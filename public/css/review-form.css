@@ -1,0 +1,116 @@
+div#cpr-review-form-wrapper {
+  width: 927px;
+  background: #fffff4;
+  padding: 50px;
+  margin: 0 auto;
+
+  form {
+    margin: 0;
+  }
+
+  label {
+    color: #661415;
+  }
+
+  input {
+    width: 100%;
+    background-color: #fbf9ec;
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+    box-shadow: none;
+    padding: 8px 16px;
+    color: #661415;
+  }
+  input::placeholder {
+    color: #661415;
+  }
+  textarea {
+    width: 100%;
+    background-color: #fbf9ec;
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+    box-shadow: none;
+    padding: 8px 16px;
+    color: #661415;
+  }
+  textarea::placeholder {
+    color: #661415;
+  }
+
+  .cpr-age-range {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    button {
+      color: #661415;
+      padding: 6px 16px;
+      background: #fbf9ec;
+      border: 1px solid #dddddd;
+      border-radius: 12px;
+    }
+  }
+  .submit-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    input[type='submit'] {
+      background: #e07c3d !important;
+      color: #fff !important;
+      width: auto !important;
+      border-color: #e07c3d !important;
+      padding: 15px 20px !important;
+    }
+  }
+  .cpr-terms {
+    text-align: center;
+  }
+  .cpr-age-range-label {
+    font-size: 21px;
+    font-weight: 500;
+  }
+  .drag-file-area {
+    background: #fbf9ec;
+    border: 1px solid #dddddd;
+    padding: 30px 20px;
+    border-radius: 12px;
+    text-align: center;
+    input.default-file-input {
+      padding: 0 !important;
+      opacity: 0;
+      height: 0 !important;
+      width: 0 !important;
+    }
+    .browse-files-text {
+      color: #e07c3d;
+    }
+    .drag-file-icon img {
+      text-align: center;
+      margin: 0 auto;
+    }
+  }
+
+  .cpr-star-rating span {
+    font-size: 25px;
+    cursor: pointer;
+    color: #ccc;
+  }
+  .cpr-star-rating span.selected,
+  .cpr-star-rating span:hover {
+    color: #ffcc00;
+  }
+
+  .cpr-age-range button {
+  margin-right: 0;
+    padding: 9px 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background: #fbf9ec;
+  }
+  .cpr-age-range button.selected {
+    background: #661415;
+    color: #fff;
+    border-color: #661415;
+    box-shadow: none;
+    outline: none;
+  }
+}
