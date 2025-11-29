@@ -1,0 +1,48 @@
+.cpr-review-filters {
+    background: #fbf9ec;
+    border: 1px solid #f0e6d3;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.cpr-filter-group {
+    margin-bottom: 15px;
+}
+
+.cpr-filter-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #661415;
+}
+
+.cpr-rating-filter {
+    display: flex;
+    gap: 15px;
+}
+
+.cpr-rating-filter label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: normal;
+}
+
+.cpr-rating-filter input[type="checkbox"] {
+    width: auto;
+}
+
+.cpr-age-filter select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.cpr-loading, .cpr-error {
+    text-align: center;
+    padding: 20px;
+    color: #661415;
+}

@@ -126,6 +126,12 @@ final class Custom_Product_Reviews {
         wp_enqueue_script( 'cpr-public-review-rating', CPR_PUBLIC_URL . 'js/review-rating.js', array( 'jquery' ), CPR_VERSION, true );
         wp_enqueue_style( 'cpr-public-review-filter', CPR_PUBLIC_URL . 'css/review-filters.css', array(), CPR_VERSION );
         wp_enqueue_script( 'cpr-public-review-filter', CPR_PUBLIC_URL . 'js/review-filter.js', array( 'jquery' ), CPR_VERSION, true );
+        
+        // AJAX ভেরিয়েবল যোগ করুন
+        wp_localize_script( 'cpr-public-review-filter', 'cpr_ajax', array(
+            'ajax_url' => admin_url( 'admin-ajax.php' ),
+            'nonce'    => wp_create_nonce( 'cpr_filter_nonce' ),
+        ) );
     }
 
     /**

@@ -1,4 +1,6 @@
 <?php
+
+
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -6,17 +8,14 @@ if ( !defined( 'ABSPATH' ) ) {
 class CPR_Form_Handler {
 
     public function __construct() {
-
         add_action( 'woocommerce_after_single_product_summary', array( $this, 'render_review_form' ), 20 );
         add_action( 'init', array( $this, 'handle_form_submission' ) );
-
     }
 
     /**
      * Render Review Form on WooCommerce Single Product Page
      */
     public function render_review_form() {
-
         if ( !is_product() ) {
             return;
         }
@@ -52,7 +51,6 @@ class CPR_Form_Handler {
                     </div>
                     <label class="label">
                         <span class="browse-files">
-
                             <input type="file" name="cpr_file" class="default-file-input" id="cpr_file_input">
                             Drag and drop, or <span class="browse-files-text">browse</span>
                             <span>your files</span>
@@ -62,7 +60,6 @@ class CPR_Form_Handler {
                     <div>
                         <span>Support JPG,PDF,PNG</span>
                     </div>
-
                 </div>
 
                 <p>
@@ -85,7 +82,7 @@ class CPR_Form_Handler {
                     <input type="email" name="cpr_email" id="cpr_email" placeholder="Email Address" required>
                 </p>
 
-               <p>
+                <p>
                     <label class="cpr-age-range-label"><?php _e( 'Age Range', 'custom-product-reviews' ); ?></label><br>
                     <label><?php _e( 'Choose One', 'custom-product-reviews' ); ?></label><br>
                     <div class="cpr-age-range">
@@ -101,7 +98,7 @@ class CPR_Form_Handler {
                 </p>
 
                 <p class="cpr-terms">
-                    <label>By continuing you agree to JOURIE’S Terms and Conditions </label>
+                    <label>By continuing you agree to JOURIE'S Terms and Conditions </label>
                 </p>
 
                 <p class="submit-wrapper">
@@ -110,7 +107,6 @@ class CPR_Form_Handler {
             </form>
         </div>
         <?php
-
     }
 
     public function handle_form_submission() {
@@ -145,7 +141,6 @@ class CPR_Form_Handler {
         }
 
         update_post_meta( $review_id, '_cpr_rating', $rating );
-        // update_post_meta( $review_id, '_cpr_file_url', $file_url );
         update_post_meta( $review_id, '_cpr_product_id', $product_id );
         update_post_meta( $review_id, '_cpr_name', $name );
         update_post_meta( $review_id, '_cpr_email', $email );
@@ -167,85 +162,93 @@ class CPR_Form_Handler {
         wp_safe_redirect( get_permalink( $product_id ) . '?review_submitted=1' );
         exit;
     }
-
+    
     public function render_all_reviews( $product ) {
-        /**
-         * All Reviews
-         */
         $product_id = $product->get_id();
-        $arg = array(
-            'post_type'      => 'cpr_review',
-            'post_status'    => 'publish',
-            'posts_per_page' => -1,
-            'meta_query'     => array(
-                array(
-                    'key'     => '_cpr_product_id',
-                    'value'   => $product_id,
-                    'compare' => '=',
-                ),
-            ),
-            'orderby'        => 'date',
-            'order'          => 'DESC',
-        );
-        $review_query = new WP_Query( $arg );
         ?>
-        <div id="cpr-review-form-wrapper">
+        <div id="cpr-all-reviews-wrapper">
             <h3><?php _e( 'All Reviews', 'custom-product-reviews' ); ?></h3>
-
-            <?php if ( $review_query->have_posts() ):
-            while ( $review_query->have_posts() ): $review_query->the_post();
-
-                $review_id = get_the_ID();
-                $product_id = get_post_meta( $review_id, '_cpr_product_id', true );
-                $file_url = get_post_meta( $review_id, '_cpr_file_url', true );
-                $rating = get_post_meta( $review_id, '_cpr_rating', true );
-                $reviewer_name = get_post_meta( $review_id, '_cpr_name', true );
-                $reviewer_email = get_post_meta( $review_id, '_cpr_email', true );
-                $reviewer_age = get_post_meta( $review_id, '_cpr_age_range', true );
-                $verified = get_post_meta( $review_id, '_cpr_verified_buyer', true );
+            
+            <!-- Hidden input for product ID -->
+            <input type="hidden" id="cpr_product_id" value="<?php echo esc_attr( $product_id ); ?>">
+            
+            <?php
+            $filter = new CPR_Filter();
+            $filter->render_filter_form();
+            ?>
+            
+            <div id="cpr-reviews-container">
+                <?php
+                $arg = array(
+                    'post_type'      => 'cpr_review',
+                    'post_status'    => 'publish',
+                    'posts_per_page' => -1,
+                    'meta_query'     => array(
+                        array(
+                            'key'     => '_cpr_product_id',
+                            'value'   => $product_id,
+                            'compare' => '=',
+                        ),
+                    ),
+                    'orderby'        => 'date',
+                    'order'          => 'DESC',
+                );
+                
+                $review_query = new WP_Query( $arg );
+                
+                if ( $review_query->have_posts() ) :
+                    while ( $review_query->have_posts() ) : $review_query->the_post();
+                        $this->render_single_review( get_the_ID() );
+                    endwhile;
+                else :
+                    echo '<div class="cpr-no-reviews"><p>' . __( 'No reviews found.', 'custom-product-reviews' ) . '</p></div>';
+                endif;
+                
+                wp_reset_postdata();
                 ?>
-
-		            <div class="cpt-review-full-box">
-		                <div class="cpt-review-box-one">
-		                    <div class="cpt-name"><?php echo $reviewer_name; ?></div>
-		                    <?php if ( $verified == '1' ): ?>
-		                    <div class="cpt-verify-buer">
-		                        <span>Verified Buyer</span>
-		                        <img src="<?php echo CPR_ASSETS_URL . 'images/verify-buyer.svg'; ?>" alt="verify-buyer">
-		                    </div>
-		                    <?php endif; ?>
-	                    <div class="cpt-age-range">
-	                        <span>Age Ranges</span>
-	                        <span><?php echo $reviewer_age; ?></span>
-	                    </div>
-	                </div>
-	                <div class="cpt-review-box-two">
-	                    <div class="cpt-review-date">
-	                        <div class="cpt-review-count">
-	                            <?php echo str_repeat( '★', intval( $rating ) ); ?>
-	                            <?php echo str_repeat( '☆', 5 - intval( $rating ) ); ?>
-	                        </div>
-	                        <div class="cpt-date"> <?php echo get_the_date( 'j/n/y' ); ?></div>
-	                    </div>
-	                    <div class="cpt-review-content">
-	                        <span><?php echo esc_html( get_the_content() ); ?></span>
-	                    </div>
-	                </div>
-	            </div>
-
-	            <?php endwhile; ?>
-            <?php else: ?>
-                <div class="cpr-no-reviews">
-                    <p style="padding: 40px; text-align: center; color: #666;">
-                        <?php _e( 'No reviews found.', 'custom-product-reviews' ); ?>
-                    </p>
-                </div>
-            <?php endif; ?>
-
+            </div>
         </div>
         <?php
-}
+    }
 
+    private function render_single_review( $review_id ) {
+        $product_id = get_post_meta( $review_id, '_cpr_product_id', true );
+        $file_url = get_post_meta( $review_id, '_cpr_file_url', true );
+        $rating = get_post_meta( $review_id, '_cpr_rating', true );
+        $reviewer_name = get_post_meta( $review_id, '_cpr_name', true );
+        $reviewer_age = get_post_meta( $review_id, '_cpr_age_range', true );
+        $verified = get_post_meta( $review_id, '_cpr_verified_buyer', true );
+        
+        ?>
+        <div class="cpt-review-full-box">
+            <div class="cpt-review-box-one">
+                <div class="cpt-name"><?php echo esc_html( $reviewer_name ); ?></div>
+                <?php if ( $verified == '1' ) : ?>
+                <div class="cpt-verify-buer">
+                    <span><?php _e( 'Verified Buyer', 'custom-product-reviews' ); ?></span>
+                    <img src="<?php echo CPR_ASSETS_URL . 'images/verify-buyer.svg'; ?>" alt="verify-buyer">
+                </div>
+                <?php endif; ?>
+                <div class="cpt-age-range">
+                    <span><?php _e( 'Age Range', 'custom-product-reviews' ); ?></span>
+                    <span><?php echo esc_html( $reviewer_age ); ?></span>
+                </div>
+            </div>
+            <div class="cpt-review-box-two">
+                <div class="cpt-review-date">
+                    <div class="cpt-review-count">
+                        <?php echo str_repeat( '★', intval( $rating ) ); ?>
+                        <?php echo str_repeat( '☆', 5 - intval( $rating ) ); ?>
+                    </div>
+                    <div class="cpt-date"><?php echo get_the_date( 'j/n/y' ); ?></div>
+                </div>
+                <div class="cpt-review-content">
+                    <span><?php echo esc_html( get_the_content() ); ?></span>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
 }
 
 // Initialize Form Handler
