@@ -17,32 +17,32 @@ class CPR_Filter {
     public function render_filter_form() {
         ?>
         <div class="cpr-review-filters">
-            <h4><?php _e( 'Filter Reviews', 'custom-product-reviews' ); ?></h4>
+            <h4><?php esc_html_e( 'Filter Reviews', 'custom-product-reviews' ); ?></h4>
             
             <div class="cpr-filter-group">
-                <label><?php _e( 'Rating', 'custom-product-reviews' ); ?></label>
+                <label><?php esc_html_e( 'Rating', 'custom-product-reviews' ); ?></label>
                 <div class="cpr-rating-filter">
                     <?php for ( $i = 5; $i >= 1; $i-- ) : ?>
                         <label>
-                            <input type="checkbox" name="rating[]" value="<?php echo $i; ?>">
-                            <?php echo str_repeat( '★', $i ); ?>
+                            <input type="checkbox" name="rating[]" value="<?php echo esc_attr( $i ); ?>">
+                            <?php echo esc_html( str_repeat( '★', $i ) ); ?>
                         </label>
                     <?php endfor; ?>
                 </div>
             </div>
             
             <div class="cpr-filter-group">
-                <label><?php _e( 'Age Range', 'custom-product-reviews' ); ?></label>
+                <label><?php esc_html_e( 'Age Range', 'custom-product-reviews' ); ?></label>
                 <div class="cpr-age-filter">
                     <select name="age_range">
-                        <option value=""><?php _e( 'All Ages', 'custom-product-reviews' ); ?></option>
-                        <option value="under-18"><?php _e( 'Under 18', 'custom-product-reviews' ); ?></option>
-                        <option value="18-24"><?php _e( '18 - 24', 'custom-product-reviews' ); ?></option>
-                        <option value="25-34"><?php _e( '25 - 34', 'custom-product-reviews' ); ?></option>
-                        <option value="35-44"><?php _e( '35 - 44', 'custom-product-reviews' ); ?></option>
-                        <option value="45-54"><?php _e( '45 - 54', 'custom-product-reviews' ); ?></option>
-                        <option value="55-64"><?php _e( '55 - 64', 'custom-product-reviews' ); ?></option>
-                        <option value="65+"><?php _e( '65+', 'custom-product-reviews' ); ?></option>
+                        <option value=""><?php esc_html_e( 'All Ages', 'custom-product-reviews' ); ?></option>
+                        <option value="under-18"><?php esc_html_e( 'Under 18', 'custom-product-reviews' ); ?></option>
+                        <option value="18-24"><?php esc_html_e( '18 - 24', 'custom-product-reviews' ); ?></option>
+                        <option value="25-34"><?php esc_html_e( '25 - 34', 'custom-product-reviews' ); ?></option>
+                        <option value="35-44"><?php esc_html_e( '35 - 44', 'custom-product-reviews' ); ?></option>
+                        <option value="45-54"><?php esc_html_e( '45 - 54', 'custom-product-reviews' ); ?></option>
+                        <option value="55-64"><?php esc_html_e( '55 - 64', 'custom-product-reviews' ); ?></option>
+                        <option value="65+"><?php esc_html_e( '65+', 'custom-product-reviews' ); ?></option>
                     </select>
                 </div>
             </div>
@@ -50,7 +50,7 @@ class CPR_Filter {
             <div class="cpr-filter-group cpr-verified-filter">
                 <label>
                     <input type="checkbox" name="verified_only" value="1">
-                    <?php _e( 'Verified Buyers Only', 'custom-product-reviews' ); ?>
+                    <?php esc_html_e( 'Verified Buyers Only', 'custom-product-reviews' ); ?>
                 </label>
             </div>
         </div>
@@ -62,7 +62,7 @@ class CPR_Filter {
         
         $product_id = isset( $_POST['product_id'] ) ? intval( $_POST['product_id'] ) : 0;
         $ratings = isset( $_POST['rating'] ) && is_array( $_POST['rating'] ) ? array_map( 'intval', $_POST['rating'] ) : array();
-        $age_range = isset( $_POST['age_range'] ) ? sanitize_text_field( $_POST['age_range'] ) : '';
+        $age_range = isset( $_POST['age_range'] ) ? sanitize_text_field( wp_unslash( $_POST['age_range'] ) ) : '';
         $verified_only = isset( $_POST['verified_only'] ) && $_POST['verified_only'] == '1' ? true : false;
         
         if ( !$product_id ) {
@@ -122,7 +122,7 @@ class CPR_Filter {
                 $this->render_single_review( get_the_ID() );
             }
         } else {
-            echo '<div class="cpr-no-reviews"><p>' . __( 'No reviews found with these filters.', 'custom-product-reviews' ) . '</p></div>';
+            echo '<div class="cpr-no-reviews"><p>' . esc_html__( 'No reviews found with these filters.', 'custom-product-reviews' ) . '</p></div>';
         }
         wp_reset_postdata();
         
@@ -153,14 +153,14 @@ class CPR_Filter {
                 
                 <?php if ( $show_verified_badge == '1' && $verified == '1' ) : ?>
                 <div class="cpt-verify-buyer">
-                    <span><?php _e( 'Verified Buyer', 'custom-product-reviews' ); ?></span>
-                    <img src="<?php echo CPR_ASSETS_URL . 'images/verify-buyer.svg'; ?>" alt="verify-buyer">
+                    <span><?php esc_html_e( 'Verified Buyer', 'custom-product-reviews' ); ?></span>
+                    <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
                 </div>
                 <?php endif; ?>
                 
                 <?php if ( $enable_age_range == '1' && !empty( $reviewer_age ) ) : ?>
                 <div class="cpt-age-range">
-                    <span><?php _e( 'Age Range:', 'custom-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Age Range:', 'custom-product-reviews' ); ?></span>
                     <span><?php echo esc_html( $reviewer_age ); ?></span>
                 </div>
                 <?php endif; ?>

@@ -19,29 +19,110 @@ class CPR_Settings {
      */
     public function register_settings() {
         // General Settings
-        register_setting( 'cpr_general_settings', 'cpr_auto_approve' );
-        register_setting( 'cpr_general_settings', 'cpr_min_rating' );
-        register_setting( 'cpr_general_settings', 'cpr_form_position' );
-        register_setting( 'cpr_general_settings', 'cpr_reviews_per_page' );
+        register_setting( 'cpr_general_settings', 'cpr_auto_approve', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '0'
+        ) );
+        
+        register_setting( 'cpr_general_settings', 'cpr_min_rating', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '1'
+        ) );
+        
+        register_setting( 'cpr_general_settings', 'cpr_form_position', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => 'after'
+        ) );
+        
+        register_setting( 'cpr_general_settings', 'cpr_reviews_per_page', array(
+            'type' => 'integer',
+            'sanitize_callback' => 'absint',
+            'default' => 10
+        ) );
 
         // Form Settings
-        register_setting( 'cpr_form_settings', 'cpr_enable_file_upload' );
-        register_setting( 'cpr_form_settings', 'cpr_enable_age_range' );
-        register_setting( 'cpr_form_settings', 'cpr_email_required' );
-        register_setting( 'cpr_form_settings', 'cpr_title_required' );
+        register_setting( 'cpr_form_settings', 'cpr_enable_file_upload', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '1'
+        ) );
+        
+        register_setting( 'cpr_form_settings', 'cpr_enable_age_range', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '1'
+        ) );
+        
+        register_setting( 'cpr_form_settings', 'cpr_email_required', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '1'
+        ) );
+        
+        register_setting( 'cpr_form_settings', 'cpr_title_required', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '1'
+        ) );
 
         // Display Settings
-        register_setting( 'cpr_display_settings', 'cpr_show_verified_badge' );
-        register_setting( 'cpr_display_settings', 'cpr_date_format' );
-        register_setting( 'cpr_display_settings', 'cpr_show_filters' );
-        register_setting( 'cpr_display_settings', 'cpr_empty_star_color' );
-        register_setting( 'cpr_display_settings', 'cpr_filled_star_color' );
+        register_setting( 'cpr_display_settings', 'cpr_show_verified_badge', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '1'
+        ) );
+        
+        register_setting( 'cpr_display_settings', 'cpr_date_format', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => 'j/n/y'
+        ) );
+        
+        register_setting( 'cpr_display_settings', 'cpr_show_filters', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '1'
+        ) );
+        
+        register_setting( 'cpr_display_settings', 'cpr_empty_star_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#dddddd'
+        ) );
+        
+        register_setting( 'cpr_display_settings', 'cpr_filled_star_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#ffc107'
+        ) );
 
         // Advanced Settings
-        register_setting( 'cpr_advanced_settings', 'cpr_enable_moderation' );
-        register_setting( 'cpr_advanced_settings', 'cpr_bad_words' );
-        register_setting( 'cpr_advanced_settings', 'cpr_enable_email_notification' );
-        register_setting( 'cpr_advanced_settings', 'cpr_admin_email' );
+        register_setting( 'cpr_advanced_settings', 'cpr_enable_moderation', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '0'
+        ) );
+        
+        register_setting( 'cpr_advanced_settings', 'cpr_bad_words', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_textarea_field',
+            'default' => ''
+        ) );
+        
+        register_setting( 'cpr_advanced_settings', 'cpr_enable_email_notification', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '1'
+        ) );
+        
+        register_setting( 'cpr_advanced_settings', 'cpr_admin_email', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_email',
+            'default' => get_option( 'admin_email' )
+        ) );
     }
 
     /**
@@ -53,30 +134,30 @@ class CPR_Settings {
             add_settings_error(
                 'cpr_messages',
                 'cpr_message',
-                __( 'Settings saved successfully', 'custom-product-reviews' ),
+                esc_html__( 'Settings saved successfully', 'custom-product-reviews' ),
                 'updated'
             );
         }
 
         settings_errors( 'cpr_messages' );
         
-        $active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'general';
+        $active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'general';
         ?>
         <div class="wrap">
             <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
             
             <h2 class="nav-tab-wrapper">
                 <a href="?page=cpr-settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>">
-                    <?php _e( 'General', 'custom-product-reviews' ); ?>
+                    <?php esc_html_e( 'General', 'custom-product-reviews' ); ?>
                 </a>
                 <a href="?page=cpr-settings&tab=form" class="nav-tab <?php echo $active_tab == 'form' ? 'nav-tab-active' : ''; ?>">
-                    <?php _e( 'Form Settings', 'custom-product-reviews' ); ?>
+                    <?php esc_html_e( 'Form Settings', 'custom-product-reviews' ); ?>
                 </a>
                 <a href="?page=cpr-settings&tab=display" class="nav-tab <?php echo $active_tab == 'display' ? 'nav-tab-active' : ''; ?>">
-                    <?php _e( 'Display Settings', 'custom-product-reviews' ); ?>
+                    <?php esc_html_e( 'Display Settings', 'custom-product-reviews' ); ?>
                 </a>
                 <a href="?page=cpr-settings&tab=advanced" class="nav-tab <?php echo $active_tab == 'advanced' ? 'nav-tab-active' : ''; ?>">
-                    <?php _e( 'Advanced', 'custom-product-reviews' ); ?>
+                    <?php esc_html_e( 'Advanced', 'custom-product-reviews' ); ?>
                 </a>
             </h2>
 
@@ -115,20 +196,20 @@ class CPR_Settings {
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label><?php _e( 'Auto Approve Reviews', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Auto Approve Reviews', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_auto_approve" value="1" <?php checked( $auto_approve, '1' ); ?>>
-                        <?php _e( 'Automatically approve reviews (No manual approval needed)', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Automatically approve reviews (No manual approval needed)', 'custom-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php _e( 'If disabled, reviews will be in pending status and require admin approval.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'If disabled, reviews will be in pending status and require admin approval.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_min_rating"><?php _e( 'Minimum Star Rating', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_min_rating"><?php esc_html_e( 'Minimum Star Rating', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <select name="cpr_min_rating" id="cpr_min_rating">
@@ -138,30 +219,30 @@ class CPR_Settings {
                         <option value="4" <?php selected( $min_rating, '4' ); ?>>4 Stars</option>
                         <option value="5" <?php selected( $min_rating, '5' ); ?>>5 Stars</option>
                     </select>
-                    <p class="description"><?php _e( 'Reviews below this rating will not be accepted.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Reviews below this rating will not be accepted.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_form_position"><?php _e( 'Review Form Position', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_form_position"><?php esc_html_e( 'Review Form Position', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <select name="cpr_form_position" id="cpr_form_position">
-                        <option value="before" <?php selected( $form_position, 'before' ); ?>><?php _e( 'Before Product Summary', 'custom-product-reviews' ); ?></option>
-                        <option value="after" <?php selected( $form_position, 'after' ); ?>><?php _e( 'After Product Summary', 'custom-product-reviews' ); ?></option>
+                        <option value="before" <?php selected( $form_position, 'before' ); ?>><?php esc_html_e( 'Before Product Summary', 'custom-product-reviews' ); ?></option>
+                        <option value="after" <?php selected( $form_position, 'after' ); ?>><?php esc_html_e( 'After Product Summary', 'custom-product-reviews' ); ?></option>
                     </select>
-                    <p class="description"><?php _e( 'Where to display the review form on product page.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Where to display the review form on product page.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_reviews_per_page"><?php _e( 'Reviews Per Page', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_reviews_per_page"><?php esc_html_e( 'Reviews Per Page', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <input type="number" name="cpr_reviews_per_page" id="cpr_reviews_per_page" value="<?php echo esc_attr( $reviews_per_page ); ?>" min="2" max="100" class="small-text">
-                    <p class="description"><?php _e( 'Number of reviews to display per page (pagination).', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Number of reviews to display per page (pagination).', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
         </table>
@@ -180,53 +261,53 @@ class CPR_Settings {
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label><?php _e( 'File Upload', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'File Upload', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_enable_file_upload" value="1" <?php checked( $enable_file, '1' ); ?>>
-                        <?php _e( 'Enable file upload (JPG, PNG, PDF)', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Enable file upload (JPG, PNG, PDF)', 'custom-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php _e( 'Allow customers to upload images or documents with their review.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Allow customers to upload images or documents with their review.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php _e( 'Age Range Field', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Age Range Field', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_enable_age_range" value="1" <?php checked( $enable_age, '1' ); ?>>
-                        <?php _e( 'Show age range selection field', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Show age range selection field', 'custom-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php _e( 'Ask customers to select their age range when submitting a review.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Ask customers to select their age range when submitting a review.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php _e( 'Email Field', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Email Field', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_email_required" value="1" <?php checked( $email_required, '1' ); ?>>
-                        <?php _e( 'Email address is required', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Email address is required', 'custom-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php _e( 'Make email field mandatory for review submission.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Make email field mandatory for review submission.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php _e( 'Review Title', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Review Title', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_title_required" value="1" <?php checked( $title_required, '1' ); ?>>
-                        <?php _e( 'Review title is required', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Review title is required', 'custom-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php _e( 'Make review title field mandatory.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Make review title field mandatory.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
         </table>
@@ -246,20 +327,20 @@ class CPR_Settings {
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label><?php _e( 'Verified Buyer Badge', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Verified Buyer Badge', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_show_verified_badge" value="1" <?php checked( $show_badge, '1' ); ?>>
-                        <?php _e( 'Show verified buyer badge on reviews', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Show verified buyer badge on reviews', 'custom-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php _e( 'Display a badge for verified purchasers.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Display a badge for verified purchasers.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_date_format"><?php _e( 'Date Format', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_date_format"><?php esc_html_e( 'Date Format', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <select name="cpr_date_format" id="cpr_date_format">
@@ -269,40 +350,40 @@ class CPR_Settings {
                         <option value="M j, Y" <?php selected( $date_format, 'M j, Y' ); ?>>Nov 29, 2025</option>
                         <option value="Y-m-d" <?php selected( $date_format, 'Y-m-d' ); ?>>2025-11-29</option>
                     </select>
-                    <p class="description"><?php _e( 'How to display review submission date.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'How to display review submission date.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php _e( 'Review Filters', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Review Filters', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_show_filters" value="1" <?php checked( $show_filters, '1' ); ?>>
-                        <?php _e( 'Show filter options (Rating, Age Range, Verified)', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Show filter options (Rating, Age Range, Verified)', 'custom-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php _e( 'Allow customers to filter reviews by rating, age range, etc.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Allow customers to filter reviews by rating, age range, etc.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_empty_star_color"><?php _e( 'Empty Star Color', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_empty_star_color"><?php esc_html_e( 'Empty Star Color', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <input type="color" name="cpr_empty_star_color" id="cpr_empty_star_color" value="<?php echo esc_attr( $empty_star ); ?>">
-                    <p class="description"><?php _e( 'Color for empty/unfilled stars.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Color for empty/unfilled stars.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_filled_star_color"><?php _e( 'Filled Star Color', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_filled_star_color"><?php esc_html_e( 'Filled Star Color', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <input type="color" name="cpr_filled_star_color" id="cpr_filled_star_color" value="<?php echo esc_attr( $filled_star ); ?>">
-                    <p class="description"><?php _e( 'Color for filled/selected stars.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Color for filled/selected stars.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
         </table>
@@ -321,47 +402,47 @@ class CPR_Settings {
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label><?php _e( 'Review Moderation', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Review Moderation', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_enable_moderation" value="1" <?php checked( $enable_moderation, '1' ); ?>>
-                        <?php _e( 'Enable bad words filter', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Enable bad words filter', 'custom-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php _e( 'Automatically reject reviews containing inappropriate words.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Automatically reject reviews containing inappropriate words.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_bad_words"><?php _e( 'Bad Words List', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_bad_words"><?php esc_html_e( 'Bad Words List', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <textarea name="cpr_bad_words" id="cpr_bad_words" rows="5" class="large-text"><?php echo esc_textarea( $bad_words ); ?></textarea>
-                    <p class="description"><?php _e( 'Add words separated by commas. Reviews containing these words will be automatically rejected.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Add words separated by commas. Reviews containing these words will be automatically rejected.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php _e( 'Email Notifications', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Email Notifications', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_enable_email_notification" value="1" <?php checked( $enable_email, '1' ); ?>>
-                        <?php _e( 'Send email notification when a new review is submitted', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Send email notification when a new review is submitted', 'custom-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php _e( 'Admin will receive an email alert for each new review.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Admin will receive an email alert for each new review.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_admin_email"><?php _e( 'Admin Email Address', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_admin_email"><?php esc_html_e( 'Admin Email Address', 'custom-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <input type="email" name="cpr_admin_email" id="cpr_admin_email" value="<?php echo esc_attr( $admin_email ); ?>" class="regular-text">
-                    <p class="description"><?php _e( 'Email address to receive review notifications.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Email address to receive review notifications.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
         </table>

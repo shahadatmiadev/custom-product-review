@@ -119,8 +119,6 @@ final class Custom_Product_Reviews {
             return;
         }
 
-        load_plugin_textdomain( 'custom-product-reviews', false, dirname( CPR_PLUGIN_BASENAME ) . '/languages' );
-
         $this->includes();
 
         // Initialize main loader class
@@ -230,8 +228,8 @@ final class Custom_Product_Reviews {
      */
     public function add_admin_menu() {
         add_menu_page(
-            __( 'Product Reviews', 'custom-product-reviews' ),
-            __( 'Product Reviews', 'custom-product-reviews' ),
+            esc_html__( 'Product Reviews', 'custom-product-reviews' ),
+            esc_html__( 'Product Reviews', 'custom-product-reviews' ),
             'manage_options',
             'cpr-reviews',
             array( $this, 'render_manage_reviews_page' ),
@@ -242,8 +240,8 @@ final class Custom_Product_Reviews {
         // Rename first submenu
         add_submenu_page(
             'cpr-reviews',
-            __( 'All Reviews', 'custom-product-reviews' ),
-            __( 'All Reviews', 'custom-product-reviews' ),
+            esc_html__( 'All Reviews', 'custom-product-reviews' ),
+            esc_html__( 'All Reviews', 'custom-product-reviews' ),
             'manage_options',
             'cpr-reviews',
             array( $this, 'render_manage_reviews_page' )
@@ -252,8 +250,8 @@ final class Custom_Product_Reviews {
         // Add Settings submenu
         add_submenu_page(
             'cpr-reviews',
-            __( 'Settings', 'custom-product-reviews' ),
-            __( 'Settings', 'custom-product-reviews' ),
+            esc_html__( 'Settings', 'custom-product-reviews' ),
+            esc_html__( 'Settings', 'custom-product-reviews' ),
             'manage_options',
             'cpr-settings',
             array( $this, 'render_settings_page' )
@@ -262,8 +260,8 @@ final class Custom_Product_Reviews {
         // Add Customize Styles submenu
         add_submenu_page(
             'cpr-reviews',
-            __( 'Customize Styles', 'custom-product-reviews' ),
-            __( 'Customize Styles', 'custom-product-reviews' ),
+            esc_html__( 'Customize Styles', 'custom-product-reviews' ),
+            esc_html__( 'Customize Styles', 'custom-product-reviews' ),
             'manage_options',
             'cpr-styles',
             array( $this, 'render_styles_page' )

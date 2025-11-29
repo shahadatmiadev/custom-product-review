@@ -19,61 +19,261 @@ class CPR_Style_Settings {
      */
     public function register_style_settings() {
         // Form Styles
-        register_setting( 'cpr_style_settings', 'cpr_form_bg_color' );
-        register_setting( 'cpr_style_settings', 'cpr_form_border_color' );
-        register_setting( 'cpr_style_settings', 'cpr_form_border_width' );
-        register_setting( 'cpr_style_settings', 'cpr_form_border_radius' );
-        register_setting( 'cpr_style_settings', 'cpr_form_padding' );
-        register_setting( 'cpr_style_settings', 'cpr_form_title_color' );
-        register_setting( 'cpr_style_settings', 'cpr_form_label_color' );
-        register_setting( 'cpr_style_settings', 'cpr_form_input_bg_color' );
-        register_setting( 'cpr_style_settings', 'cpr_form_input_border_color' );
-        register_setting( 'cpr_style_settings', 'cpr_form_input_text_color' );
-        register_setting( 'cpr_style_settings', 'cpr_form_button_bg_color' );
-        register_setting( 'cpr_style_settings', 'cpr_form_button_text_color' );
-        register_setting( 'cpr_style_settings', 'cpr_form_button_hover_bg_color' );
-        register_setting( 'cpr_style_settings', 'cpr_form_button_hover_text_color' );
+        register_setting( 'cpr_style_settings', 'cpr_form_bg_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#ffffff'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_border_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#e0e0e0'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_border_width', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '1px'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_border_radius', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '8px'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_padding', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '20px'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_title_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#333333'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_label_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#555555'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_input_bg_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#ffffff'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_input_border_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#dddddd'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_input_text_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#333333'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_button_bg_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#0073aa'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_button_text_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#ffffff'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_button_hover_bg_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#005a87'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_form_button_hover_text_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#ffffff'
+        ) );
 
         // Review Styles
-        register_setting( 'cpr_style_settings', 'cpr_review_box_bg_color' );
-        register_setting( 'cpr_style_settings', 'cpr_review_box_border_color' );
-        register_setting( 'cpr_style_settings', 'cpr_review_box_border_width' );
-        register_setting( 'cpr_style_settings', 'cpr_review_box_border_radius' );
-        register_setting( 'cpr_style_settings', 'cpr_review_box_padding' );
-        register_setting( 'cpr_style_settings', 'cpr_review_name_color' );
-        register_setting( 'cpr_style_settings', 'cpr_review_date_color' );
-        register_setting( 'cpr_style_settings', 'cpr_review_content_color' );
-        register_setting( 'cpr_style_settings', 'cpr_star_size' );
+        register_setting( 'cpr_style_settings', 'cpr_review_box_bg_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#f9f9f9'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_review_box_border_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#e0e0e0'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_review_box_border_width', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => ''
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_review_box_border_radius', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '8px'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_review_box_padding', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '15px'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_review_name_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#333333'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_review_date_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#777777'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_review_content_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#555555'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_star_size', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '16px'
+        ) );
 
         // Filter Styles
-        register_setting( 'cpr_style_settings', 'cpr_filter_bg_color' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_border_color' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_border_width' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_border_radius' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_padding' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_title_color' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_label_color' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_input_bg_color' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_input_border_color' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_input_text_color' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_checkbox_color' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_select_bg_color' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_select_border_color' );
-        register_setting( 'cpr_style_settings', 'cpr_filter_select_text_color' );
+        register_setting( 'cpr_style_settings', 'cpr_filter_bg_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#f9f9f9'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_border_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#f0e6d3'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_border_width', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '1'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_border_radius', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '8px'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_padding', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => '15px'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_title_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#333333'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_label_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#555555'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_input_bg_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#ffffff'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_input_border_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#dddddd'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_input_text_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#333333'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_checkbox_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#0073aa'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_select_bg_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#ffffff'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_select_border_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#dddddd'
+        ) );
+        
+        register_setting( 'cpr_style_settings', 'cpr_filter_select_text_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#333333'
+        ) );
 
-        register_setting( 'cpr_style_settings', 'cpr_custom_css' );
+        register_setting( 'cpr_style_settings', 'cpr_custom_css', array(
+            'type' => 'string',
+            'sanitize_callback' => array( $this, 'sanitize_css' ),
+            'default' => ''
+        ) );
+    }
+
+    /**
+     * Sanitize CSS - Remove script tags and dangerous content
+     */
+    public function sanitize_css( $css ) {
+        // Remove any script tags or dangerous content
+        $css = wp_strip_all_tags( $css );
+        
+        // Remove potential XSS vectors
+        $css = str_replace( array( '<script', '</script', 'javascript:', 'expression(' ), '', $css );
+        
+        return $css;
     }
 
     /**
      * Render Style Settings Page
      */
     public function render_style_settings_page() {
-        // Check if settings saved
+        
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading WordPress core settings-updated parameter
         if ( isset( $_GET['settings-updated'] ) ) {
             add_settings_error(
                 'cpr_style_messages',
                 'cpr_style_message',
-                __( 'Styles saved successfully', 'custom-product-reviews' ),
+                esc_html__( 'Styles saved successfully', 'custom-product-reviews' ),
                 'updated'
             );
         }
@@ -88,10 +288,10 @@ class CPR_Style_Settings {
 
                 <div class="cpr-style-settings-tabs">
                     <h2 class="nav-tab-wrapper">
-                        <a href="#form-styles" class="nav-tab nav-tab-active"><?php _e( 'Form Styles', 'custom-product-reviews' ); ?></a>
-                        <a href="#review-styles" class="nav-tab"><?php _e( 'Review Styles', 'custom-product-reviews' ); ?></a>
-                        <a href="#filter-styles" class="nav-tab"><?php _e( 'Filter Styles', 'custom-product-reviews' ); ?></a>
-                        <a href="#custom-css" class="nav-tab"><?php _e( 'Custom CSS', 'custom-product-reviews' ); ?></a>
+                        <a href="#form-styles" class="nav-tab nav-tab-active"><?php esc_html_e( 'Form Styles', 'custom-product-reviews' ); ?></a>
+                        <a href="#review-styles" class="nav-tab"><?php esc_html_e( 'Review Styles', 'custom-product-reviews' ); ?></a>
+                        <a href="#filter-styles" class="nav-tab"><?php esc_html_e( 'Filter Styles', 'custom-product-reviews' ); ?></a>
+                        <a href="#custom-css" class="nav-tab"><?php esc_html_e( 'Custom CSS', 'custom-product-reviews' ); ?></a>
                     </h2>
 
                     <div id="form-styles" class="cpr-style-tab-content">
@@ -140,14 +340,14 @@ class CPR_Style_Settings {
         ?>
         <table class="form-table">
             <tr>
-                <th scope="row"><?php _e( 'Filter Section Background', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Section Background', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_bg_color" value="<?php echo esc_attr( $filter_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Filter Section Border', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Section Border', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_border_color" value="<?php echo esc_attr( $filter_border ); ?>" />
                     <input type="text" name="cpr_filter_border_width" value="<?php echo esc_attr( $filter_border_width ); ?>" class="small-text" placeholder="1px" />
@@ -156,70 +356,70 @@ class CPR_Style_Settings {
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Filter Section Padding', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Section Padding', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="text" name="cpr_filter_padding" value="<?php echo esc_attr( $filter_padding ); ?>" class="regular-text" placeholder="15px" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Filter Title Color', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Title Color', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_title_color" value="<?php echo esc_attr( $title_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Filter Label Color', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Label Color', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_label_color" value="<?php echo esc_attr( $label_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Filter Input Background', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Input Background', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_input_bg_color" value="<?php echo esc_attr( $input_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Filter Input Border', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Input Border', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_input_border_color" value="<?php echo esc_attr( $input_border ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Filter Input Text Color', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Input Text Color', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_input_text_color" value="<?php echo esc_attr( $input_text ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Filter Checkbox Color', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Checkbox Color', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_checkbox_color" value="<?php echo esc_attr( $checkbox_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Filter Select Background', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Select Background', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_select_bg_color" value="<?php echo esc_attr( $select_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Filter Select Border', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Select Border', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_select_border_color" value="<?php echo esc_attr( $select_border ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Filter Select Text Color', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Select Text Color', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_select_text_color" value="<?php echo esc_attr( $select_text ); ?>" />
                 </td>
@@ -249,14 +449,14 @@ class CPR_Style_Settings {
         ?>
         <table class="form-table">
             <tr>
-                <th scope="row"><?php _e( 'Form Background', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Form Background', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_bg_color" value="<?php echo esc_attr( $form_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Form Border', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Form Border', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_border_color" value="<?php echo esc_attr( $form_border ); ?>" />
                     <input type="text" name="cpr_form_border_width" value="<?php echo esc_attr( $form_border_width ); ?>" class="small-text" placeholder="1px" />
@@ -265,70 +465,70 @@ class CPR_Style_Settings {
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Form Padding', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Form Padding', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="text" name="cpr_form_padding" value="<?php echo esc_attr( $form_padding ); ?>" class="regular-text" placeholder="20px" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Form Title Color', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Form Title Color', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_title_color" value="<?php echo esc_attr( $title_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Form Label Color', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Form Label Color', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_label_color" value="<?php echo esc_attr( $label_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Input Background', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Input Background', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_input_bg_color" value="<?php echo esc_attr( $input_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Input Border', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Input Border', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_input_border_color" value="<?php echo esc_attr( $input_border ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Input Text Color', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Input Text Color', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_input_text_color" value="<?php echo esc_attr( $input_text ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Button Background', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Button Background', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_button_bg_color" value="<?php echo esc_attr( $button_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Button Text Color', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Button Text Color', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_button_text_color" value="<?php echo esc_attr( $button_text ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Button Hover Background', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Button Hover Background', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_button_hover_bg_color" value="<?php echo esc_attr( $button_hover_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Button Hover Text', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Button Hover Text', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_button_hover_text_color" value="<?php echo esc_attr( $button_hover_text ); ?>" />
                 </td>
@@ -353,14 +553,14 @@ class CPR_Style_Settings {
         ?>
         <table class="form-table">
             <tr>
-                <th scope="row"><?php _e( 'Review Box Background', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Review Box Background', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_review_box_bg_color" value="<?php echo esc_attr( $review_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Review Box Border', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Review Box Border', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_review_box_border_color" value="<?php echo esc_attr( $review_border ); ?>" />
                     <input type="text" name="cpr_review_box_border_width" value="<?php echo esc_attr( $review_border_width ); ?>" class="small-text" placeholder="1px" />
@@ -369,35 +569,35 @@ class CPR_Style_Settings {
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Review Box Padding', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Review Box Padding', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="text" name="cpr_review_box_padding" value="<?php echo esc_attr( $review_padding ); ?>" class="regular-text" placeholder="15px" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Reviewer Name Color', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Reviewer Name Color', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_review_name_color" value="<?php echo esc_attr( $name_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Review Date Color', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Review Date Color', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_review_date_color" value="<?php echo esc_attr( $date_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Review Content Color', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Review Content Color', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_review_content_color" value="<?php echo esc_attr( $content_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php _e( 'Star Size', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Star Size', 'custom-product-reviews' ); ?></th>
                 <td>
                     <input type="text" name="cpr_star_size" value="<?php echo esc_attr( $star_size ); ?>" class="small-text" placeholder="16px" />
                 </td>
@@ -414,10 +614,10 @@ class CPR_Style_Settings {
         ?>
         <table class="form-table">
             <tr>
-                <th scope="row"><?php _e( 'Custom CSS', 'custom-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Custom CSS', 'custom-product-reviews' ); ?></th>
                 <td>
                     <textarea name="cpr_custom_css" rows="20" class="large-text"><?php echo esc_textarea( $custom_css ); ?></textarea>
-                    <p class="description"><?php _e( 'Add your custom CSS code here. It will be applied to all review forms and displays.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Add your custom CSS code here. It will be applied to all review forms and displays.', 'custom-product-reviews' ); ?></p>
                 </td>
             </tr>
         </table>

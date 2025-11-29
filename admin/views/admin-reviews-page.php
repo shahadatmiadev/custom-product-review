@@ -7,7 +7,7 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 
 // Get filter status
-$status = isset( $_GET['review_status'] ) ? sanitize_text_field( $_GET['review_status'] ) : 'pending';
+$status = isset( $_GET['review_status'] ) ? sanitize_text_field( wp_unslash( $_GET['review_status'] ) ) : 'pending';
 
 $arg = array(
     'post_type'      => 'cpr_review',
@@ -31,21 +31,24 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
     <!-- Status Tabs -->
     <ul class="subsubsub">
         <li>
-            <a href="?page=cpr-reviews&review_status=pending" 
-               class="<?php echo $status === 'pending' ? 'current' : ''; ?>">
-                Pending <span class="count">(<?php echo $pending_count; ?>)</span>
+            <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'cpr-reviews', 'review_status' => 'pending' ) ) ); ?>" 
+            class="<?php echo $status === 'pending' ? 'current' : ''; ?>">
+                <?php esc_html_e( 'Pending', 'custom-product-reviews' ); ?> 
+                <span class="count">(<?php echo esc_html( $pending_count ); ?>)</span>
             </a> |
         </li>
         <li>
-            <a href="?page=cpr-reviews&review_status=publish" 
-               class="<?php echo $status === 'publish' ? 'current' : ''; ?>">
-                Approved <span class="count">(<?php echo $approved_count; ?>)</span>
+            <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'cpr-reviews', 'review_status' => 'publish' ) ) ); ?>" 
+            class="<?php echo $status === 'publish' ? 'current' : ''; ?>">
+                <?php esc_html_e( 'Approved', 'custom-product-reviews' ); ?> 
+                <span class="count">(<?php echo esc_html( $approved_count ); ?>)</span>
             </a> |
         </li>
         <li>
-            <a href="?page=cpr-reviews&review_status=draft" 
-               class="<?php echo $status === 'draft' ? 'current' : ''; ?>">
-                Rejected <span class="count">(<?php echo $rejected_count; ?>)</span>
+            <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'cpr-reviews', 'review_status' => 'draft' ) ) ); ?>" 
+            class="<?php echo $status === 'draft' ? 'current' : ''; ?>">
+                <?php esc_html_e( 'Rejected', 'custom-product-reviews' ); ?> 
+                <span class="count">(<?php echo esc_html( $rejected_count ); ?>)</span>
             </a>
         </li>
     </ul>
@@ -78,9 +81,14 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
                 ?>
                 <tr>
                     <td width="5%"><?php echo esc_html( $i++ ); ?></td>
-                    <td width="20%"><a href="<?php echo get_permalink($product_id); ?>" target="_blank"><strong><?php echo get_the_title($product_id); ?></strong></a></td>
+                    <td width="20%">
+                        <a href="<?php echo esc_url( get_permalink( $product_id ) ); ?>" target="_blank">
+                            <strong><?php echo esc_html( get_the_title( $product_id ) ); ?></strong>
+                        </a>
+                    </td>
+
                     <td width="30%">
-                        <strong><?php echo get_the_title(); ?></strong>
+                        <strong><?php echo esc_html( get_the_title() ); ?></strong>
                         <p><?php echo esc_html(wp_trim_words(get_the_content(), 5)); ?></p>
                         <p>
                             <?php if ($file_url) : ?>
@@ -91,10 +99,11 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
                         </p>                        
                     </td>
                     <td width="10%">
-                          <span style="color: #f1c40f; font-size: 16px;">
-                                <?php echo str_repeat('★', intval($rating)); ?>
-                                <?php echo str_repeat('☆', 5 - intval($rating)); ?>
+                            <span style="color: #f1c40f; font-size: 16px;">
+                                <?php echo esc_html( str_repeat( '★', intval( $rating ) ) ); ?>
+                                <?php echo esc_html( str_repeat( '☆', 5 - intval( $rating ) ) ); ?>
                             </span>
+
                     </td>
                     <td width="15%">
                         <strong><?php echo esc_html($reviewer_name); ?></strong><br>
@@ -103,35 +112,43 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
                     <td width="10%"><?php echo esc_html($reviewer_age ? $reviewer_age : '—'); ?></td>
                     <td width="10%"><?php echo get_the_date('M j, Y'); ?></td>
                     <td width="15%">
-                         <?php if ($status === 'pending') : ?>
-                                <button class="button button-small cpr-approve-btn" 
-                                        data-review-id="<?php echo $review_id; ?>">
-                                    <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/approve.svg' ); ?>" alt=""> Approve
-                                </button><br>
-                                <button class="button button-small cpr-reject-btn" 
-                                        data-review-id="<?php echo $review_id; ?>" 
-                                        style="margin-top: 5px;">
-                                    <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/reject.svg' ); ?>" alt=""> Reject
-                                </button>
-                            <?php elseif ($status === 'publish') : ?>
-                                <button class="button button-small cpr-reject-btn" 
-                                        data-review-id="<?php echo $review_id; ?>">
-                                    <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/reject.svg' ); ?>" alt=""> Reject
-                                </button>
-                                
-                            <?php elseif ($status === 'draft') : ?>
-                                <button class="button button-small cpr-approve-btn" 
-                                        data-review-id="<?php echo $review_id; ?>">
-                                    <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/approve.svg' ); ?>" alt=""> Approve
-                                </button>
-                            <?php endif; ?>
-                            
-                            <br>
-                            <button class="button button-link-delete button-small cpr-delete-btn" 
-                                    data-review-id="<?php echo $review_id; ?>" 
-                                    style="margin-top: 5px; color: #a00;">
-                                <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/delete.svg' ); ?>" alt=""> Delete
+                        <?php if ( $status === 'pending' ) : ?>
+                            <button class="button button-small cpr-approve-btn" 
+                                    data-review-id="<?php echo esc_attr( $review_id ); ?>">
+                                <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/approve.svg' ); ?>" 
+                                    alt="<?php esc_attresc_html_e( 'Approve', 'custom-product-reviews' ); ?>"> 
+                                <?php esc_html_e( 'Approve', 'custom-product-reviews' ); ?>
+                            </button><br>
+                            <button class="button button-small cpr-reject-btn" 
+                                    data-review-id="<?php echo esc_attr( $review_id ); ?>" 
+                                    style="margin-top: 5px;">
+                                <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/reject.svg' ); ?>" 
+                                    alt="<?php esc_attresc_html_e( 'Reject', 'custom-product-reviews' ); ?>"> 
+                                <?php esc_html_e( 'Reject', 'custom-product-reviews' ); ?>
                             </button>
+                        <?php elseif ( $status === 'publish' ) : ?>
+                            <button class="button button-small cpr-reject-btn" 
+                                    data-review-id="<?php echo esc_attr( $review_id ); ?>">
+                                <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/reject.svg' ); ?>" 
+                                    alt="<?php esc_attresc_html_e( 'Reject', 'custom-product-reviews' ); ?>"> 
+                                <?php esc_html_e( 'Reject', 'custom-product-reviews' ); ?>
+                            </button>
+                        <?php elseif ( $status === 'draft' ) : ?>
+                            <button class="button button-small cpr-approve-btn" 
+                                    data-review-id="<?php echo esc_attr( $review_id ); ?>">
+                                <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/approve.svg' ); ?>" 
+                                    alt="<?php esc_attresc_html_e( 'Approve', 'custom-product-reviews' ); ?>"> 
+                                <?php esc_html_e( 'Approve', 'custom-product-reviews' ); ?>
+                            </button>
+                        <?php endif; ?>
+                        <br>
+                        <button class="button button-link-delete button-small cpr-delete-btn" 
+                                data-review-id="<?php echo esc_attr( $review_id ); ?>" 
+                                style="margin-top: 5px; color: #a00;">
+                            <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/delete.svg' ); ?>" 
+                                alt="<?php esc_attresc_html_e( 'Delete', 'custom-product-reviews' ); ?>"> 
+                            <?php esc_html_e( 'Delete', 'custom-product-reviews' ); ?>
+                        </button>
                     </td>
                 </tr>
                 <?php endwhile; ?>
@@ -141,7 +158,7 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
         else: ?>
           <div class="cpr-no-reviews">
                 <p style="padding: 40px; text-align: center; color: #666;">
-                    <?php _e( 'No reviews found with this status.', 'custom-product-reviews' ); ?>
+                    <?php esc_html_e( 'No reviews found with this status.', 'custom-product-reviews' ); ?>
                 </p>
             </div>
         <?php endif; ?>

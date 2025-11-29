@@ -55,16 +55,16 @@ class CPR_Form_Handler {
         ?>
 
         <div id="cpr-review-form-wrapper" class="cpr-review-form-section">
-            <h3><?php _e( 'Write a Review', 'custom-product-reviews' ); ?></h3>
+            <h3><?php esc_html_e( 'Write a Review', 'custom-product-reviews' ); ?></h3>
 
             <?php if ( isset( $_GET['review_submitted'] ) && $_GET['review_submitted'] == '1' ): ?>
                 <div class="cpr-success-message">
                     <?php
 $auto_approve = get_option( 'cpr_auto_approve', '0' );
         if ( $auto_approve == '1' ) {
-            _e( 'Thank you! Your review has been published.', 'custom-product-reviews' );
+            esc_html_e( 'Thank you! Your review has been published.', 'custom-product-reviews' );
         } else {
-            _e( 'Thank you! Your review has been submitted and is pending approval.', 'custom-product-reviews' );
+            esc_html_e( 'Thank you! Your review has been submitted and is pending approval.', 'custom-product-reviews' );
         }
         ?>
                 </div>
@@ -78,30 +78,30 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
                 <!-- Review Title Field -->
                 <p class="cpr-form-field">
                     <label for="cpr_title">
-                        <?php _e( 'Review Title', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Review Title', 'custom-product-reviews' ); ?>
                         <?php if ( $title_required == '1' ): ?>
                             <span class="required">*</span>
                         <?php else: ?>
-                            <span class="optional"><?php _e( '(Optional)', 'custom-product-reviews' ); ?></span>
+                            <span class="optional"><?php esc_html_e( '(Optional)', 'custom-product-reviews' ); ?></span>
                         <?php endif; ?>
                     </label>
                     <input type="text"
                            name="cpr_title"
                            id="cpr_title"
-                           placeholder="<?php esc_attr_e( 'Enter review title', 'custom-product-reviews' ); ?>"
+                           placeholder="<?php esc_attresc_html_e( 'Enter review title', 'custom-product-reviews' ); ?>"
                            <?php echo $title_required == '1' ? 'required' : ''; ?>>
                 </p>
 
                 <!-- Review Description Field -->
                 <p class="cpr-form-field">
                     <label for="cpr_content">
-                        <?php _e( 'Review Description', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Review Description', 'custom-product-reviews' ); ?>
                         <span class="required">*</span>
                     </label>
                     <textarea name="cpr_content"
                               id="cpr_content"
                               rows="4"
-                              placeholder="<?php esc_attr_e( 'Share your experience with this product', 'custom-product-reviews' ); ?>"
+                              placeholder="<?php esc_attresc_html_e( 'Share your experience with this product', 'custom-product-reviews' ); ?>"
                               required></textarea>
                 </p>
 
@@ -114,14 +114,14 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
                     <label class="label">
                         <span class="browse-files">
                             <input type="file" name="cpr_file" class="default-file-input" id="cpr_file_input" accept=".jpg,.jpeg,.png,.pdf">
-                            <?php _e( 'Drag and drop, or', 'custom-product-reviews' ); ?>
-                            <span class="browse-files-text"><?php _e( 'browse', 'custom-product-reviews' ); ?></span>
-                            <span><?php _e( 'your files', 'custom-product-reviews' ); ?></span>
+                            <?php esc_html_e( 'Drag and drop, or', 'custom-product-reviews' ); ?>
+                            <span class="browse-files-text"><?php esc_html_e( 'browse', 'custom-product-reviews' ); ?></span>
+                            <span><?php esc_html_e( 'your files', 'custom-product-reviews' ); ?></span>
                         </span>
                         <img src="" alt="" id="cpr_file_preview" style="display:none; max-width:70px; margin-left: auto; margin-right: auto;">
                     </label>
                     <div class="cpr-file-format-note">
-                        <span><?php _e( 'Support JPG, PDF, PNG', 'custom-product-reviews' ); ?></span>
+                        <span><?php esc_html_e( 'Support JPG, PDF, PNG', 'custom-product-reviews' ); ?></span>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -129,13 +129,18 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
                 <!-- Star Rating Field -->
                 <p class="cpr-form-field">
                     <label>
-                        <?php _e( 'Star Rating', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Star Rating', 'custom-product-reviews' ); ?>
                         <span class="required">*</span>
                     </label>
                     <?php if ( $min_rating > 1 ): ?>
                         <span class="cpr-min-rating-note">
-                            <?php printf( __( '(Minimum %d stars required)', 'custom-product-reviews' ), $min_rating ); ?>
+                            <?php printf(
+                                /* translators: %d: minimum number of stars required for a review */
+                                esc_html__( '(Minimum %d stars required)', 'custom-product-reviews' ),
+                                intval( $min_rating )
+                            ); ?>
                         </span>
+
                     <?php endif; ?>
                     <div class="cpr-star-rating" data-min-rating="<?php echo esc_attr( $min_rating ); ?>">
                         <span data-value="1">&#9733;</span>
@@ -150,30 +155,30 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
                 <!-- Name Field -->
                 <p class="cpr-form-field">
                     <label for="cpr_name">
-                        <?php _e( 'Name', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Name', 'custom-product-reviews' ); ?>
                         <span class="required">*</span>
                     </label>
                     <input type="text"
                            name="cpr_name"
                            id="cpr_name"
-                           placeholder="<?php esc_attr_e( 'Enter your name', 'custom-product-reviews' ); ?>"
+                           placeholder="<?php esc_attresc_html_e( 'Enter your name', 'custom-product-reviews' ); ?>"
                            required>
                 </p>
 
                 <!-- Email Field -->
                 <p class="cpr-form-field">
                     <label for="cpr_email">
-                        <?php _e( 'Email Address', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Email Address', 'custom-product-reviews' ); ?>
                         <?php if ( $email_required == '1' ): ?>
                             <span class="required">*</span>
                         <?php else: ?>
-                            <span class="optional"><?php _e( '(Optional)', 'custom-product-reviews' ); ?></span>
+                            <span class="optional"><?php esc_html_e( '(Optional)', 'custom-product-reviews' ); ?></span>
                         <?php endif; ?>
                     </label>
                     <input type="email"
                            name="cpr_email"
                            id="cpr_email"
-                           placeholder="<?php esc_attr_e( 'Enter your email', 'custom-product-reviews' ); ?>"
+                           placeholder="<?php esc_attresc_html_e( 'Enter your email', 'custom-product-reviews' ); ?>"
                            <?php echo $email_required == '1' ? 'required' : ''; ?>>
                 </p>
 
@@ -181,11 +186,11 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
                 <?php if ( $enable_age_range == '1' ): ?>
                 <p class="cpr-form-field">
                     <label class="cpr-age-range-label">
-                        <?php _e( 'Age Range', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Age Range', 'custom-product-reviews' ); ?>
                         <span class="required">*</span>
                     </label>
                     <div class="cpr-age-range">
-                        <button type="button" class="age-btn" data-value="under-18"><?php _e( 'Under 18', 'custom-product-reviews' ); ?></button>
+                        <button type="button" class="age-btn" data-value="under-18"><?php esc_html_e( 'Under 18', 'custom-product-reviews' ); ?></button>
                         <button type="button" class="age-btn" data-value="18-24">18 - 24</button>
                         <button type="button" class="age-btn" data-value="25-34">25 - 34</button>
                         <button type="button" class="age-btn" data-value="35-44">35 - 44</button>
@@ -199,12 +204,12 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
                 <!-- Terms Notice -->
                 <p class="cpr-terms">
-                    <label><?php _e( "By continuing you agree to JOURIE'S Terms and Conditions", 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( "By continuing you agree to JOURIE'S Terms and Conditions", 'custom-product-reviews' ); ?></label>
                 </p>
 
                 <!-- Submit Button -->
                 <p class="submit-wrapper">
-                    <input type="submit" name="cpr_submit_review" value="<?php esc_attr_e( 'Submit Review', 'custom-product-reviews' ); ?>" class="cpr-submit-btn">
+                    <input type="submit" name="cpr_submit_review" value="<?php esc_attresc_html_e( 'Submit Review', 'custom-product-reviews' ); ?>" class="cpr-submit-btn">
                 </p>
             </form>
         </div>
@@ -220,22 +225,22 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
         }
 
         // Verify nonce
-        if ( !isset( $_POST['cpr_review_nonce'] ) || !wp_verify_nonce( $_POST['cpr_review_nonce'], 'cpr_submit_review' ) ) {
-            wp_die( __( 'Security check failed', 'custom-product-reviews' ) );
+        if ( !isset( $_POST['cpr_review_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['cpr_review_nonce'] ) ), 'cpr_submit_review' ) ) {
+            wp_die( esc_html__( 'Security check failed', 'custom-product-reviews' ) );
         }
 
         $product_id = isset( $_POST['cpr_product_id'] ) ? intval( $_POST['cpr_product_id'] ) : 0;
         if ( !$product_id ) {
-            wp_die( __( 'Invalid product', 'custom-product-reviews' ) );
+            wp_die( esc_html__( 'Invalid product', 'custom-product-reviews' ) );
         }
 
         // Get form data
-        $title = isset( $_POST['cpr_title'] ) ? sanitize_text_field( $_POST['cpr_title'] ) : '';
-        $content = isset( $_POST['cpr_content'] ) ? sanitize_textarea_field( $_POST['cpr_content'] ) : '';
+        $title = isset( $_POST['cpr_title'] ) ? sanitize_text_field( wp_unslash( $_POST['cpr_title'] ) ) : '';
+        $content = isset( $_POST['cpr_content'] ) ? sanitize_textarea_field( wp_unslash( $_POST['cpr_content'] ) ) : '';
         $rating = isset( $_POST['cpr_rating'] ) ? intval( $_POST['cpr_rating'] ) : 0;
-        $name = isset( $_POST['cpr_name'] ) ? sanitize_text_field( $_POST['cpr_name'] ) : '';
-        $email = isset( $_POST['cpr_email'] ) ? sanitize_email( $_POST['cpr_email'] ) : '';
-        $age_range = isset( $_POST['cpr_age_range'] ) ? sanitize_text_field( $_POST['cpr_age_range'] ) : '';
+        $name = isset( $_POST['cpr_name'] ) ? sanitize_text_field( wp_unslash( $_POST['cpr_name'] ) ) : '';
+        $email = isset( $_POST['cpr_email'] ) ? sanitize_email( wp_unslash( $_POST['cpr_email'] ) ) : '';
+        $age_range = isset( $_POST['cpr_age_range'] ) ? sanitize_text_field( wp_unslash( $_POST['cpr_age_range'] ) ) : '';
 
         // Get all settings
         $auto_approve = get_option( 'cpr_auto_approve', '0' );
@@ -248,20 +253,26 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
         // Validate required fields based on settings
         if ( $title_required == '1' && empty( $title ) ) {
-            wp_die( __( 'Review title is required.', 'custom-product-reviews' ) );
+            wp_die( esc_html__( 'Review title is required.', 'custom-product-reviews' ) );
         }
 
         if ( $email_required == '1' && empty( $email ) ) {
-            wp_die( __( 'Email address is required.', 'custom-product-reviews' ) );
+            wp_die( esc_html__( 'Email address is required.', 'custom-product-reviews' ) );
         }
 
         if ( empty( $content ) ) {
-            wp_die( __( 'Review description is required.', 'custom-product-reviews' ) );
+            wp_die( esc_html__( 'Review description is required.', 'custom-product-reviews' ) );
         }
 
         // Validate minimum rating
         if ( $rating < $min_rating ) {
-            wp_die( sprintf( __( 'Minimum rating of %d stars is required.', 'custom-product-reviews' ), $min_rating ) );
+            wp_die( 
+                sprintf( 
+                    /* translators: %d: minimum rating number */
+                    esc_html__( 'Minimum rating of %d stars is required.', 'custom-product-reviews' ), 
+                    intval( $min_rating ) 
+                ) 
+            );
         }
 
         // Check bad words if moderation is enabled
@@ -271,7 +282,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
             foreach ( $bad_words_array as $bad_word ) {
                 if ( !empty( $bad_word ) && strpos( $review_text, $bad_word ) !== false ) {
-                    wp_die( __( 'Your review contains inappropriate content and cannot be submitted.', 'custom-product-reviews' ) );
+                    wp_die( esc_html__( 'Your review contains inappropriate content and cannot be submitted.', 'custom-product-reviews' ) );
                 }
             }
         }
@@ -293,7 +304,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
         $review_id = wp_insert_post( $post );
 
         if ( !$review_id ) {
-            wp_die( __( 'Failed to submit review. Please try again.', 'custom-product-reviews' ) );
+            wp_die( esc_html__( 'Failed to submit review. Please try again.', 'custom-product-reviews' ) );
         }
 
         // Save meta data
@@ -349,32 +360,52 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
         $rating = get_post_meta( $review_id, '_cpr_rating', true );
         $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
+        /* translators: %s: product name */
         $subject = sprintf( __( 'New Review Submitted: %s', 'custom-product-reviews' ), $product->get_name() );
 
+        /* translators: %s: product name */
         $message = sprintf(
             __( "A new review has been submitted for: %s\n\n", 'custom-product-reviews' ),
             $product->get_name()
         );
 
+
+        /* translators: %s: reviewer name */
         $message .= sprintf( __( "Reviewer: %s\n", 'custom-product-reviews' ), $reviewer_name );
 
+
         if ( !empty( $reviewer_email ) ) {
+            /* translators: %s: reviewer email address */
             $message .= sprintf( __( "Email: %s\n", 'custom-product-reviews' ), $reviewer_email );
         }
 
-        $message .= sprintf( __( "Rating: %s stars\n", 'custom-product-reviews' ), $rating );
-        $message .= sprintf( __( "Review Title: %s\n", 'custom-product-reviews' ), $review_title );
-        $message .= sprintf( __( "Review: %s\n\n", 'custom-product-reviews' ), $review_content );
+        $message .= sprintf( 
+            /* translators: %s: star rating (1-5) */
+            esc_html__( "Rating: %s stars\n", 'custom-product-reviews' ), 
+            intval( $rating ) 
+        );
+
+        $message .= sprintf( 
+            /* translators: %s: review title */
+            esc_html__( "Review Title: %s\n", 'custom-product-reviews' ), 
+            sanitize_text_field( $review_title ) 
+        );
+
+        $message .= sprintf( 
+            /* translators: %s: review content */
+            esc_html__( "Review: %s\n\n", 'custom-product-reviews' ), 
+            sanitize_textarea_field( $review_content ) 
+        );
 
         if ( $auto_approve == '1' ) {
-            $message .= __( "Status: Published (Auto-approved)\n\n", 'custom-product-reviews' );
+            $message .= esc_html__( "Status: Published (Auto-approved)\n\n", 'custom-product-reviews' );
         } else {
-            $message .= __( "Status: Pending Approval\n\n", 'custom-product-reviews' );
+            $message .= esc_html__( "Status: Pending Approval\n\n", 'custom-product-reviews' );
         }
-
         $message .= sprintf(
+            /* translators: %s: URL to review management page */
             __( "View and manage this review:\n%s", 'custom-product-reviews' ),
-            admin_url( 'admin.php?page=cpr-reviews' )
+            esc_url( admin_url( 'admin.php?page=cpr-reviews' ) )
         );
 
         wp_mail( $admin_email, $subject, $message );
@@ -390,7 +421,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
         $load_more_count = 3;
         ?>
          <div id="cpr-all-reviews-wrapper" class="cpr-reviews-section">
-            <h3><?php _e( 'Customer Reviews', 'custom-product-reviews' ); ?></h3>
+            <h3><?php esc_html_e( 'Customer Reviews', 'custom-product-reviews' ); ?></h3>
             
             <!-- Hidden input for product ID -->
             <input type="hidden" id="cpr_product_id" value="<?php echo esc_attr( $product_id ); ?>">
@@ -448,7 +479,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
                         $this->render_single_review( get_the_ID() );
                     endwhile;
                 else :
-                    echo '<div class="cpr-no-reviews"><p>' . __( 'No reviews yet. Be the first to review this product!', 'custom-product-reviews' ) . '</p></div>';
+                    echo '<div class="cpr-no-reviews"><p>' . esc_html__( 'No reviews yet. Be the first to review this product!', 'custom-product-reviews' ) . '</p></div>';
                 endif;
                 
                 wp_reset_postdata();
@@ -459,7 +490,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
             <?php if ( $total_reviews > $initial_reviews ) : ?>
             <div class="cpr-load-more-container">
                 <button id="cpr-load-more-btn" class="cpr-load-more-btn">
-                    <?php _e( 'More Reviews', 'custom-product-reviews' ); ?>
+                    <?php esc_html_e( 'More Reviews', 'custom-product-reviews' ); ?>
                 </button>
                 <div class="cpr-loading-spinner" style="display: none;">
                     <div class="spinner"></div>
@@ -500,11 +531,11 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
                     spinner.show();
                     
                     $.ajax({
-                        url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                        url: '<?php echo esc_url( admin_url('admin-ajax.php' ) ); ?>',
                         type: 'POST',
                         data: {
                             action: 'cpr_load_more_reviews',
-                            nonce: '<?php echo wp_create_nonce('cpr_load_more_nonce'); ?>',
+                            nonce: '<?php echo esc_js( wp_create_nonce( 'cpr_load_more_nonce' ) ); ?>',
                             product_id: product_id,
                             offset: loaded_reviews,
                             count: load_more_count,
@@ -553,21 +584,21 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
         
         // Previous button
         if ( $current_page > 1 ) {
-            echo '<a class="prev page-numbers" href="#" data-page="' . ($current_page - 1) . '">&laquo; Previous</a>';
+            echo '<a class="prev page-numbers" href="#" data-page="' . esc_attr( $current_page - 1 ) . '">&laquo; ' . esc_html__( 'Previous', 'custom-product-reviews' ) . '</a>';
         }
         
         // Page numbers
         for ( $i = 1; $i <= $total_pages; $i++ ) {
             if ( $i == $current_page ) {
-                echo '<span class="page-numbers current">' . $i . '</span>';
+                echo '<span class="page-numbers current">' . esc_html( $i ) . '</span>';
             } else {
-                echo '<a class="page-numbers" href="#" data-page="' . $i . '">' . $i . '</a>';
+                echo '<a class="page-numbers" href="#" data-page="' . esc_attr( $i ) . '">' . esc_html( $i ) . '</a>';
             }
         }
         
         // Next button
         if ( $current_page < $total_pages ) {
-            echo '<a class="next page-numbers" href="#" data-page="' . ($current_page + 1) . '">Next &raquo;</a>';
+            echo '<a class="next page-numbers" href="#" data-page="' . esc_attr( $current_page + 1 ) . '">' . esc_html__( 'Next', 'custom-product-reviews' ) . ' &raquo;</a>';
         }
         
         echo '</div>';
@@ -592,11 +623,11 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
                 var verified_only = $('input[name="verified_only"]').is(':checked') ? '1' : '0';
                 
                 $.ajax({
-                    url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                    url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
                     type: 'POST',
                     data: {
                         action: 'cpr_paginate_reviews',
-                        nonce: '<?php echo wp_create_nonce('cpr_pagination_nonce'); ?>',
+                        nonce: '<?php echo esc_js( wp_create_nonce( 'cpr_pagination_nonce' ) ); ?>',
                         product_id: product_id,
                         page: page,
                         rating: ratings,
@@ -654,7 +685,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
                 <?php if ( $show_verified_badge == '1' && $verified == '1' ): ?>
                 <div class="cpt-verify-buyer">
-                    <span><?php _e( 'Verified Buyer', 'custom-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Verified Buyer', 'custom-product-reviews' ); ?></span>
                     <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
 
                 </div>
@@ -662,7 +693,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
                 <?php if ( $enable_age_range == '1' && !empty( $reviewer_age ) ): ?>
                 <div class="cpt-age-range">
-                    <span><?php _e( 'Age Range:', 'custom-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Age Range:', 'custom-product-reviews' ); ?></span>
                     <span><?php echo esc_html( $reviewer_age ); ?></span>
                 </div>
                 <?php endif; ?>

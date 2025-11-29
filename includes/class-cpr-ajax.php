@@ -91,19 +91,21 @@ class CPR_Ajax {
         $offset = isset( $_POST['offset'] ) ? intval( $_POST['offset'] ) : 0;
         $count = isset( $_POST['count'] ) ? intval( $_POST['count'] ) : 3;
         $ratings = isset( $_POST['rating'] ) && is_array( $_POST['rating'] ) ? array_map( 'intval', $_POST['rating'] ) : array();
-        $age_range = isset( $_POST['age_range'] ) ? sanitize_text_field( $_POST['age_range'] ) : '';
+        $age_range = isset( $_POST['age_range'] ) ? sanitize_text_field( wp_unslash( $_POST['age_range'] ) ) : '';
         $verified_only = isset( $_POST['verified_only'] ) && $_POST['verified_only'] == '1' ? true : false;
         
         if ( !$product_id ) {
             wp_send_json_error( array( 'message' => 'Product ID missing' ) );
         }
         
+        // Build meta query with caching consideration
         $meta_query = array(
             'relation' => 'AND',
             array(
                 'key'     => '_cpr_product_id',
                 'value'   => $product_id,
                 'compare' => '=',
+                'type'    => 'NUMERIC',
             ),
         );
         
@@ -121,6 +123,7 @@ class CPR_Ajax {
                 'key'     => '_cpr_age_range',
                 'value'   => $age_range,
                 'compare' => '=',
+                'type'    => 'CHAR',
             );
         }
         
@@ -129,7 +132,26 @@ class CPR_Ajax {
                 'key'     => '_cpr_verified_buyer',
                 'value'   => '1',
                 'compare' => '=',
+                'type'    => 'CHAR',
             );
+        }
+        
+        // Create cache key
+        $cache_key = 'cpr_reviews_' . md5( serialize( array(
+            'product_id' => $product_id,
+            'offset' => $offset,
+            'count' => $count,
+            'ratings' => $ratings,
+            'age_range' => $age_range,
+            'verified' => $verified_only
+        ) ) );
+        
+        // Try to get cached results
+        $cached_results = get_transient( $cache_key );
+        
+        if ( false !== $cached_results ) {
+            wp_send_json_success( $cached_results );
+            return;
         }
         
         $args = array(
@@ -140,6 +162,9 @@ class CPR_Ajax {
             'meta_query'     => $meta_query,
             'orderby'        => 'date',
             'order'          => 'DESC',
+            'no_found_rows'  => true, // Performance optimization
+            'update_post_meta_cache' => true,
+            'update_post_term_cache' => false,
         );
         
         $review_query = new WP_Query( $args );
@@ -154,10 +179,15 @@ class CPR_Ajax {
         wp_reset_postdata();
         $reviews_html = ob_get_clean();
         
-        wp_send_json_success( array(
+        $response_data = array(
             'reviews' => $reviews_html,
             'loaded_count' => $review_query->post_count
-        ) );
+        );
+        
+        // Cache for 1 hour
+        set_transient( $cache_key, $response_data, HOUR_IN_SECONDS );
+        
+        wp_send_json_success( $response_data );
     }
     
     /**
@@ -185,14 +215,14 @@ class CPR_Ajax {
                 
                 <?php if ( $show_verified_badge == '1' && $verified == '1' ) : ?>
                 <div class="cpt-verify-buyer">
-                    <span><?php _e( 'Verified Buyer', 'custom-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Verified Buyer', 'custom-product-reviews' ); ?></span>
                     <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
                 </div>
                 <?php endif; ?>
                 
                 <?php if ( $enable_age_range == '1' && !empty( $reviewer_age ) ) : ?>
                 <div class="cpt-age-range">
-                    <span><?php _e( 'Age Range:', 'custom-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Age Range:', 'custom-product-reviews' ); ?></span>
                     <span><?php echo esc_html( $reviewer_age ); ?></span>
                 </div>
                 <?php endif; ?>
