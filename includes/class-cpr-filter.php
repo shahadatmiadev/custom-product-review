@@ -47,7 +47,7 @@ class CPR_Filter {
                 </div>
             </div>
             
-            <div class="cpr-filter-group">
+            <div class="cpr-filter-group cpr-verified-filter">
                 <label>
                     <input type="checkbox" name="verified_only" value="1">
                     <?php _e( 'Verified Buyers Only', 'custom-product-reviews' ); ?>
@@ -64,12 +64,6 @@ class CPR_Filter {
         $ratings = isset( $_POST['rating'] ) && is_array( $_POST['rating'] ) ? array_map( 'intval', $_POST['rating'] ) : array();
         $age_range = isset( $_POST['age_range'] ) ? sanitize_text_field( $_POST['age_range'] ) : '';
         $verified_only = isset( $_POST['verified_only'] ) && $_POST['verified_only'] == '1' ? true : false;
-        
-        // Debug করার জন্য
-        error_log( 'Product ID: ' . $product_id );
-        error_log( 'Ratings: ' . print_r( $ratings, true ) );
-        error_log( 'Age Range: ' . $age_range );
-        error_log( 'Verified Only: ' . ( $verified_only ? 'true' : 'false' ) );
         
         if ( !$product_id ) {
             wp_send_json_error( array( 'message' => 'Product ID missing' ) );
@@ -119,12 +113,7 @@ class CPR_Filter {
             'order'          => 'DESC',
         );
         
-        // Debug query
-        error_log( 'Query Args: ' . print_r( $args, true ) );
-        
         $reviews = new WP_Query( $args );
-        
-        error_log( 'Found Posts: ' . $reviews->found_posts );
         
         ob_start();
         if ( $reviews->have_posts() ) {
@@ -150,32 +139,69 @@ class CPR_Filter {
         $reviewer_age = get_post_meta( $review_id, '_cpr_age_range', true );
         $verified = get_post_meta( $review_id, '_cpr_verified_buyer', true );
         
+        // Get display settings
+        $show_verified_badge = get_option( 'cpr_show_verified_badge', '1' );
+        $date_format = get_option( 'cpr_date_format', 'j/n/y' );
+        $enable_age_range = get_option( 'cpr_enable_age_range', '1' );
+        $filled_star_color = get_option( 'cpr_filled_star_color', '#ffc107' );
+        $empty_star_color = get_option( 'cpr_empty_star_color', '#dddddd' );
+        
         ?>
         <div class="cpt-review-full-box">
             <div class="cpt-review-box-one">
                 <div class="cpt-name"><?php echo esc_html( $reviewer_name ); ?></div>
-                <?php if ( $verified == '1' ) : ?>
-                <div class="cpt-verify-buer">
+                
+                <?php if ( $show_verified_badge == '1' && $verified == '1' ) : ?>
+                <div class="cpt-verify-buyer">
                     <span><?php _e( 'Verified Buyer', 'custom-product-reviews' ); ?></span>
                     <img src="<?php echo CPR_ASSETS_URL . 'images/verify-buyer.svg'; ?>" alt="verify-buyer">
                 </div>
                 <?php endif; ?>
+                
+                <?php if ( $enable_age_range == '1' && !empty( $reviewer_age ) ) : ?>
                 <div class="cpt-age-range">
-                    <span><?php _e( 'Age Range', 'custom-product-reviews' ); ?></span>
+                    <span><?php _e( 'Age Range:', 'custom-product-reviews' ); ?></span>
                     <span><?php echo esc_html( $reviewer_age ); ?></span>
                 </div>
+                <?php endif; ?>
             </div>
+            
             <div class="cpt-review-box-two">
                 <div class="cpt-review-date">
                     <div class="cpt-review-count">
-                        <?php echo str_repeat( '★', intval( $rating ) ); ?>
-                        <?php echo str_repeat( '☆', 5 - intval( $rating ) ); ?>
+                        <?php 
+                        // Display stars with custom colors
+                        for ( $i = 1; $i <= 5; $i++ ) {
+                            if ( $i <= intval( $rating ) ) {
+                                echo '<span style="color: ' . esc_attr( $filled_star_color ) . ';">★</span>';
+                            } else {
+                                echo '<span style="color: ' . esc_attr( $empty_star_color ) . ';">☆</span>';
+                            }
+                        }
+                        ?>
                     </div>
-                    <div class="cpt-date"><?php echo get_the_date( 'j/n/y' ); ?></div>
+                    <div class="cpt-date"><?php echo get_the_date( $date_format ); ?></div>
                 </div>
-                <div class="cpt-review-content">
-                    <span><?php echo esc_html( get_the_content() ); ?></span>
+                <div class="cpt-review-box-content-image">
+                    <div class="cpt-review-content-td">
+                        <div class="cpt-review-title">
+                        <strong><?php echo esc_html( get_the_title() ); ?></strong>
+                        </div>
+                        
+                        <div class="cpt-review-content">
+                            <span><?php echo esc_html( get_the_content() ); ?></span>
+                        </div>
+                    </div>
+                    
+                    
+                    <?php if ( !empty( $file_url ) ) : ?>
+                    <div class="cpt-review-image">
+                        <img src="<?php echo esc_url( $file_url ); ?>" alt="Review attachment" style="max-width: 50px; height: auto;">
+                    </div>
+                    <?php endif; ?>
                 </div>
+                
+                
             </div>
         </div>
         <?php

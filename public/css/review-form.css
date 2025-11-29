@@ -1,15 +1,25 @@
-div#cpr-review-form-wrapper {
-  width: 927px;
+/**
+ * public/css/review-form.css
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.cpr-review-form-wrapper {
   background: #fffff4;
-  padding: 50px;
   margin: 0 auto;
+}
 
-  form {
+form {
     margin: 0;
   }
 
+  .cpr-file-format-note,
   label {
     color: #661415;
+    font-size: 16px;
+    font-weight: 500;
   }
 
   input {
@@ -53,12 +63,14 @@ div#cpr-review-form-wrapper {
     display: flex;
     justify-content: center;
     margin: 0;
+    margin-top: 10px;
     input[type='submit'] {
       background: #e07c3d !important;
       color: #fff !important;
       width: auto !important;
       border-color: #e07c3d !important;
-      padding: 15px 20px !important;
+      padding: 10px 20px !important;
+      border-radius: 8px;
     }
   }
   .cpr-terms {
@@ -88,7 +100,9 @@ div#cpr-review-form-wrapper {
       margin: 0 auto;
     }
   }
-
+  .cpr-star-rating {
+    margin-bottom: 20px;
+  }
   .cpr-star-rating span {
     font-size: 25px;
     cursor: pointer;
@@ -99,18 +113,121 @@ div#cpr-review-form-wrapper {
     color: #ffcc00;
   }
 
-  .cpr-age-range button {
-  margin-right: 0;
-    padding: 9px 10px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    background: #fbf9ec;
+
+  .cpr-star-rating {
+    line-height: 0;
   }
-  .cpr-age-range button.selected {
-    background: #661415;
-    color: #fff;
-    border-color: #661415;
-    box-shadow: none;
-    outline: none;
+
+/* Success Message */
+.cpr-success-message {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form Field Styling */
+.cpr-form-field {
+  margin-bottom: 20px;
+}
+
+.cpr-form-field label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px !important;
+}
+
+.cpr-form-field .required {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.cpr-form-field .optional {
+  color: #7f8c8d;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.cpr-form-field input[type='text'],
+.cpr-form-field input[type='email'],
+.cpr-form-field textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.cpr-form-field input[type='text']:focus,
+.cpr-form-field input[type='email']:focus,
+.cpr-form-field textarea:focus {
+  border-color: #661415;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 20, 21, 0.1);
+}
+
+/* Age Range Buttons */
+.cpr-age-range {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+.cpr-age-range .age-btn:hover {
+  border-color: #661415;
+  background: #fbf9ec;
+  color: #661415;
+}
+
+.cpr-age-range .age-btn.selected {
+  border-color: #661415;
+  background: #661415;
+  color: #fff;
+}
+
+/* Submit Button */
+.cpr-submit-btn {
+  background: #661415;
+  color: #fff;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cpr-submit-btn:hover {
+  background: #4a0f10;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 20, 21, 0.3);
+}
+
+/* Min Rating Note */
+.cpr-min-rating-note {
+  display: inline-block;
+  background: #fff3cd;
+  color: #856404;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-left: 10px;
 }

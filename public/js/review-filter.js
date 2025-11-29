@@ -1,3 +1,6 @@
+/**
+ * public/js/review-filter.js
+ */
 jQuery(document).ready(function($) {
     'use strict';
     
@@ -12,12 +15,7 @@ jQuery(document).ready(function($) {
         $('input[name="rating[]"]:checked').each(function() {
             ratings.push($(this).val());
         });
-        
-        console.log('Product ID:', product_id);
-        console.log('Ratings:', ratings);
-        console.log('Age Range:', age_range);
-        console.log('Verified Only:', verified_only);
-        
+                
         $.ajax({
             url: cpr_ajax.ajax_url,
             type: 'POST',
@@ -33,9 +31,9 @@ jQuery(document).ready(function($) {
                 $('#cpr-reviews-container').html('<div class="cpr-loading">Loading...</div>');
             },
             success: function(response) {
-                console.log('Response:', response);
                 if (response.success) {
                     $('#cpr-reviews-container').html(response.data);
+                    $('.cpr-load-more-container').hide();
                 } else {
                     $('#cpr-reviews-container').html('<div class="cpr-error">Error loading reviews</div>');
                 }

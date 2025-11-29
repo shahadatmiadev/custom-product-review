@@ -1,4 +1,7 @@
 <?php
+/**
+ * views/admin-reviews-page.php
+ */
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }

@@ -1,11 +1,17 @@
+/**
+ * admin/css/admin-style.css
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 #cpr_review_details .inside img {
   width: 100px;
   height: 100px;
   border-radius: 10px;
   display: block;
 }
-
-
 
 
 /* Action Buttons */
@@ -59,4 +65,28 @@
     0%   { opacity: 1; }
     70%  { opacity: 1; }
     100% { opacity: 0; transform: translateY(-10px); }
+}
+
+
+/* Reset Button Styles */
+.cpr-reset-styles-form .submit {
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+.cpr-reset-styles-form .submit input[type="submit"] {
+    background-color: #dc3232;
+    color: #fff;
+    border-color: #dc3232;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+.cpr-reset-styles-form .submit input[type="submit"]:hover,
+.cpr-reset-styles-form .submit input[type="submit"]:focus {
+    background-color: #c62222;
+    border-color: #c62222;
+    color: #fff;
 }

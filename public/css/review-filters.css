@@ -1,3 +1,11 @@
+/**
+ * public/css/review-filters.css
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .cpr-review-filters {
     background: #fbf9ec;
     border: 1px solid #f0e6d3;
@@ -5,7 +13,9 @@
     padding: 20px;
     margin-bottom: 30px;
 }
-
+.cpr-review-filters h4 {
+    margin-bottom: 20px;
+}
 .cpr-filter-group {
     margin-bottom: 15px;
 }
@@ -13,8 +23,9 @@
 .cpr-filter-group label {
     display: block;
     font-weight: 500;
-    margin-bottom: 8px;
+    margin-bottom: 8px!important;
     color: #661415;
+    font-size: 15px;
 }
 
 .cpr-rating-filter {
@@ -31,18 +42,47 @@
 
 .cpr-rating-filter input[type="checkbox"] {
     width: auto;
+    outline: none;
+    cursor: pointer;
 }
-
-.cpr-age-filter select {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #dddddd;
-    border-radius: 6px;
-    background: #fff;
+.cpr-filter-group.cpr-verified-filter label {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: start;
+    gap: 5px;
 }
-
+.cpr-filter-group.cpr-verified-filter label input {
+    width: auto;
+}
 .cpr-loading, .cpr-error {
     text-align: center;
     padding: 20px;
     color: #661415;
+}
+
+
+.cpr-age-filter select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: #fbf9ec;
+    border: 1px solid #f0e6d3;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #374151;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' fill='none' stroke='%236b7280' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+
+.cpr-age-filter select:focus {
+    outline: none;
+    border-color: none;
+    box-shadow: none;
 }

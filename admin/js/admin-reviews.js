@@ -1,4 +1,6 @@
-
+/**
+ * admin/js/admin-reviews.js
+ */
 jQuery(document).ready(function ($) {
   'use strict';
 

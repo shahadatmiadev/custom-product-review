@@ -1,4 +1,8 @@
 <?php
+/**
+ * Meta Boxes Class
+ * includes/class-cpr-meta-boxes.php
+ */
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }

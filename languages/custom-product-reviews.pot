@@ -1,0 +1,711 @@
+# Copyright (C) 2025 Shahadat Mia
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Product Reviews 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/shahadatmiadev/custom-product-reviews\n"
+"POT-Creation-Date: 2025-01-15 10:00:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: WordPress\n"
+"X-Domain: custom-product-reviews\n"
+
+#: custom-product-reviews.php:50
+msgid "Product Reviews"
+msgstr ""
+
+#: custom-product-reviews.php:51
+msgid "All Reviews"
+msgstr ""
+
+#: custom-product-reviews.php:61
+msgid "Settings"
+msgstr ""
+
+#: custom-product-reviews.php:71
+msgid "Customize Styles"
+msgstr ""
+
+#: includes/class-cpr-post-type.php:15
+msgid "Reviews"
+msgstr ""
+
+#: includes/class-cpr-post-type.php:16
+msgid "Review"
+msgstr ""
+
+#: includes/class-cpr-post-type.php:18
+msgid "Add New Review"
+msgstr ""
+
+#: includes/class-cpr-post-type.php:19
+msgid "Edit Review"
+msgstr ""
+
+#: includes/class-cpr-post-type.php:20
+msgid "New Review"
+msgstr ""
+
+#: includes/class-cpr-post-type.php:21
+msgid "View Review"
+msgstr ""
+
+#: includes/class-cpr-post-type.php:22
+msgid "Search Reviews"
+msgstr ""
+
+#: includes/class-cpr-post-type.php:23
+msgid "No Reviews found"
+msgstr ""
+
+#: includes/class-cpr-post-type.php:24
+msgid "No Reviews found in Trash"
+msgstr ""
+
+#: includes/class-cpr-meta-boxes.php:18
+msgid "Review Details"
+msgstr ""
+
+#: includes/class-cpr-meta-boxes.php:37
+msgid "Star Rating (1-5)"
+msgstr ""
+
+#: includes/class-cpr-meta-boxes.php:42
+msgid "Age Range"
+msgstr ""
+
+#: includes/class-cpr-meta-boxes.php:55
+msgid "Upload File (JPG, PNG, PDF)"
+msgstr ""
+
+#: includes/class-cpr-meta-boxes.php:58
+msgid "View Uploaded File"
+msgstr ""
+
+#: includes/class-cpr-meta-boxes.php:64
+msgid "Verified Buyer"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:60
+msgid "Write a Review"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:66
+msgid "Thank you! Your review has been published."
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:68
+msgid "Thank you! Your review has been submitted and is pending approval."
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:78
+msgid "Review Title"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:82
+msgid "(Optional)"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:85
+msgid "Enter review title"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:91
+msgid "Review Description"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:97
+msgid "Share your experience with this product"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:108
+msgid "Drag and drop, or"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:109
+msgid "browse"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:110
+msgid "your files"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:115
+msgid "Support JPG, PDF, PNG"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:121
+msgid "Star Rating"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:125
+#, php-format
+msgid "(Minimum %d stars required)"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:137
+msgid "Name"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:143
+msgid "Enter your name"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:148
+msgid "Email Address"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:158
+msgid "Enter your email"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:168
+msgid "Under 18"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:169
+msgid "18 - 24"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:170
+msgid "25 - 34"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:171
+msgid "35 - 44"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:172
+msgid "45 - 54"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:173
+msgid "55 - 64"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:174
+msgid "65+"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:180
+msgid "By continuing you agree to JOURIE'S Terms and Conditions"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:185
+msgid "Submit Review"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:199
+msgid "Security check failed"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:204
+msgid "Invalid product"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:226
+msgid "Review title is required."
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:230
+msgid "Email address is required."
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:234
+msgid "Review description is required."
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:238
+#, php-format
+msgid "Minimum rating of %d stars is required."
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:248
+msgid "Your review contains inappropriate content and cannot be submitted."
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:275
+msgid "Failed to submit review. Please try again."
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:304
+#, php-format
+msgid "New Review Submitted: %s"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:306
+#, php-format
+msgid "A new review has been submitted for: %s\n\n"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:310
+#, php-format
+msgid "Reviewer: %s\n"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:313
+#, php-format
+msgid "Email: %s\n"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:316
+#, php-format
+msgid "Rating: %s stars\n"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:317
+#, php-format
+msgid "Review Title: %s\n"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:318
+#, php-format
+msgid "Review: %s\n\n"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:321
+msgid "Status: Published (Auto-approved)\n\n"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:323
+msgid "Status: Pending Approval\n\n"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:326
+#, php-format
+msgid "View and manage this review:\n%s"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:340
+msgid "Customer Reviews"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:391
+msgid "No reviews yet. Be the first to review this product!"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:402
+msgid "More Reviews"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:513
+msgid "Verified Buyer"
+msgstr ""
+
+#: includes/class-cpr-form-handler.php:521
+msgid "Age Range:"
+msgstr ""
+
+#: includes/class-cpr-filter.php:25
+msgid "Filter Reviews"
+msgstr ""
+
+#: includes/class-cpr-filter.php:28
+msgid "Rating"
+msgstr ""
+
+#: includes/class-cpr-filter.php:38
+msgid "Age Range"
+msgstr ""
+
+#: includes/class-cpr-filter.php:41
+msgid "All Ages"
+msgstr ""
+
+#: includes/class-cpr-filter.php:42
+msgid "Under 18"
+msgstr ""
+
+#: includes/class-cpr-filter.php:43
+msgid "18 - 24"
+msgstr ""
+
+#: includes/class-cpr-filter.php:44
+msgid "25 - 34"
+msgstr ""
+
+#: includes/class-cpr-filter.php:45
+msgid "35 - 44"
+msgstr ""
+
+#: includes/class-cpr-filter.php:46
+msgid "45 - 54"
+msgstr ""
+
+#: includes/class-cpr-filter.php:47
+msgid "55 - 64"
+msgstr ""
+
+#: includes/class-cpr-filter.php:48
+msgid "65+"
+msgstr ""
+
+#: includes/class-cpr-filter.php:55
+msgid "Verified Buyers Only"
+msgstr ""
+
+#: includes/class-cpr-filter.php:116
+msgid "No reviews found with these filters."
+msgstr ""
+
+#: includes/class-cpr-settings.php:46
+msgid "Settings saved successfully"
+msgstr ""
+
+#: includes/class-cpr-settings.php:64
+msgid "General"
+msgstr ""
+
+#: includes/class-cpr-settings.php:68
+msgid "Form Settings"
+msgstr ""
+
+#: includes/class-cpr-settings.php:72
+msgid "Display Settings"
+msgstr ""
+
+#: includes/class-cpr-settings.php:76
+msgid "Advanced"
+msgstr ""
+
+#: includes/class-cpr-settings.php:106
+msgid "Auto Approve Reviews"
+msgstr ""
+
+#: includes/class-cpr-settings.php:109
+msgid "Automatically approve reviews (No manual approval needed)"
+msgstr ""
+
+#: includes/class-cpr-settings.php:110
+msgid "If disabled, reviews will be in pending status and require admin approval."
+msgstr ""
+
+#: includes/class-cpr-settings.php:116
+msgid "Minimum Star Rating"
+msgstr ""
+
+#: includes/class-cpr-settings.php:124
+msgid "Reviews below this rating will not be accepted."
+msgstr ""
+
+#: includes/class-cpr-settings.php:130
+msgid "Review Form Position"
+msgstr ""
+
+#: includes/class-cpr-settings.php:133
+msgid "Before Product Summary"
+msgstr ""
+
+#: includes/class-cpr-settings.php:134
+msgid "After Product Summary"
+msgstr ""
+
+#: includes/class-cpr-settings.php:136
+msgid "Where to display the review form on product page."
+msgstr ""
+
+#: includes/class-cpr-settings.php:142
+msgid "Reviews Per Page"
+msgstr ""
+
+#: includes/class-cpr-settings.php:144
+msgid "Number of reviews to display per page (pagination)."
+msgstr ""
+
+#: includes/class-cpr-settings.php:159
+msgid "File Upload"
+msgstr ""
+
+#: includes/class-cpr-settings.php:162
+msgid "Enable file upload (JPG, PNG, PDF)"
+msgstr ""
+
+#: includes/class-cpr-settings.php:164
+msgid "Allow customers to upload images or documents with their review."
+msgstr ""
+
+#: includes/class-cpr-settings.php:170
+msgid "Age Range Field"
+msgstr ""
+
+#: includes/class-cpr-settings.php:173
+msgid "Show age range selection field"
+msgstr ""
+
+#: includes/class-cpr-settings.php:175
+msgid "Ask customers to select their age range when submitting a review."
+msgstr ""
+
+#: includes/class-cpr-settings.php:181
+msgid "Email Field"
+msgstr ""
+
+#: includes/class-cpr-settings.php:184
+msgid "Email address is required"
+msgstr ""
+
+#: includes/class-cpr-settings.php:186
+msgid "Make email field mandatory for review submission."
+msgstr ""
+
+#: includes/class-cpr-settings.php:192
+msgid "Review Title"
+msgstr ""
+
+#: includes/class-cpr-settings.php:195
+msgid "Review title is required"
+msgstr ""
+
+#: includes/class-cpr-settings.php:197
+msgid "Make review title field mandatory."
+msgstr ""
+
+#: includes/class-cpr-settings.php:213
+msgid "Verified Buyer Badge"
+msgstr ""
+
+#: includes/class-cpr-settings.php:216
+msgid "Show verified buyer badge on reviews"
+msgstr ""
+
+#: includes/class-cpr-settings.php:218
+msgid "Display a badge for verified purchasers."
+msgstr ""
+
+#: includes/class-cpr-settings.php:224
+msgid "Date Format"
+msgstr ""
+
+#: includes/class-cpr-settings.php:233
+msgid "How to display review submission date."
+msgstr ""
+
+#: includes/class-cpr-settings.php:239
+msgid "Review Filters"
+msgstr ""
+
+#: includes/class-cpr-settings.php:242
+msgid "Show filter options (Rating, Age Range, Verified)"
+msgstr ""
+
+#: includes/class-cpr-settings.php:244
+msgid "Allow customers to filter reviews by rating, age range, etc."
+msgstr ""
+
+#: includes/class-cpr-settings.php:250
+msgid "Empty Star Color"
+msgstr ""
+
+#: includes/class-cpr-settings.php:253
+msgid "Color for empty/unfilled stars."
+msgstr ""
+
+#: includes/class-cpr-settings.php:259
+msgid "Filled Star Color"
+msgstr ""
+
+#: includes/class-cpr-settings.php:262
+msgid "Color for filled/selected stars."
+msgstr ""
+
+#: includes/class-cpr-settings.php:278
+msgid "Review Moderation"
+msgstr ""
+
+#: includes/class-cpr-settings.php:281
+msgid "Enable bad words filter"
+msgstr ""
+
+#: includes/class-cpr-settings.php:283
+msgid "Automatically reject reviews containing inappropriate words."
+msgstr ""
+
+#: includes/class-cpr-settings.php:289
+msgid "Bad Words List"
+msgstr ""
+
+#: includes/class-cpr-settings.php:291
+msgid "Add words separated by commas. Reviews containing these words will be automatically rejected."
+msgstr ""
+
+#: includes/class-cpr-settings.php:297
+msgid "Email Notifications"
+msgstr ""
+
+#: includes/class-cpr-settings.php:300
+msgid "Send email notification when a new review is submitted"
+msgstr ""
+
+#: includes/class-cpr-settings.php:302
+msgid "Admin will receive an email alert for each new review."
+msgstr ""
+
+#: includes/class-cpr-settings.php:308
+msgid "Admin Email Address"
+msgstr ""
+
+#: includes/class-cpr-settings.php:310
+msgid "Email address to receive review notifications."
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:46
+msgid "Styles saved successfully"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:57
+msgid "Form Styles"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:58
+msgid "Review Styles"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:59
+msgid "Filter Styles"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:60
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:94
+msgid "Filter Section Background"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:101
+msgid "Filter Section Border"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:110
+msgid "Filter Section Padding"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:117
+msgid "Filter Title Color"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:124
+msgid "Filter Label Color"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:131
+msgid "Filter Input Background"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:138
+msgid "Filter Input Border"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:145
+msgid "Filter Input Text Color"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:152
+msgid "Filter Checkbox Color"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:159
+msgid "Filter Select Background"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:166
+msgid "Filter Select Border"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:173
+msgid "Filter Select Text Color"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:194
+msgid "Form Background"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:201
+msgid "Form Border"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:210
+msgid "Form Padding"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:217
+msgid "Form Title Color"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:224
+msgid "Form Label Color"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:231
+msgid "Input Background"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:238
+msgid "Input Border"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:245
+msgid "Input Text Color"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:252
+msgid "Button Background"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:259
+msgid "Button Text Color"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:266
+msgid "Button Hover Background"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:273
+msgid "Button Hover Text"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:295
+msgid "Review Box Background"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:302
+msgid "Review Box Border"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:311
+msgid "Review Box Padding"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:318
+msgid "Reviewer Name Color"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:325
+msgid "Review Date Color"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:332
+msgid "Review Content Color"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:339
+msgid "Star Size"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:356
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/class-cpr-style-settings.php:358
+msgid "Add your custom CSS code here. It will be applied to all review forms and displays."
+msgstr ""
+
+#: admin/views/admin-reviews-page.php:45
+msgid "No reviews found with this status."
+msgstr ""

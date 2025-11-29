@@ -1,4 +1,8 @@
 <?php
+/**
+ * Post Type Class
+ * includes/class-cpr-post-type.php
+ */
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
