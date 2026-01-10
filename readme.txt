@@ -2,7 +2,7 @@
 Contributors: xohanniloy017
 Tags: woocommerce, reviews, product reviews, rating, testimonials
 Requires at least: 5.8
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv2 or later
@@ -256,7 +256,7 @@ Initial release of ReviewNest. Install to add a powerful review system to your W
 = Support =
 
 For support, feature requests, or bug reports, please visit:
-* GitHub: https://github.com/shahadatmiadev/custom-product-reviews
+* GitHub: https://github.com/shahadatmiadev/reviewnest-product-reviews
 * Support Forum: WordPress.org support forum
 
 = Contributing =

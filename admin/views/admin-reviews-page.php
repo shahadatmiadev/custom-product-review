@@ -33,21 +33,21 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
         <li>
             <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'cpr-reviews', 'review_status' => 'pending' ) ) ); ?>" 
             class="<?php echo $status === 'pending' ? 'current' : ''; ?>">
-                <?php esc_html_e( 'Pending', 'custom-product-reviews' ); ?> 
+                <?php esc_html_e( 'Pending', 'reviewnest-product-reviews' ); ?> 
                 <span class="count">(<?php echo esc_html( $pending_count ); ?>)</span>
             </a> |
         </li>
         <li>
             <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'cpr-reviews', 'review_status' => 'publish' ) ) ); ?>" 
             class="<?php echo $status === 'publish' ? 'current' : ''; ?>">
-                <?php esc_html_e( 'Approved', 'custom-product-reviews' ); ?> 
+                <?php esc_html_e( 'Approved', 'reviewnest-product-reviews' ); ?> 
                 <span class="count">(<?php echo esc_html( $approved_count ); ?>)</span>
             </a> |
         </li>
         <li>
             <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'cpr-reviews', 'review_status' => 'draft' ) ) ); ?>" 
             class="<?php echo $status === 'draft' ? 'current' : ''; ?>">
-                <?php esc_html_e( 'Rejected', 'custom-product-reviews' ); ?> 
+                <?php esc_html_e( 'Rejected', 'reviewnest-product-reviews' ); ?> 
                 <span class="count">(<?php echo esc_html( $rejected_count ); ?>)</span>
             </a>
         </li>
@@ -116,29 +116,29 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
                             <button class="button button-small cpr-approve-btn" 
                                     data-review-id="<?php echo esc_attr( $review_id ); ?>">
                                 <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/approve.svg' ); ?>" 
-                                    alt="<?php esc_attr_e( 'Approve', 'custom-product-reviews' ); ?>"> 
-                                <?php esc_html_e( 'Approve', 'custom-product-reviews' ); ?>
+                                    alt="<?php esc_attr_e( 'Approve', 'reviewnest-product-reviews' ); ?>"> 
+                                <?php esc_html_e( 'Approve', 'reviewnest-product-reviews' ); ?>
                             </button><br>
                             <button class="button button-small cpr-reject-btn" 
                                     data-review-id="<?php echo esc_attr( $review_id ); ?>" 
                                     style="margin-top: 5px;">
                                 <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/reject.svg' ); ?>" 
-                                    alt="<?php esc_attr_e( 'Reject', 'custom-product-reviews' ); ?>"> 
-                                <?php esc_html_e( 'Reject', 'custom-product-reviews' ); ?>
+                                    alt="<?php esc_attr_e( 'Reject', 'reviewnest-product-reviews' ); ?>"> 
+                                <?php esc_html_e( 'Reject', 'reviewnest-product-reviews' ); ?>
                             </button>
                         <?php elseif ( $status === 'publish' ) : ?>
                             <button class="button button-small cpr-reject-btn" 
                                     data-review-id="<?php echo esc_attr( $review_id ); ?>">
                                 <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/reject.svg' ); ?>" 
-                                    alt="<?php esc_attr_e( 'Reject', 'custom-product-reviews' ); ?>"> 
-                                <?php esc_html_e( 'Reject', 'custom-product-reviews' ); ?>
+                                    alt="<?php esc_attr_e( 'Reject', 'reviewnest-product-reviews' ); ?>"> 
+                                <?php esc_html_e( 'Reject', 'reviewnest-product-reviews' ); ?>
                             </button>
                         <?php elseif ( $status === 'draft' ) : ?>
                             <button class="button button-small cpr-approve-btn" 
                                     data-review-id="<?php echo esc_attr( $review_id ); ?>">
                                 <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/approve.svg' ); ?>" 
-                                    alt="<?php esc_attr_e( 'Approve', 'custom-product-reviews' ); ?>"> 
-                                <?php esc_html_e( 'Approve', 'custom-product-reviews' ); ?>
+                                    alt="<?php esc_attr_e( 'Approve', 'reviewnest-product-reviews' ); ?>"> 
+                                <?php esc_html_e( 'Approve', 'reviewnest-product-reviews' ); ?>
                             </button>
                         <?php endif; ?>
                         <br>
@@ -146,8 +146,8 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
                                 data-review-id="<?php echo esc_attr( $review_id ); ?>" 
                                 style="margin-top: 5px; color: #a00;">
                             <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/delete.svg' ); ?>" 
-                                alt="<?php esc_attr_e( 'Delete', 'custom-product-reviews' ); ?>"> 
-                            <?php esc_html_e( 'Delete', 'custom-product-reviews' ); ?>
+                                alt="<?php esc_attr_e( 'Delete', 'reviewnest-product-reviews' ); ?>"> 
+                            <?php esc_html_e( 'Delete', 'reviewnest-product-reviews' ); ?>
                         </button>
                     </td>
                 </tr>
@@ -158,7 +158,7 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
         else: ?>
           <div class="cpr-no-reviews">
                 <p style="padding: 40px; text-align: center; color: #666;">
-                    <?php esc_html_e( 'No reviews found with this status.', 'custom-product-reviews' ); ?>
+                    <?php esc_html_e( 'No reviews found with this status.', 'reviewnest-product-reviews' ); ?>
                 </p>
             </div>
         <?php endif; ?>

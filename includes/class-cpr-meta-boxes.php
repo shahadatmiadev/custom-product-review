@@ -117,7 +117,7 @@ class CPR_Meta_Boxes {
             $allowed_types = array('jpg', 'jpeg', 'png', 'pdf');
             $file_info = wp_check_filetype($_FILES['cpr_file']['name']);
             if (!in_array(strtolower($file_info['ext']), $allowed_types)) {
-                wp_die(esc_html__('Invalid file type. Only JPG, PNG, and PDF files are allowed.', 'xohanniloy017-custom-product-reviews'));
+                wp_die(esc_html__('Invalid file type. Only JPG, PNG, and PDF files are allowed.', 'reviewnest-product-reviews'));
             }
             
             $uploaded = wp_handle_upload($_FILES['cpr_file'], [

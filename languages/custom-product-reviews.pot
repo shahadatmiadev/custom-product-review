@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ReviewNest 1.0.0\n"
-"Report-Msgid-Bugs-To: https://github.com/shahadatmiadev/custom-product-reviews\n"
+"Report-Msgid-Bugs-To: https://github.com/shahadatmiadev/reviewnest-product-reviews\n"
 "POT-Creation-Date: 2025-01-15 10:00:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -14,21 +14,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: WordPress\n"
-"X-Domain: custom-product-reviews\n"
+"X-Domain: reviewnest-product-reviews\n"
 
-#: custom-product-reviews.php:50
+#: reviewnest-product-reviews.php:50
 msgid "Product Reviews"
 msgstr ""
 
-#: custom-product-reviews.php:51
+#: reviewnest-product-reviews.php:51
 msgid "All Reviews"
 msgstr ""
 
-#: custom-product-reviews.php:61
+#: reviewnest-product-reviews.php:61
 msgid "Settings"
 msgstr ""
 
-#: custom-product-reviews.php:71
+#: reviewnest-product-reviews.php:71
 msgid "Customize Styles"
 msgstr ""
 
