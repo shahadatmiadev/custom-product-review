@@ -134,7 +134,7 @@ class CPR_Settings {
             add_settings_error(
                 'cpr_messages',
                 'cpr_message',
-                esc_html__( 'Settings saved successfully', 'custom-product-reviews' ),
+                esc_html__( 'Settings saved successfully', 'reviewnest-product-reviews' ),
                 'updated'
             );
         }
@@ -148,16 +148,16 @@ class CPR_Settings {
             
             <h2 class="nav-tab-wrapper">
                 <a href="?page=cpr-settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>">
-                    <?php esc_html_e( 'General', 'custom-product-reviews' ); ?>
+                    <?php esc_html_e( 'General', 'reviewnest-product-reviews' ); ?>
                 </a>
                 <a href="?page=cpr-settings&tab=form" class="nav-tab <?php echo $active_tab == 'form' ? 'nav-tab-active' : ''; ?>">
-                    <?php esc_html_e( 'Form Settings', 'custom-product-reviews' ); ?>
+                    <?php esc_html_e( 'Form Settings', 'reviewnest-product-reviews' ); ?>
                 </a>
                 <a href="?page=cpr-settings&tab=display" class="nav-tab <?php echo $active_tab == 'display' ? 'nav-tab-active' : ''; ?>">
-                    <?php esc_html_e( 'Display Settings', 'custom-product-reviews' ); ?>
+                    <?php esc_html_e( 'Display Settings', 'reviewnest-product-reviews' ); ?>
                 </a>
                 <a href="?page=cpr-settings&tab=advanced" class="nav-tab <?php echo $active_tab == 'advanced' ? 'nav-tab-active' : ''; ?>">
-                    <?php esc_html_e( 'Advanced', 'custom-product-reviews' ); ?>
+                    <?php esc_html_e( 'Advanced', 'reviewnest-product-reviews' ); ?>
                 </a>
             </h2>
 
@@ -196,20 +196,20 @@ class CPR_Settings {
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Auto Approve Reviews', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Auto Approve Reviews', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_auto_approve" value="1" <?php checked( $auto_approve, '1' ); ?>>
-                        <?php esc_html_e( 'Automatically approve reviews (No manual approval needed)', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Automatically approve reviews (No manual approval needed)', 'reviewnest-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'If disabled, reviews will be in pending status and require admin approval.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'If disabled, reviews will be in pending status and require admin approval.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_min_rating"><?php esc_html_e( 'Minimum Star Rating', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_min_rating"><?php esc_html_e( 'Minimum Star Rating', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <select name="cpr_min_rating" id="cpr_min_rating">
@@ -219,30 +219,30 @@ class CPR_Settings {
                         <option value="4" <?php selected( $min_rating, '4' ); ?>>4 Stars</option>
                         <option value="5" <?php selected( $min_rating, '5' ); ?>>5 Stars</option>
                     </select>
-                    <p class="description"><?php esc_html_e( 'Reviews below this rating will not be accepted.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Reviews below this rating will not be accepted.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_form_position"><?php esc_html_e( 'Review Form Position', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_form_position"><?php esc_html_e( 'Review Form Position', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <select name="cpr_form_position" id="cpr_form_position">
-                        <option value="before" <?php selected( $form_position, 'before' ); ?>><?php esc_html_e( 'Before Product Summary', 'custom-product-reviews' ); ?></option>
-                        <option value="after" <?php selected( $form_position, 'after' ); ?>><?php esc_html_e( 'After Product Summary', 'custom-product-reviews' ); ?></option>
+                        <option value="before" <?php selected( $form_position, 'before' ); ?>><?php esc_html_e( 'Before Product Summary', 'reviewnest-product-reviews' ); ?></option>
+                        <option value="after" <?php selected( $form_position, 'after' ); ?>><?php esc_html_e( 'After Product Summary', 'reviewnest-product-reviews' ); ?></option>
                     </select>
-                    <p class="description"><?php esc_html_e( 'Where to display the review form on product page.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Where to display the review form on product page.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_reviews_per_page"><?php esc_html_e( 'Reviews Per Page', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_reviews_per_page"><?php esc_html_e( 'Reviews Per Page', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <input type="number" name="cpr_reviews_per_page" id="cpr_reviews_per_page" value="<?php echo esc_attr( $reviews_per_page ); ?>" min="2" max="100" class="small-text">
-                    <p class="description"><?php esc_html_e( 'Number of reviews to display per page (pagination).', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Number of reviews to display per page (pagination).', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
         </table>
@@ -261,53 +261,53 @@ class CPR_Settings {
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'File Upload', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'File Upload', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_enable_file_upload" value="1" <?php checked( $enable_file, '1' ); ?>>
-                        <?php esc_html_e( 'Enable file upload (JPG, PNG, PDF)', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Enable file upload (JPG, PNG, PDF)', 'reviewnest-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Allow customers to upload images or documents with their review.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Allow customers to upload images or documents with their review.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Age Range Field', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Age Range Field', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_enable_age_range" value="1" <?php checked( $enable_age, '1' ); ?>>
-                        <?php esc_html_e( 'Show age range selection field', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Show age range selection field', 'reviewnest-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Ask customers to select their age range when submitting a review.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Ask customers to select their age range when submitting a review.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Email Field', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Email Field', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_email_required" value="1" <?php checked( $email_required, '1' ); ?>>
-                        <?php esc_html_e( 'Email address is required', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Email address is required', 'reviewnest-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Make email field mandatory for review submission.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Make email field mandatory for review submission.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Review Title', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Review Title', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_title_required" value="1" <?php checked( $title_required, '1' ); ?>>
-                        <?php esc_html_e( 'Review title is required', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Review title is required', 'reviewnest-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Make review title field mandatory.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Make review title field mandatory.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
         </table>
@@ -327,20 +327,20 @@ class CPR_Settings {
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Verified Buyer Badge', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Verified Buyer Badge', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_show_verified_badge" value="1" <?php checked( $show_badge, '1' ); ?>>
-                        <?php esc_html_e( 'Show verified buyer badge on reviews', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Show verified buyer badge on reviews', 'reviewnest-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Display a badge for verified purchasers.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Display a badge for verified purchasers.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_date_format"><?php esc_html_e( 'Date Format', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_date_format"><?php esc_html_e( 'Date Format', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <select name="cpr_date_format" id="cpr_date_format">
@@ -350,40 +350,40 @@ class CPR_Settings {
                         <option value="M j, Y" <?php selected( $date_format, 'M j, Y' ); ?>>Nov 29, 2025</option>
                         <option value="Y-m-d" <?php selected( $date_format, 'Y-m-d' ); ?>>2025-11-29</option>
                     </select>
-                    <p class="description"><?php esc_html_e( 'How to display review submission date.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'How to display review submission date.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Review Filters', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Review Filters', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_show_filters" value="1" <?php checked( $show_filters, '1' ); ?>>
-                        <?php esc_html_e( 'Show filter options (Rating, Age Range, Verified)', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Show filter options (Rating, Age Range, Verified)', 'reviewnest-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Allow customers to filter reviews by rating, age range, etc.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Allow customers to filter reviews by rating, age range, etc.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_empty_star_color"><?php esc_html_e( 'Empty Star Color', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_empty_star_color"><?php esc_html_e( 'Empty Star Color', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <input type="color" name="cpr_empty_star_color" id="cpr_empty_star_color" value="<?php echo esc_attr( $empty_star ); ?>">
-                    <p class="description"><?php esc_html_e( 'Color for empty/unfilled stars.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Color for empty/unfilled stars.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_filled_star_color"><?php esc_html_e( 'Filled Star Color', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_filled_star_color"><?php esc_html_e( 'Filled Star Color', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <input type="color" name="cpr_filled_star_color" id="cpr_filled_star_color" value="<?php echo esc_attr( $filled_star ); ?>">
-                    <p class="description"><?php esc_html_e( 'Color for filled/selected stars.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Color for filled/selected stars.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
         </table>
@@ -402,47 +402,47 @@ class CPR_Settings {
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Review Moderation', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Review Moderation', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_enable_moderation" value="1" <?php checked( $enable_moderation, '1' ); ?>>
-                        <?php esc_html_e( 'Enable bad words filter', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Enable bad words filter', 'reviewnest-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Automatically reject reviews containing inappropriate words.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Automatically reject reviews containing inappropriate words.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_bad_words"><?php esc_html_e( 'Bad Words List', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_bad_words"><?php esc_html_e( 'Bad Words List', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <textarea name="cpr_bad_words" id="cpr_bad_words" rows="5" class="large-text"><?php echo esc_textarea( $bad_words ); ?></textarea>
-                    <p class="description"><?php esc_html_e( 'Add words separated by commas. Reviews containing these words will be automatically rejected.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Add words separated by commas. Reviews containing these words will be automatically rejected.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Email Notifications', 'custom-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Email Notifications', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_enable_email_notification" value="1" <?php checked( $enable_email, '1' ); ?>>
-                        <?php esc_html_e( 'Send email notification when a new review is submitted', 'custom-product-reviews' ); ?>
+                        <?php esc_html_e( 'Send email notification when a new review is submitted', 'reviewnest-product-reviews' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Admin will receive an email alert for each new review.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Admin will receive an email alert for each new review.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_admin_email"><?php esc_html_e( 'Admin Email Address', 'custom-product-reviews' ); ?></label>
+                    <label for="cpr_admin_email"><?php esc_html_e( 'Admin Email Address', 'reviewnest-product-reviews' ); ?></label>
                 </th>
                 <td>
                     <input type="email" name="cpr_admin_email" id="cpr_admin_email" value="<?php echo esc_attr( $admin_email ); ?>" class="regular-text">
-                    <p class="description"><?php esc_html_e( 'Email address to receive review notifications.', 'custom-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Email address to receive review notifications.', 'reviewnest-product-reviews' ); ?></p>
                 </td>
             </tr>
         </table>

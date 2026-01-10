@@ -215,14 +215,14 @@ class CPR_Ajax {
                 
                 <?php if ( $show_verified_badge == '1' && $verified == '1' ) : ?>
                 <div class="cpt-verify-buyer">
-                    <span><?php esc_html_e( 'Verified Buyer', 'custom-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Verified Buyer', 'reviewnest-product-reviews' ); ?></span>
                     <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
                 </div>
                 <?php endif; ?>
                 
                 <?php if ( $enable_age_range == '1' && !empty( $reviewer_age ) ) : ?>
                 <div class="cpt-age-range">
-                    <span><?php esc_html_e( 'Age Range:', 'custom-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Age Range:', 'reviewnest-product-reviews' ); ?></span>
                     <span><?php echo esc_html( $reviewer_age ); ?></span>
                 </div>
                 <?php endif; ?>

@@ -49,172 +49,202 @@ class CPR_Form_Handler {
         $email_required = get_option( 'cpr_email_required', '1' );
         $title_required = get_option( 'cpr_title_required', '1' );
         $min_rating = get_option( 'cpr_min_rating', '1' );
-
-        // Show all reviews first
-        $this->render_all_reviews( $product );
-        ?>
-
-        <div id="cpr-review-form-wrapper" class="cpr-review-form-section">
-            <h3><?php esc_html_e( 'Write a Review', 'custom-product-reviews' ); ?></h3>
-
-            <?php if ( isset( $_GET['review_submitted'] ) && $_GET['review_submitted'] == '1' ): ?>
-                <div class="cpr-success-message">
-                    <?php
-$auto_approve = get_option( 'cpr_auto_approve', '0' );
-        if ( $auto_approve == '1' ) {
-            esc_html_e( 'Thank you! Your review has been published.', 'custom-product-reviews' );
-        } else {
-            esc_html_e( 'Thank you! Your review has been submitted and is pending approval.', 'custom-product-reviews' );
+        
+        // Get product description - try long description first, then short
+        $product_description = $product->get_description();
+        if ( empty( $product_description ) ) {
+            $product_description = $product->get_short_description();
         }
+        // Apply content filters to process shortcodes and formatting
+        $product_description = apply_filters( 'the_content', $product_description );
+
         ?>
-                </div>
-            <?php endif; ?>
 
-            <form method="post" enctype="multipart/form-data" id="cpr-review-form">
-                <?php wp_nonce_field( 'cpr_submit_review', 'cpr_review_nonce' ); ?>
+        <div class="cpr-tab">
+            <div class="cpr-tab-desc " data-tab="desc"><?php esc_html_e( 'Description', 'reviewnest-product-reviews' ); ?></div>
+            <div class="cpr-tab-rev cpr-tab-active" data-tab="rev"><?php esc_html_e( 'Review', 'reviewnest-product-reviews' ); ?></div>
+        </div>
 
-                <input type="hidden" name="cpr_product_id" value="<?php echo esc_attr( $product->get_id() ); ?>">
+        <div class="cpr-tab-desc-area" style="display: none">
+            <div class="cpr-product-description">
+                <?php
+                if ( ! empty( $product_description ) ) {
+                    echo wp_kses_post( $product_description );
+                } else {
+                    echo '<p>' . esc_html__( 'No product description available.', 'reviewnest-product-reviews' ) . '</p>';
+                }
+                ?>
+            </div>
+        </div>
 
-                <!-- Review Title Field -->
-                <p class="cpr-form-field">
-                    <label for="cpr_title">
-                        <?php esc_html_e( 'Review Title', 'custom-product-reviews' ); ?>
-                        <?php if ( $title_required == '1' ): ?>
-                            <span class="required">*</span>
-                        <?php else: ?>
-                            <span class="optional"><?php esc_html_e( '(Optional)', 'custom-product-reviews' ); ?></span>
-                        <?php endif; ?>
-                    </label>
-                    <input type="text"
-                           name="cpr_title"
-                           id="cpr_title"
-                           placeholder="<?php esc_attresc_html_e( 'Enter review title', 'custom-product-reviews' ); ?>"
-                           <?php echo $title_required == '1' ? 'required' : ''; ?>>
-                </p>
+        <div class="cpr-tab-review-area">
+            <?php
+            // Show all reviews first
+            $this->render_all_reviews( $product );
+            ?>
 
-                <!-- Review Description Field -->
-                <p class="cpr-form-field">
-                    <label for="cpr_content">
-                        <?php esc_html_e( 'Review Description', 'custom-product-reviews' ); ?>
-                        <span class="required">*</span>
-                    </label>
-                    <textarea name="cpr_content"
-                              id="cpr_content"
-                              rows="4"
-                              placeholder="<?php esc_attresc_html_e( 'Share your experience with this product', 'custom-product-reviews' ); ?>"
-                              required></textarea>
-                </p>
+            <div id="cpr-review-form-wrapper" class="cpr-review-form-section">
+                <h3><?php esc_html_e( 'Write a Review', 'reviewnest-product-reviews' ); ?></h3>
 
-                <!-- File Upload Field (Conditional) -->
-                <?php if ( $enable_file_upload == '1' ): ?>
-                <div class="cpr-form-field drag-file-area">
-                    <div class="drag-file-icon">
-                        <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/download.svg' ); ?>" alt="">
+                <?php if ( isset( $_GET['review_submitted'] ) && $_GET['review_submitted'] == '1' ): ?>
+                    <div class="cpr-success-message">
+                        <?php
+                        $auto_approve = get_option( 'cpr_auto_approve', '0' );
+                        if ( $auto_approve == '1' ) {
+                            esc_html_e( 'Thank you! Your review has been published.', 'reviewnest-product-reviews' );
+                        } else {
+                            esc_html_e( 'Thank you! Your review has been submitted and is pending approval.', 'reviewnest-product-reviews' );
+                        }
+                        ?>
                     </div>
-                    <label class="label">
-                        <span class="browse-files">
-                            <input type="file" name="cpr_file" class="default-file-input" id="cpr_file_input" accept=".jpg,.jpeg,.png,.pdf">
-                            <?php esc_html_e( 'Drag and drop, or', 'custom-product-reviews' ); ?>
-                            <span class="browse-files-text"><?php esc_html_e( 'browse', 'custom-product-reviews' ); ?></span>
-                            <span><?php esc_html_e( 'your files', 'custom-product-reviews' ); ?></span>
-                        </span>
-                        <img src="" alt="" id="cpr_file_preview" style="display:none; max-width:70px; margin-left: auto; margin-right: auto;">
-                    </label>
-                    <div class="cpr-file-format-note">
-                        <span><?php esc_html_e( 'Support JPG, PDF, PNG', 'custom-product-reviews' ); ?></span>
-                    </div>
-                </div>
                 <?php endif; ?>
 
-                <!-- Star Rating Field -->
-                <p class="cpr-form-field">
-                    <label>
-                        <?php esc_html_e( 'Star Rating', 'custom-product-reviews' ); ?>
-                        <span class="required">*</span>
-                    </label>
-                    <?php if ( $min_rating > 1 ): ?>
-                        <span class="cpr-min-rating-note">
-                            <?php printf(
-                                /* translators: %d: minimum number of stars required for a review */
-                                esc_html__( '(Minimum %d stars required)', 'custom-product-reviews' ),
-                                intval( $min_rating )
-                            ); ?>
-                        </span>
+                <form method="post" enctype="multipart/form-data" id="cpr-review-form">
+                    <?php wp_nonce_field( 'cpr_submit_review', 'cpr_review_nonce' ); ?>
 
+                    <input type="hidden" name="cpr_product_id" value="<?php echo esc_attr( $product->get_id() ); ?>">
+
+                    <!-- Review Title Field -->
+                    <p class="cpr-form-field">
+                        <label for="cpr_title">
+                            <?php esc_html_e( 'Review Title', 'reviewnest-product-reviews' ); ?>
+                            <?php if ( $title_required == '1' ): ?>
+                                <span class="required">*</span>
+                            <?php else: ?>
+                                <span class="optional"><?php esc_html_e( '(Optional)', 'reviewnest-product-reviews' ); ?></span>
+                            <?php endif; ?>
+                        </label>
+                        <input type="text"
+                            name="cpr_title"
+                            id="cpr_title"
+                            placeholder="<?php esc_attr_e( 'Enter review title', 'reviewnest-product-reviews' ); ?>"
+                            <?php echo $title_required == '1' ? 'required' : ''; ?>>
+                    </p>
+
+                    <!-- Review Description Field -->
+                    <p class="cpr-form-field">
+                        <label for="cpr_content">
+                            <?php esc_html_e( 'Review Description', 'reviewnest-product-reviews' ); ?>
+                            <span class="required">*</span>
+                        </label>
+                        <textarea name="cpr_content"
+                                id="cpr_content"
+                                rows="4"
+                                placeholder="<?php esc_attr_e( 'Share your experience with this product', 'reviewnest-product-reviews' ); ?>"
+                                required></textarea>
+                    </p>
+
+                    <!-- File Upload Field (Conditional) -->
+                    <?php if ( $enable_file_upload == '1' ): ?>
+                    <div class="cpr-form-field drag-file-area">
+                        <div class="drag-file-icon">
+                            <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/download.svg' ); ?>" alt="">
+                        </div>
+                        <label class="label">
+                            <span class="browse-files">
+                                <input type="file" name="cpr_file" class="default-file-input" id="cpr_file_input" accept=".jpg,.jpeg,.png,.pdf">
+                                <?php esc_html_e( 'Drag and drop, or', 'reviewnest-product-reviews' ); ?>
+                                <span class="browse-files-text"><?php esc_html_e( 'browse', 'reviewnest-product-reviews' ); ?></span>
+                                <span><?php esc_html_e( 'your files', 'reviewnest-product-reviews' ); ?></span>
+                            </span>
+                            <img src="" alt="" id="cpr_file_preview" style="display:none; max-width:70px; margin-left: auto; margin-right: auto;">
+                        </label>
+                        <div class="cpr-file-format-note">
+                            <span><?php esc_html_e( 'Support JPG, PDF, PNG', 'reviewnest-product-reviews' ); ?></span>
+                        </div>
+                    </div>
                     <?php endif; ?>
-                    <div class="cpr-star-rating" data-min-rating="<?php echo esc_attr( $min_rating ); ?>">
-                        <span data-value="1">&#9733;</span>
-                        <span data-value="2">&#9733;</span>
-                        <span data-value="3">&#9733;</span>
-                        <span data-value="4">&#9733;</span>
-                        <span data-value="5">&#9733;</span>
-                    </div>
-                    <input type="hidden" name="cpr_rating" id="cpr_rating" required>
-                </p>
 
-                <!-- Name Field -->
-                <p class="cpr-form-field">
-                    <label for="cpr_name">
-                        <?php esc_html_e( 'Name', 'custom-product-reviews' ); ?>
-                        <span class="required">*</span>
-                    </label>
-                    <input type="text"
-                           name="cpr_name"
-                           id="cpr_name"
-                           placeholder="<?php esc_attresc_html_e( 'Enter your name', 'custom-product-reviews' ); ?>"
-                           required>
-                </p>
-
-                <!-- Email Field -->
-                <p class="cpr-form-field">
-                    <label for="cpr_email">
-                        <?php esc_html_e( 'Email Address', 'custom-product-reviews' ); ?>
-                        <?php if ( $email_required == '1' ): ?>
+                    <!-- Star Rating Field -->
+                    <p class="cpr-form-field">
+                        <label>
+                            <?php esc_html_e( 'Star Rating', 'reviewnest-product-reviews' ); ?>
                             <span class="required">*</span>
-                        <?php else: ?>
-                            <span class="optional"><?php esc_html_e( '(Optional)', 'custom-product-reviews' ); ?></span>
+                        </label>
+                        <?php if ( $min_rating > 1 ): ?>
+                            <span class="cpr-min-rating-note">
+                                <?php printf(
+                                    /* translators: %d: minimum number of stars required for a review */
+                                    esc_html__( '(Minimum %d stars required)', 'reviewnest-product-reviews' ),
+                                    intval( $min_rating )
+                                ); ?>
+                            </span>
+
                         <?php endif; ?>
-                    </label>
-                    <input type="email"
-                           name="cpr_email"
-                           id="cpr_email"
-                           placeholder="<?php esc_attresc_html_e( 'Enter your email', 'custom-product-reviews' ); ?>"
-                           <?php echo $email_required == '1' ? 'required' : ''; ?>>
-                </p>
+                        <div class="cpr-star-rating" data-min-rating="<?php echo esc_attr( $min_rating ); ?>">
+                            <span data-value="1">&#9733;</span>
+                            <span data-value="2">&#9733;</span>
+                            <span data-value="3">&#9733;</span>
+                            <span data-value="4">&#9733;</span>
+                            <span data-value="5">&#9733;</span>
+                        </div>
+                        <input type="hidden" name="cpr_rating" id="cpr_rating" required>
+                    </p>
 
-                <!-- Age Range Field (Conditional) -->
-                <?php if ( $enable_age_range == '1' ): ?>
-                <p class="cpr-form-field">
-                    <label class="cpr-age-range-label">
-                        <?php esc_html_e( 'Age Range', 'custom-product-reviews' ); ?>
-                        <span class="required">*</span>
-                    </label>
-                    <div class="cpr-age-range">
-                        <button type="button" class="age-btn" data-value="under-18"><?php esc_html_e( 'Under 18', 'custom-product-reviews' ); ?></button>
-                        <button type="button" class="age-btn" data-value="18-24">18 - 24</button>
-                        <button type="button" class="age-btn" data-value="25-34">25 - 34</button>
-                        <button type="button" class="age-btn" data-value="35-44">35 - 44</button>
-                        <button type="button" class="age-btn" data-value="45-54">45 - 54</button>
-                        <button type="button" class="age-btn" data-value="55-64">55 - 64</button>
-                        <button type="button" class="age-btn" data-value="65+">65+</button>
-                    </div>
-                    <input type="hidden" name="cpr_age_range" id="cpr_age_range" required>
-                </p>
-                <?php endif; ?>
+                    <!-- Name Field -->
+                    <p class="cpr-form-field">
+                        <label for="cpr_name">
+                            <?php esc_html_e( 'Name', 'reviewnest-product-reviews' ); ?>
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text"
+                            name="cpr_name"
+                            id="cpr_name"
+                            placeholder="<?php esc_attr_e( 'Enter your name', 'reviewnest-product-reviews' ); ?>"
+                            required>
+                    </p>
 
-                <!-- Terms Notice -->
-                <p class="cpr-terms">
-                    <label><?php esc_html_e( "By continuing you agree to JOURIE'S Terms and Conditions", 'custom-product-reviews' ); ?></label>
-                </p>
+                    <!-- Email Field -->
+                    <p class="cpr-form-field">
+                        <label for="cpr_email">
+                            <?php esc_html_e( 'Email Address', 'reviewnest-product-reviews' ); ?>
+                            <?php if ( $email_required == '1' ): ?>
+                                <span class="required">*</span>
+                            <?php else: ?>
+                                <span class="optional"><?php esc_html_e( '(Optional)', 'reviewnest-product-reviews' ); ?></span>
+                            <?php endif; ?>
+                        </label>
+                        <input type="email"
+                            name="cpr_email"
+                            id="cpr_email"
+                            placeholder="<?php esc_attr_e( 'Enter your email', 'reviewnest-product-reviews' ); ?>"
+                            <?php echo $email_required == '1' ? 'required' : ''; ?>>
+                    </p>
 
-                <!-- Submit Button -->
-                <p class="submit-wrapper">
-                    <input type="submit" name="cpr_submit_review" value="<?php esc_attresc_html_e( 'Submit Review', 'custom-product-reviews' ); ?>" class="cpr-submit-btn">
-                </p>
-            </form>
+                    <!-- Age Range Field (Conditional) -->
+                    <?php if ( $enable_age_range == '1' ): ?>
+                    <p class="cpr-form-field">
+                        <label class="cpr-age-range-label">
+                            <?php esc_html_e( 'Age Range', 'reviewnest-product-reviews' ); ?>
+                            <span class="required">*</span>
+                        </label>
+                        <div class="cpr-age-range">
+                            <button type="button" class="age-btn" data-value="under-18"><?php esc_html_e( 'Under 18', 'reviewnest-product-reviews' ); ?></button>
+                            <button type="button" class="age-btn" data-value="18-24">18 - 24</button>
+                            <button type="button" class="age-btn" data-value="25-34">25 - 34</button>
+                            <button type="button" class="age-btn" data-value="35-44">35 - 44</button>
+                            <button type="button" class="age-btn" data-value="45-54">45 - 54</button>
+                            <button type="button" class="age-btn" data-value="55-64">55 - 64</button>
+                            <button type="button" class="age-btn" data-value="65+">65+</button>
+                        </div>
+                        <input type="hidden" name="cpr_age_range" id="cpr_age_range" required>
+                    </p>
+                    <?php endif; ?>
+
+                    <!-- Terms Notice -->
+                    <p class="cpr-terms">
+                        <label><?php esc_html_e( "By continuing you agree to JOURIE'S Terms and Conditions", 'reviewnest-product-reviews' ); ?></label>
+                    </p>
+
+                    <!-- Submit Button -->
+                    <p class="submit-wrapper">
+                        <input type="submit" name="cpr_submit_review" value="<?php esc_attr_e( 'Submit Review', 'reviewnest-product-reviews' ); ?>" class="cpr-submit-btn">
+                    </p>
+                </form>
+            </div>
         </div>
         <?php
-}
+    }
 
     /**
      * Handle Form Submission with All Settings Check
@@ -226,12 +256,12 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
         // Verify nonce
         if ( !isset( $_POST['cpr_review_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['cpr_review_nonce'] ) ), 'cpr_submit_review' ) ) {
-            wp_die( esc_html__( 'Security check failed', 'custom-product-reviews' ) );
+            wp_die( esc_html__( 'Security check failed', 'reviewnest-product-reviews' ) );
         }
 
         $product_id = isset( $_POST['cpr_product_id'] ) ? intval( $_POST['cpr_product_id'] ) : 0;
         if ( !$product_id ) {
-            wp_die( esc_html__( 'Invalid product', 'custom-product-reviews' ) );
+            wp_die( esc_html__( 'Invalid product', 'reviewnest-product-reviews' ) );
         }
 
         // Get form data
@@ -253,15 +283,15 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
         // Validate required fields based on settings
         if ( $title_required == '1' && empty( $title ) ) {
-            wp_die( esc_html__( 'Review title is required.', 'custom-product-reviews' ) );
+            wp_die( esc_html__( 'Review title is required.', 'reviewnest-product-reviews' ) );
         }
 
         if ( $email_required == '1' && empty( $email ) ) {
-            wp_die( esc_html__( 'Email address is required.', 'custom-product-reviews' ) );
+            wp_die( esc_html__( 'Email address is required.', 'reviewnest-product-reviews' ) );
         }
 
         if ( empty( $content ) ) {
-            wp_die( esc_html__( 'Review description is required.', 'custom-product-reviews' ) );
+            wp_die( esc_html__( 'Review description is required.', 'reviewnest-product-reviews' ) );
         }
 
         // Validate minimum rating
@@ -269,7 +299,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
             wp_die( 
                 sprintf( 
                     /* translators: %d: minimum rating number */
-                    esc_html__( 'Minimum rating of %d stars is required.', 'custom-product-reviews' ), 
+                    esc_html__( 'Minimum rating of %d stars is required.', 'reviewnest-product-reviews' ), 
                     intval( $min_rating ) 
                 ) 
             );
@@ -282,7 +312,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
             foreach ( $bad_words_array as $bad_word ) {
                 if ( !empty( $bad_word ) && strpos( $review_text, $bad_word ) !== false ) {
-                    wp_die( esc_html__( 'Your review contains inappropriate content and cannot be submitted.', 'custom-product-reviews' ) );
+                    wp_die( esc_html__( 'Your review contains inappropriate content and cannot be submitted.', 'reviewnest-product-reviews' ) );
                 }
             }
         }
@@ -304,7 +334,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
         $review_id = wp_insert_post( $post );
 
         if ( !$review_id ) {
-            wp_die( esc_html__( 'Failed to submit review. Please try again.', 'custom-product-reviews' ) );
+            wp_die( esc_html__( 'Failed to submit review. Please try again.', 'reviewnest-product-reviews' ) );
         }
 
         // Save meta data
@@ -319,8 +349,20 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
         if ( get_option( 'cpr_enable_file_upload', '1' ) == '1' && !empty( $_FILES['cpr_file']['name'] ) ) {
             require_once ABSPATH . 'wp-admin/includes/file.php';
 
+            $allowed_mimes = array(
+                'jpg|jpeg' => 'image/jpeg',
+                'png'      => 'image/png',
+                'pdf'      => 'application/pdf',
+            );
+
+            $file_info = wp_check_filetype( basename( $_FILES['cpr_file']['name'] ), $allowed_mimes );
+            if ( ! in_array( $file_info['ext'], array_keys( $allowed_mimes ) ) ) {
+                wp_die( esc_html__( 'Invalid file type. Only JPG, PNG, and PDF files are allowed.', 'reviewnest-product-reviews' ) );
+            }
+
             $uploaded = wp_handle_upload( $_FILES['cpr_file'], array(
                 'test_form' => false,
+                'mimes'     => $allowed_mimes,
             ) );
 
             if ( !isset( $uploaded['error'] ) ) {
@@ -361,50 +403,50 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
         $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
         /* translators: %s: product name */
-        $subject = sprintf( __( 'New Review Submitted: %s', 'custom-product-reviews' ), $product->get_name() );
+        $subject = sprintf( __( 'New Review Submitted: %s', 'reviewnest-product-reviews' ), $product->get_name() );
 
         /* translators: %s: product name */
         $message = sprintf(
-            __( "A new review has been submitted for: %s\n\n", 'custom-product-reviews' ),
+            __( "A new review has been submitted for: %s\n\n", 'reviewnest-product-reviews' ),
             $product->get_name()
         );
 
 
         /* translators: %s: reviewer name */
-        $message .= sprintf( __( "Reviewer: %s\n", 'custom-product-reviews' ), $reviewer_name );
+        $message .= sprintf( __( "Reviewer: %s\n", 'reviewnest-product-reviews' ), $reviewer_name );
 
 
         if ( !empty( $reviewer_email ) ) {
             /* translators: %s: reviewer email address */
-            $message .= sprintf( __( "Email: %s\n", 'custom-product-reviews' ), $reviewer_email );
+            $message .= sprintf( __( "Email: %s\n", 'reviewnest-product-reviews' ), $reviewer_email );
         }
 
         $message .= sprintf( 
             /* translators: %s: star rating (1-5) */
-            esc_html__( "Rating: %s stars\n", 'custom-product-reviews' ), 
+            esc_html__( "Rating: %s stars\n", 'reviewnest-product-reviews' ), 
             intval( $rating ) 
         );
 
         $message .= sprintf( 
             /* translators: %s: review title */
-            esc_html__( "Review Title: %s\n", 'custom-product-reviews' ), 
+            esc_html__( "Review Title: %s\n", 'reviewnest-product-reviews' ), 
             sanitize_text_field( $review_title ) 
         );
 
         $message .= sprintf( 
             /* translators: %s: review content */
-            esc_html__( "Review: %s\n\n", 'custom-product-reviews' ), 
+            esc_html__( "Review: %s\n\n", 'reviewnest-product-reviews' ), 
             sanitize_textarea_field( $review_content ) 
         );
 
         if ( $auto_approve == '1' ) {
-            $message .= esc_html__( "Status: Published (Auto-approved)\n\n", 'custom-product-reviews' );
+            $message .= esc_html__( "Status: Published (Auto-approved)\n\n", 'reviewnest-product-reviews' );
         } else {
-            $message .= esc_html__( "Status: Pending Approval\n\n", 'custom-product-reviews' );
+            $message .= esc_html__( "Status: Pending Approval\n\n", 'reviewnest-product-reviews' );
         }
         $message .= sprintf(
             /* translators: %s: URL to review management page */
-            __( "View and manage this review:\n%s", 'custom-product-reviews' ),
+            __( "View and manage this review:\n%s", 'reviewnest-product-reviews' ),
             esc_url( admin_url( 'admin.php?page=cpr-reviews' ) )
         );
 
@@ -419,88 +461,92 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
         $show_filters = get_option( 'cpr_show_filters', '1' );
         $initial_reviews = get_option( 'cpr_reviews_per_page', '10' );
         $load_more_count = 3;
+         // Get product description
+       
         ?>
-         <div id="cpr-all-reviews-wrapper" class="cpr-reviews-section">
-            <h3><?php esc_html_e( 'Customer Reviews', 'custom-product-reviews' ); ?></h3>
+        <div id="cpr-all-reviews-wrapper" class="cpr-reviews-section">
+                <h3><?php esc_html_e( 'Customer Reviews', 'reviewnest-product-reviews' ); ?></h3>
             
-            <!-- Hidden input for product ID -->
-            <input type="hidden" id="cpr_product_id" value="<?php echo esc_attr( $product_id ); ?>">
-            <input type="hidden" id="cpr_initial_reviews" value="<?php echo esc_attr( $initial_reviews ); ?>">
-            <input type="hidden" id="cpr_load_more_count" value="<?php echo esc_attr( $load_more_count ); ?>">
-            
-            <!-- Filters (Conditional) -->
-            <?php if ( $show_filters == '1' ) : ?>
-            <?php
-            $filter = new CPR_Filter();
-            $filter->render_filter_form();
-            ?>
-            <?php endif; ?>
-            
-            <!-- Reviews Container -->
-            <div id="cpr-reviews-container">
+                <!-- Hidden input for product ID -->
+                <input type="hidden" id="cpr_product_id" value="<?php echo esc_attr( $product_id ); ?>">
+                <input type="hidden" id="cpr_initial_reviews" value="<?php echo esc_attr( $initial_reviews ); ?>">
+                <input type="hidden" id="cpr_load_more_count" value="<?php echo esc_attr( $load_more_count ); ?>">
+                
+                <!-- Filters (Conditional) -->
+                <?php if ( $show_filters == '1' ) : ?>
                 <?php
-                // Get total reviews count
-                $total_args = array(
-                    'post_type'      => 'cpr_review',
-                    'post_status'    => 'publish',
-                    'meta_query'     => array(
-                        array(
-                            'key'     => '_cpr_product_id',
-                            'value'   => $product_id,
-                            'compare' => '=',
-                        ),
-                    ),
-                    'posts_per_page' => -1,
-                );
-                
-                $total_query = new WP_Query( $total_args );
-                $total_reviews = $total_query->found_posts;
-                
-                // Get initial reviews
-                $args = array(
-                    'post_type'      => 'cpr_review',
-                    'post_status'    => 'publish',
-                    'posts_per_page' => $initial_reviews,
-                    'meta_query'     => array(
-                        array(
-                            'key'     => '_cpr_product_id',
-                            'value'   => $product_id,
-                            'compare' => '=',
-                        ),
-                    ),
-                    'orderby'        => 'date',
-                    'order'          => 'DESC',
-                );
-                
-                $review_query = new WP_Query( $args );
-                
-                if ( $review_query->have_posts() ) :
-                    while ( $review_query->have_posts() ) : $review_query->the_post();
-                        $this->render_single_review( get_the_ID() );
-                    endwhile;
-                else :
-                    echo '<div class="cpr-no-reviews"><p>' . esc_html__( 'No reviews yet. Be the first to review this product!', 'custom-product-reviews' ) . '</p></div>';
-                endif;
-                
-                wp_reset_postdata();
+                $filter = new CPR_Filter();
+                $filter->render_filter_form();
                 ?>
-            </div>
-            
-            <!-- Load More Button -->
-            <?php if ( $total_reviews > $initial_reviews ) : ?>
-            <div class="cpr-load-more-container">
-                <button id="cpr-load-more-btn" class="cpr-load-more-btn">
-                    <?php esc_html_e( 'More Reviews', 'custom-product-reviews' ); ?>
-                </button>
-                <div class="cpr-loading-spinner" style="display: none;">
-                    <div class="spinner"></div>
+                <?php endif; ?>
+                
+                <!-- Reviews Container -->
+                <div id="cpr-reviews-container">
+                    <?php
+                    // Get total reviews count
+                    $total_args = array(
+                        'post_type'      => 'cpr_review',
+                        'post_status'    => 'publish',
+                        'meta_query'     => array(
+                            array(
+                                'key'     => '_cpr_product_id',
+                                'value'   => $product_id,
+                                'compare' => '=',
+                            ),
+                        ),
+                        'posts_per_page' => -1,
+                    );
+                    
+                    $total_query = new WP_Query( $total_args );
+                    $total_reviews = $total_query->found_posts;
+                    
+                    // Get initial reviews
+                    $args = array(
+                        'post_type'      => 'cpr_review',
+                        'post_status'    => 'publish',
+                        'posts_per_page' => $initial_reviews,
+                        'meta_query'     => array(
+                            array(
+                                'key'     => '_cpr_product_id',
+                                'value'   => $product_id,
+                                'compare' => '=',
+                            ),
+                        ),
+                        'orderby'        => 'date',
+                        'order'          => 'DESC',
+                    );
+                    
+                    $review_query = new WP_Query( $args );
+                    
+                    if ( $review_query->have_posts() ) :
+                        while ( $review_query->have_posts() ) : $review_query->the_post();
+                            $this->render_single_review( get_the_ID() );
+                        endwhile;
+                    else :
+                        echo '<div class="cpr-no-reviews"><p>' . esc_html__( 'No reviews yet. Be the first to review this product!', 'reviewnest-product-reviews' ) . '</p></div>';
+                    endif;
+                    
+                    wp_reset_postdata();
+                    ?>
                 </div>
-            </div>
-            <?php endif; ?>
+                
+                <!-- Load More Button -->
+                <?php if ( $total_reviews > $initial_reviews ) : ?>
+                <div class="cpr-load-more-container">
+                    <button id="cpr-load-more-btn" class="cpr-load-more-btn">
+                        <?php esc_html_e( 'More Reviews', 'reviewnest-product-reviews' ); ?>
+                    </button>
+                    <div class="cpr-loading-spinner" style="display: none;">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+                <?php endif; ?>
+                
+                <!-- Hidden field for total reviews -->
+                <input type="hidden" id="cpr_total_reviews" value="<?php echo esc_attr( $total_reviews ); ?>">
+                <input type="hidden" id="cpr_loaded_reviews" value="<?php echo esc_attr( min( $initial_reviews, $total_reviews ) ); ?>">
             
-            <!-- Hidden field for total reviews -->
-            <input type="hidden" id="cpr_total_reviews" value="<?php echo esc_attr( $total_reviews ); ?>">
-            <input type="hidden" id="cpr_loaded_reviews" value="<?php echo esc_attr( min( $initial_reviews, $total_reviews ) ); ?>">
+            
         </div>
     
         <script type="text/javascript">
@@ -584,7 +630,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
         
         // Previous button
         if ( $current_page > 1 ) {
-            echo '<a class="prev page-numbers" href="#" data-page="' . esc_attr( $current_page - 1 ) . '">&laquo; ' . esc_html__( 'Previous', 'custom-product-reviews' ) . '</a>';
+            echo '<a class="prev page-numbers" href="#" data-page="' . esc_attr( $current_page - 1 ) . '">&laquo; ' . esc_html__( 'Previous', 'reviewnest-product-reviews' ) . '</a>';
         }
         
         // Page numbers
@@ -598,7 +644,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
         
         // Next button
         if ( $current_page < $total_pages ) {
-            echo '<a class="next page-numbers" href="#" data-page="' . esc_attr( $current_page + 1 ) . '">' . esc_html__( 'Next', 'custom-product-reviews' ) . ' &raquo;</a>';
+            echo '<a class="next page-numbers" href="#" data-page="' . esc_attr( $current_page + 1 ) . '">' . esc_html__( 'Next', 'reviewnest-product-reviews' ) . ' &raquo;</a>';
         }
         
         echo '</div>';
@@ -685,7 +731,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
                 <?php if ( $show_verified_badge == '1' && $verified == '1' ): ?>
                 <div class="cpt-verify-buyer">
-                    <span><?php esc_html_e( 'Verified Buyer', 'custom-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Verified Buyer', 'reviewnest-product-reviews' ); ?></span>
                     <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
 
                 </div>
@@ -693,7 +739,7 @@ $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
                 <?php if ( $enable_age_range == '1' && !empty( $reviewer_age ) ): ?>
                 <div class="cpt-age-range">
-                    <span><?php esc_html_e( 'Age Range:', 'custom-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Age Range:', 'reviewnest-product-reviews' ); ?></span>
                     <span><?php echo esc_html( $reviewer_age ); ?></span>
                 </div>
                 <?php endif; ?>

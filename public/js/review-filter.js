@@ -57,4 +57,22 @@ jQuery(document).ready(function($) {
     $('input[name="verified_only"]').on('change', function() {
         applyFilters();
     });
+
+     // Tab switching functionality
+    $('.cpr-tab > div').on('click', function() {
+        var tab = $(this).data('tab');
+        
+        // Update active tab
+        $('.cpr-tab > div').removeClass('cpr-tab-active');
+        $(this).addClass('cpr-tab-active');
+        
+        // Show/hide content
+        if (tab === 'desc') {
+            $('.cpr-tab-desc-area').show();
+            $('.cpr-tab-review-area').hide();
+        } else {
+            $('.cpr-tab-desc-area').hide();
+            $('.cpr-tab-review-area').show();
+        }
+    });
 });

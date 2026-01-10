@@ -116,28 +116,28 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
                             <button class="button button-small cpr-approve-btn" 
                                     data-review-id="<?php echo esc_attr( $review_id ); ?>">
                                 <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/approve.svg' ); ?>" 
-                                    alt="<?php esc_attresc_html_e( 'Approve', 'custom-product-reviews' ); ?>"> 
+                                    alt="<?php esc_attr_e( 'Approve', 'custom-product-reviews' ); ?>"> 
                                 <?php esc_html_e( 'Approve', 'custom-product-reviews' ); ?>
                             </button><br>
                             <button class="button button-small cpr-reject-btn" 
                                     data-review-id="<?php echo esc_attr( $review_id ); ?>" 
                                     style="margin-top: 5px;">
                                 <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/reject.svg' ); ?>" 
-                                    alt="<?php esc_attresc_html_e( 'Reject', 'custom-product-reviews' ); ?>"> 
+                                    alt="<?php esc_attr_e( 'Reject', 'custom-product-reviews' ); ?>"> 
                                 <?php esc_html_e( 'Reject', 'custom-product-reviews' ); ?>
                             </button>
                         <?php elseif ( $status === 'publish' ) : ?>
                             <button class="button button-small cpr-reject-btn" 
                                     data-review-id="<?php echo esc_attr( $review_id ); ?>">
                                 <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/reject.svg' ); ?>" 
-                                    alt="<?php esc_attresc_html_e( 'Reject', 'custom-product-reviews' ); ?>"> 
+                                    alt="<?php esc_attr_e( 'Reject', 'custom-product-reviews' ); ?>"> 
                                 <?php esc_html_e( 'Reject', 'custom-product-reviews' ); ?>
                             </button>
                         <?php elseif ( $status === 'draft' ) : ?>
                             <button class="button button-small cpr-approve-btn" 
                                     data-review-id="<?php echo esc_attr( $review_id ); ?>">
                                 <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/approve.svg' ); ?>" 
-                                    alt="<?php esc_attresc_html_e( 'Approve', 'custom-product-reviews' ); ?>"> 
+                                    alt="<?php esc_attr_e( 'Approve', 'custom-product-reviews' ); ?>"> 
                                 <?php esc_html_e( 'Approve', 'custom-product-reviews' ); ?>
                             </button>
                         <?php endif; ?>
@@ -146,7 +146,7 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
                                 data-review-id="<?php echo esc_attr( $review_id ); ?>" 
                                 style="margin-top: 5px; color: #a00;">
                             <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/delete.svg' ); ?>" 
-                                alt="<?php esc_attresc_html_e( 'Delete', 'custom-product-reviews' ); ?>"> 
+                                alt="<?php esc_attr_e( 'Delete', 'custom-product-reviews' ); ?>"> 
                             <?php esc_html_e( 'Delete', 'custom-product-reviews' ); ?>
                         </button>
                     </td>

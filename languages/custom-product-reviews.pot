@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Custom Product Reviews 1.0.0\n"
+"Project-Id-Version: ReviewNest 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/shahadatmiadev/custom-product-reviews\n"
 "POT-Creation-Date: 2025-01-15 10:00:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
