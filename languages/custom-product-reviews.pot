@@ -2,8 +2,8 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: ReviewNest 1.0.0\n"
-"Report-Msgid-Bugs-To: https://github.com/shahadatmiadev/reviewnest-product-reviews\n"
+"Project-Id-Version: RevWoo 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/shahadatmiadev/revwoo-product-reviews-for-woocommerce\n"
 "POT-Creation-Date: 2025-01-15 10:00:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -14,21 +14,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: WordPress\n"
-"X-Domain: reviewnest-product-reviews\n"
+"X-Domain: revwoo-product-reviews\n"
 
-#: reviewnest-product-reviews.php:50
+#: revwoo-product-reviews.php:50
 msgid "Product Reviews"
 msgstr ""
 
-#: reviewnest-product-reviews.php:51
+#: revwoo-product-reviews.php:51
 msgid "All Reviews"
 msgstr ""
 
-#: reviewnest-product-reviews.php:61
+#: revwoo-product-reviews.php:61
 msgid "Settings"
 msgstr ""
 
-#: reviewnest-product-reviews.php:71
+#: revwoo-product-reviews.php:71
 msgid "Customize Styles"
 msgstr ""
 

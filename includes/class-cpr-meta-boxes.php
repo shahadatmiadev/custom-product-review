@@ -20,7 +20,7 @@ class CPR_Meta_Boxes {
     public function register_meta_boxes() {
         add_meta_box(
             'cpr_review_details',
-            __('Review Details', 'reviewnest-product-reviews'),
+            __('Review Details', 'revwoo-product-reviews'),
             array($this, 'render_meta_box'),
             'cpr_review',      
             'normal',
@@ -44,12 +44,12 @@ class CPR_Meta_Boxes {
 
         ?>
         <p>
-            <label for="cpr_rating"><?php esc_html_e('Star Rating (1-5)', 'reviewnest-product-reviews'); ?></label><br>
+            <label for="cpr_rating"><?php esc_html_e('Star Rating (1-5)', 'revwoo-product-reviews'); ?></label><br>
             <input type="number" id="cpr_rating" name="cpr_rating" min="1" max="5" value="<?php echo esc_attr($rating); ?>" />
         </p>
 
         <p>
-            <label for="cpr_age_range"><?php esc_html_e('Age Range', 'reviewnest-product-reviews'); ?></label><br>
+            <label for="cpr_age_range"><?php esc_html_e('Age Range', 'revwoo-product-reviews'); ?></label><br>
             <select name="cpr_age_range" id="cpr_age_range">
                 <option value="">--Select--</option>
             <option value="under-18" <?php selected($age_range, 'under-18'); ?>>Under 18</option>
@@ -63,10 +63,10 @@ class CPR_Meta_Boxes {
         </p>
 
         <p>
-            <label for="cpr_file"><?php esc_html_e('Upload File (JPG, PNG, PDF)', 'reviewnest-product-reviews'); ?></label><br>
+            <label for="cpr_file"><?php esc_html_e('Upload File (JPG, PNG, PDF)', 'revwoo-product-reviews'); ?></label><br>
             <input type="file" name="cpr_file" id="cpr_file" /><br>
             <?php if ($file_url): ?>
-                <a href="<?php echo esc_url($file_url); ?>" target="_blank"><?php esc_html_e('View Uploaded File', 'reviewnest-product-reviews'); ?></a>
+                <a href="<?php echo esc_url($file_url); ?>" target="_blank"><?php esc_html_e('View Uploaded File', 'revwoo-product-reviews'); ?></a>
             <?php endif; ?>
             <img src="<?php echo esc_url($file_url); ?>" alt="">
         </p>
@@ -74,7 +74,7 @@ class CPR_Meta_Boxes {
         <p>
             <label for="cpr_verified_buyer">
                 <input type="checkbox" name="cpr_verified_buyer" id="cpr_verified_buyer" value="1" <?php checked($verified, '1'); ?> />
-                <?php esc_html_e('Verified Buyer', 'reviewnest-product-reviews'); ?>
+                <?php esc_html_e('Verified Buyer', 'revwoo-product-reviews'); ?>
             </label>
         </p>
         <?php
@@ -117,7 +117,7 @@ class CPR_Meta_Boxes {
             $allowed_types = array('jpg', 'jpeg', 'png', 'pdf');
             $file_info = wp_check_filetype($_FILES['cpr_file']['name']);
             if (!in_array(strtolower($file_info['ext']), $allowed_types)) {
-                wp_die(esc_html__('Invalid file type. Only JPG, PNG, and PDF files are allowed.', 'reviewnest-product-reviews'));
+                wp_die(esc_html__('Invalid file type. Only JPG, PNG, and PDF files are allowed.', 'revwoo-product-reviews'));
             }
             
             $uploaded = wp_handle_upload($_FILES['cpr_file'], [

@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name: ReviewNest – Product Reviews for WooCommerce
- * Description: A ReviewNest system for WooCommerce products with advanced filtering and admin approval system
+ * Plugin Name: RevWoo – Product Reviews for WooCommerce
+ * Description: A RevWoo system for WooCommerce products with advanced filtering and admin approval system
  * Version: 1.0.0
  * Author: Shahadat Mia
  * Author URI: https://github.com/shahadatmiadev
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: reviewnest-product-reviews
+ * Text Domain: revwoo-product-reviews
  * Domain Path: /languages
  * Requires at least: 5.8
  * Requires PHP: 7.4
@@ -220,7 +220,7 @@ final class Custom_Product_Reviews {
      * WooCommerce missing notice
      */
     public function woocommerce_missing_notice() {
-        echo '<div class="error"><p><strong>' . esc_html__( 'ReviewNest requires WooCommerce to be installed and active.', 'reviewnest-product-reviews' ) . '</strong></p></div>';
+        echo '<div class="error"><p><strong>' . esc_html__( 'RevWoo requires WooCommerce to be installed and active.', 'revwoo-product-reviews' ) . '</strong></p></div>';
     }
 
     /**
@@ -228,8 +228,8 @@ final class Custom_Product_Reviews {
      */
     public function add_admin_menu() {
         add_menu_page(
-            esc_html__( 'Product Reviews', 'reviewnest-product-reviews' ),
-            esc_html__( 'Product Reviews', 'reviewnest-product-reviews' ),
+            esc_html__( 'Product Reviews', 'revwoo-product-reviews' ),
+            esc_html__( 'Product Reviews', 'revwoo-product-reviews' ),
             'manage_options',
             'cpr-reviews',
             array( $this, 'render_manage_reviews_page' ),
@@ -240,8 +240,8 @@ final class Custom_Product_Reviews {
         // Rename first submenu
         add_submenu_page(
             'cpr-reviews',
-            esc_html__( 'All Reviews', 'reviewnest-product-reviews' ),
-            esc_html__( 'All Reviews', 'reviewnest-product-reviews' ),
+            esc_html__( 'All Reviews', 'revwoo-product-reviews' ),
+            esc_html__( 'All Reviews', 'revwoo-product-reviews' ),
             'manage_options',
             'cpr-reviews',
             array( $this, 'render_manage_reviews_page' )
@@ -250,8 +250,8 @@ final class Custom_Product_Reviews {
         // Add Settings submenu
         add_submenu_page(
             'cpr-reviews',
-            esc_html__( 'Settings', 'reviewnest-product-reviews' ),
-            esc_html__( 'Settings', 'reviewnest-product-reviews' ),
+            esc_html__( 'Settings', 'revwoo-product-reviews' ),
+            esc_html__( 'Settings', 'revwoo-product-reviews' ),
             'manage_options',
             'cpr-settings',
             array( $this, 'render_settings_page' )
@@ -260,8 +260,8 @@ final class Custom_Product_Reviews {
         // Add Customize Styles submenu
         add_submenu_page(
             'cpr-reviews',
-            esc_html__( 'Customize Styles', 'reviewnest-product-reviews' ),
-            esc_html__( 'Customize Styles', 'reviewnest-product-reviews' ),
+            esc_html__( 'Customize Styles', 'revwoo-product-reviews' ),
+            esc_html__( 'Customize Styles', 'revwoo-product-reviews' ),
             'manage_options',
             'cpr-styles',
             array( $this, 'render_styles_page' )

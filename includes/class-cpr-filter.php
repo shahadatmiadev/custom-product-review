@@ -17,10 +17,10 @@ class CPR_Filter {
     public function render_filter_form() {
         ?>
         <div class="cpr-review-filters">
-            <h4><?php esc_html_e( 'Filter Reviews', 'reviewnest-product-reviews' ); ?></h4>
+            <h4><?php esc_html_e( 'Filter Reviews', 'revwoo-product-reviews' ); ?></h4>
             
             <div class="cpr-filter-group">
-                <label><?php esc_html_e( 'Rating', 'reviewnest-product-reviews' ); ?></label>
+                <label><?php esc_html_e( 'Rating', 'revwoo-product-reviews' ); ?></label>
                 <div class="cpr-rating-filter">
                     <?php for ( $i = 5; $i >= 1; $i-- ) : ?>
                         <label>
@@ -32,17 +32,17 @@ class CPR_Filter {
             </div>
             
             <div class="cpr-filter-group">
-                <label><?php esc_html_e( 'Age Range', 'reviewnest-product-reviews' ); ?></label>
+                <label><?php esc_html_e( 'Age Range', 'revwoo-product-reviews' ); ?></label>
                 <div class="cpr-age-filter">
                     <select name="age_range">
-                        <option value=""><?php esc_html_e( 'All Ages', 'reviewnest-product-reviews' ); ?></option>
-                        <option value="under-18"><?php esc_html_e( 'Under 18', 'reviewnest-product-reviews' ); ?></option>
-                        <option value="18-24"><?php esc_html_e( '18 - 24', 'reviewnest-product-reviews' ); ?></option>
-                        <option value="25-34"><?php esc_html_e( '25 - 34', 'reviewnest-product-reviews' ); ?></option>
-                        <option value="35-44"><?php esc_html_e( '35 - 44', 'reviewnest-product-reviews' ); ?></option>
-                        <option value="45-54"><?php esc_html_e( '45 - 54', 'reviewnest-product-reviews' ); ?></option>
-                        <option value="55-64"><?php esc_html_e( '55 - 64', 'reviewnest-product-reviews' ); ?></option>
-                        <option value="65+"><?php esc_html_e( '65+', 'reviewnest-product-reviews' ); ?></option>
+                        <option value=""><?php esc_html_e( 'All Ages', 'revwoo-product-reviews' ); ?></option>
+                        <option value="under-18"><?php esc_html_e( 'Under 18', 'revwoo-product-reviews' ); ?></option>
+                        <option value="18-24"><?php esc_html_e( '18 - 24', 'revwoo-product-reviews' ); ?></option>
+                        <option value="25-34"><?php esc_html_e( '25 - 34', 'revwoo-product-reviews' ); ?></option>
+                        <option value="35-44"><?php esc_html_e( '35 - 44', 'revwoo-product-reviews' ); ?></option>
+                        <option value="45-54"><?php esc_html_e( '45 - 54', 'revwoo-product-reviews' ); ?></option>
+                        <option value="55-64"><?php esc_html_e( '55 - 64', 'revwoo-product-reviews' ); ?></option>
+                        <option value="65+"><?php esc_html_e( '65+', 'revwoo-product-reviews' ); ?></option>
                     </select>
                 </div>
             </div>
@@ -50,7 +50,7 @@ class CPR_Filter {
             <div class="cpr-filter-group cpr-verified-filter">
                 <label>
                     <input type="checkbox" name="verified_only" value="1">
-                    <?php esc_html_e( 'Verified Buyers Only', 'reviewnest-product-reviews' ); ?>
+                    <?php esc_html_e( 'Verified Buyers Only', 'revwoo-product-reviews' ); ?>
                 </label>
             </div>
         </div>
@@ -122,7 +122,7 @@ class CPR_Filter {
                 $this->render_single_review( get_the_ID() );
             }
         } else {
-            echo '<div class="cpr-no-reviews"><p>' . esc_html__( 'No reviews found with these filters.', 'reviewnest-product-reviews' ) . '</p></div>';
+            echo '<div class="cpr-no-reviews"><p>' . esc_html__( 'No reviews found with these filters.', 'revwoo-product-reviews' ) . '</p></div>';
         }
         wp_reset_postdata();
         
@@ -153,14 +153,14 @@ class CPR_Filter {
                 
                 <?php if ( $show_verified_badge == '1' && $verified == '1' ) : ?>
                 <div class="cpt-verify-buyer">
-                    <span><?php esc_html_e( 'Verified Buyer', 'reviewnest-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Verified Buyer', 'revwoo-product-reviews' ); ?></span>
                     <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
                 </div>
                 <?php endif; ?>
                 
                 <?php if ( $enable_age_range == '1' && !empty( $reviewer_age ) ) : ?>
                 <div class="cpt-age-range">
-                    <span><?php esc_html_e( 'Age Range:', 'reviewnest-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Age Range:', 'revwoo-product-reviews' ); ?></span>
                     <span><?php echo esc_html( $reviewer_age ); ?></span>
                 </div>
                 <?php endif; ?>

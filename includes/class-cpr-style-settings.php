@@ -273,7 +273,7 @@ class CPR_Style_Settings {
             add_settings_error(
                 'cpr_style_messages',
                 'cpr_style_message',
-                esc_html__( 'Styles saved successfully', 'reviewnest-product-reviews' ),
+                esc_html__( 'Styles saved successfully', 'revwoo-product-reviews' ),
                 'updated'
             );
         }
@@ -288,10 +288,10 @@ class CPR_Style_Settings {
 
                 <div class="cpr-style-settings-tabs">
                     <h2 class="nav-tab-wrapper">
-                        <a href="#form-styles" class="nav-tab nav-tab-active"><?php esc_html_e( 'Form Styles', 'reviewnest-product-reviews' ); ?></a>
-                        <a href="#review-styles" class="nav-tab"><?php esc_html_e( 'Review Styles', 'reviewnest-product-reviews' ); ?></a>
-                        <a href="#filter-styles" class="nav-tab"><?php esc_html_e( 'Filter Styles', 'reviewnest-product-reviews' ); ?></a>
-                        <a href="#custom-css" class="nav-tab"><?php esc_html_e( 'Custom CSS', 'reviewnest-product-reviews' ); ?></a>
+                        <a href="#form-styles" class="nav-tab nav-tab-active"><?php esc_html_e( 'Form Styles', 'revwoo-product-reviews' ); ?></a>
+                        <a href="#review-styles" class="nav-tab"><?php esc_html_e( 'Review Styles', 'revwoo-product-reviews' ); ?></a>
+                        <a href="#filter-styles" class="nav-tab"><?php esc_html_e( 'Filter Styles', 'revwoo-product-reviews' ); ?></a>
+                        <a href="#custom-css" class="nav-tab"><?php esc_html_e( 'Custom CSS', 'revwoo-product-reviews' ); ?></a>
                     </h2>
 
                     <div id="form-styles" class="cpr-style-tab-content">
@@ -340,14 +340,14 @@ class CPR_Style_Settings {
         ?>
         <table class="form-table">
             <tr>
-                <th scope="row"><?php esc_html_e( 'Filter Section Background', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Section Background', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_bg_color" value="<?php echo esc_attr( $filter_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Filter Section Border', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Section Border', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_border_color" value="<?php echo esc_attr( $filter_border ); ?>" />
                     <input type="text" name="cpr_filter_border_width" value="<?php echo esc_attr( $filter_border_width ); ?>" class="small-text" placeholder="1px" />
@@ -356,70 +356,70 @@ class CPR_Style_Settings {
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Filter Section Padding', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Section Padding', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="text" name="cpr_filter_padding" value="<?php echo esc_attr( $filter_padding ); ?>" class="regular-text" placeholder="15px" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Filter Title Color', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Title Color', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_title_color" value="<?php echo esc_attr( $title_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Filter Label Color', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Label Color', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_label_color" value="<?php echo esc_attr( $label_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Filter Input Background', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Input Background', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_input_bg_color" value="<?php echo esc_attr( $input_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Filter Input Border', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Input Border', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_input_border_color" value="<?php echo esc_attr( $input_border ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Filter Input Text Color', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Input Text Color', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_input_text_color" value="<?php echo esc_attr( $input_text ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Filter Checkbox Color', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Checkbox Color', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_checkbox_color" value="<?php echo esc_attr( $checkbox_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Filter Select Background', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Select Background', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_select_bg_color" value="<?php echo esc_attr( $select_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Filter Select Border', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Select Border', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_select_border_color" value="<?php echo esc_attr( $select_border ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Filter Select Text Color', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Filter Select Text Color', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_filter_select_text_color" value="<?php echo esc_attr( $select_text ); ?>" />
                 </td>
@@ -449,14 +449,14 @@ class CPR_Style_Settings {
         ?>
         <table class="form-table">
             <tr>
-                <th scope="row"><?php esc_html_e( 'Form Background', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Form Background', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_bg_color" value="<?php echo esc_attr( $form_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Form Border', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Form Border', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_border_color" value="<?php echo esc_attr( $form_border ); ?>" />
                     <input type="text" name="cpr_form_border_width" value="<?php echo esc_attr( $form_border_width ); ?>" class="small-text" placeholder="1px" />
@@ -465,70 +465,70 @@ class CPR_Style_Settings {
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Form Padding', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Form Padding', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="text" name="cpr_form_padding" value="<?php echo esc_attr( $form_padding ); ?>" class="regular-text" placeholder="20px" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Form Title Color', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Form Title Color', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_title_color" value="<?php echo esc_attr( $title_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Form Label Color', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Form Label Color', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_label_color" value="<?php echo esc_attr( $label_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Input Background', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Input Background', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_input_bg_color" value="<?php echo esc_attr( $input_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Input Border', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Input Border', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_input_border_color" value="<?php echo esc_attr( $input_border ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Input Text Color', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Input Text Color', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_input_text_color" value="<?php echo esc_attr( $input_text ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Button Background', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Button Background', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_button_bg_color" value="<?php echo esc_attr( $button_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Button Text Color', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Button Text Color', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_button_text_color" value="<?php echo esc_attr( $button_text ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Button Hover Background', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Button Hover Background', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_button_hover_bg_color" value="<?php echo esc_attr( $button_hover_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Button Hover Text', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Button Hover Text', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_form_button_hover_text_color" value="<?php echo esc_attr( $button_hover_text ); ?>" />
                 </td>
@@ -553,14 +553,14 @@ class CPR_Style_Settings {
         ?>
         <table class="form-table">
             <tr>
-                <th scope="row"><?php esc_html_e( 'Review Box Background', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Review Box Background', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_review_box_bg_color" value="<?php echo esc_attr( $review_bg ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Review Box Border', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Review Box Border', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_review_box_border_color" value="<?php echo esc_attr( $review_border ); ?>" />
                     <input type="text" name="cpr_review_box_border_width" value="<?php echo esc_attr( $review_border_width ); ?>" class="small-text" placeholder="1px" />
@@ -569,35 +569,35 @@ class CPR_Style_Settings {
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Review Box Padding', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Review Box Padding', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="text" name="cpr_review_box_padding" value="<?php echo esc_attr( $review_padding ); ?>" class="regular-text" placeholder="15px" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Reviewer Name Color', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Reviewer Name Color', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_review_name_color" value="<?php echo esc_attr( $name_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Review Date Color', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Review Date Color', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_review_date_color" value="<?php echo esc_attr( $date_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Review Content Color', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Review Content Color', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="color" name="cpr_review_content_color" value="<?php echo esc_attr( $content_color ); ?>" />
                 </td>
             </tr>
 
             <tr>
-                <th scope="row"><?php esc_html_e( 'Star Size', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Star Size', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <input type="text" name="cpr_star_size" value="<?php echo esc_attr( $star_size ); ?>" class="small-text" placeholder="16px" />
                 </td>
@@ -614,10 +614,10 @@ class CPR_Style_Settings {
         ?>
         <table class="form-table">
             <tr>
-                <th scope="row"><?php esc_html_e( 'Custom CSS', 'reviewnest-product-reviews' ); ?></th>
+                <th scope="row"><?php esc_html_e( 'Custom CSS', 'revwoo-product-reviews' ); ?></th>
                 <td>
                     <textarea name="cpr_custom_css" rows="20" class="large-text"><?php echo esc_textarea( $custom_css ); ?></textarea>
-                    <p class="description"><?php esc_html_e( 'Add your custom CSS code here. It will be applied to all review forms and displays.', 'reviewnest-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Add your custom CSS code here. It will be applied to all review forms and displays.', 'revwoo-product-reviews' ); ?></p>
                 </td>
             </tr>
         </table>
@@ -673,7 +673,7 @@ class CPR_Style_Settings {
 
         // Generate CSS
         $css = "
-        /* ReviewNest - Form Styles */
+        /* RevWoo - Form Styles */
         .cpr-review-form-section {
             background-color: {$form_bg}!important;
             border: {$form_border_width}px solid {$form_border}!important;
@@ -707,7 +707,7 @@ class CPR_Style_Settings {
             color: {$button_hover_text}!important;
         }
 
-        /* ReviewNest - Review Display Styles */
+        /* RevWoo - Review Display Styles */
         .cpt-review-full-box {
             background-color: {$review_bg}!important;
             border: {$review_border_width}px solid {$review_border}!important;
@@ -731,7 +731,7 @@ class CPR_Style_Settings {
             font-size: {$star_size}!important;
         }
 
-        /* ReviewNest - Filter Styles */
+        /* RevWoo - Filter Styles */
         .cpr-review-filters {
             background-color: {$filter_bg}!important;
             border: {$filter_border_width}px solid {$filter_border}!important;
@@ -758,7 +758,7 @@ class CPR_Style_Settings {
             color: {$filter_select_text}!important;
         }
 
-        /* ReviewNest - Custom CSS */
+        /* RevWoo - Custom CSS */
         {$custom_css}
         ";
 

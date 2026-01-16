@@ -61,8 +61,8 @@ class CPR_Form_Handler {
         ?>
 
         <div class="cpr-tab">
-            <div class="cpr-tab-desc " data-tab="desc"><?php esc_html_e( 'Description', 'reviewnest-product-reviews' ); ?></div>
-            <div class="cpr-tab-rev cpr-tab-active" data-tab="rev"><?php esc_html_e( 'Review', 'reviewnest-product-reviews' ); ?></div>
+            <div class="cpr-tab-desc " data-tab="desc"><?php esc_html_e( 'Description', 'revwoo-product-reviews' ); ?></div>
+            <div class="cpr-tab-rev cpr-tab-active" data-tab="rev"><?php esc_html_e( 'Review', 'revwoo-product-reviews' ); ?></div>
         </div>
 
         <div class="cpr-tab-desc-area" style="display: none">
@@ -71,7 +71,7 @@ class CPR_Form_Handler {
                 if ( ! empty( $product_description ) ) {
                     echo wp_kses_post( $product_description );
                 } else {
-                    echo '<p>' . esc_html__( 'No product description available.', 'reviewnest-product-reviews' ) . '</p>';
+                    echo '<p>' . esc_html__( 'No product description available.', 'revwoo-product-reviews' ) . '</p>';
                 }
                 ?>
             </div>
@@ -84,16 +84,16 @@ class CPR_Form_Handler {
             ?>
 
             <div id="cpr-review-form-wrapper" class="cpr-review-form-section">
-                <h3><?php esc_html_e( 'Write a Review', 'reviewnest-product-reviews' ); ?></h3>
+                <h3><?php esc_html_e( 'Write a Review', 'revwoo-product-reviews' ); ?></h3>
 
                 <?php if ( isset( $_GET['review_submitted'] ) && $_GET['review_submitted'] == '1' ): ?>
                     <div class="cpr-success-message">
                         <?php
                         $auto_approve = get_option( 'cpr_auto_approve', '0' );
                         if ( $auto_approve == '1' ) {
-                            esc_html_e( 'Thank you! Your review has been published.', 'reviewnest-product-reviews' );
+                            esc_html_e( 'Thank you! Your review has been published.', 'revwoo-product-reviews' );
                         } else {
-                            esc_html_e( 'Thank you! Your review has been submitted and is pending approval.', 'reviewnest-product-reviews' );
+                            esc_html_e( 'Thank you! Your review has been submitted and is pending approval.', 'revwoo-product-reviews' );
                         }
                         ?>
                     </div>
@@ -107,30 +107,30 @@ class CPR_Form_Handler {
                     <!-- Review Title Field -->
                     <p class="cpr-form-field">
                         <label for="cpr_title">
-                            <?php esc_html_e( 'Review Title', 'reviewnest-product-reviews' ); ?>
+                            <?php esc_html_e( 'Review Title', 'revwoo-product-reviews' ); ?>
                             <?php if ( $title_required == '1' ): ?>
                                 <span class="required">*</span>
                             <?php else: ?>
-                                <span class="optional"><?php esc_html_e( '(Optional)', 'reviewnest-product-reviews' ); ?></span>
+                                <span class="optional"><?php esc_html_e( '(Optional)', 'revwoo-product-reviews' ); ?></span>
                             <?php endif; ?>
                         </label>
                         <input type="text"
                             name="cpr_title"
                             id="cpr_title"
-                            placeholder="<?php esc_attr_e( 'Enter review title', 'reviewnest-product-reviews' ); ?>"
+                            placeholder="<?php esc_attr_e( 'Enter review title', 'revwoo-product-reviews' ); ?>"
                             <?php echo $title_required == '1' ? 'required' : ''; ?>>
                     </p>
 
                     <!-- Review Description Field -->
                     <p class="cpr-form-field">
                         <label for="cpr_content">
-                            <?php esc_html_e( 'Review Description', 'reviewnest-product-reviews' ); ?>
+                            <?php esc_html_e( 'Review Description', 'revwoo-product-reviews' ); ?>
                             <span class="required">*</span>
                         </label>
                         <textarea name="cpr_content"
                                 id="cpr_content"
                                 rows="4"
-                                placeholder="<?php esc_attr_e( 'Share your experience with this product', 'reviewnest-product-reviews' ); ?>"
+                                placeholder="<?php esc_attr_e( 'Share your experience with this product', 'revwoo-product-reviews' ); ?>"
                                 required></textarea>
                     </p>
 
@@ -143,14 +143,14 @@ class CPR_Form_Handler {
                         <label class="label">
                             <span class="browse-files">
                                 <input type="file" name="cpr_file" class="default-file-input" id="cpr_file_input" accept=".jpg,.jpeg,.png,.pdf">
-                                <?php esc_html_e( 'Drag and drop, or', 'reviewnest-product-reviews' ); ?>
-                                <span class="browse-files-text"><?php esc_html_e( 'browse', 'reviewnest-product-reviews' ); ?></span>
-                                <span><?php esc_html_e( 'your files', 'reviewnest-product-reviews' ); ?></span>
+                                <?php esc_html_e( 'Drag and drop, or', 'revwoo-product-reviews' ); ?>
+                                <span class="browse-files-text"><?php esc_html_e( 'browse', 'revwoo-product-reviews' ); ?></span>
+                                <span><?php esc_html_e( 'your files', 'revwoo-product-reviews' ); ?></span>
                             </span>
                             <img src="" alt="" id="cpr_file_preview" style="display:none; max-width:70px; margin-left: auto; margin-right: auto;">
                         </label>
                         <div class="cpr-file-format-note">
-                            <span><?php esc_html_e( 'Support JPG, PDF, PNG', 'reviewnest-product-reviews' ); ?></span>
+                            <span><?php esc_html_e( 'Support JPG, PDF, PNG', 'revwoo-product-reviews' ); ?></span>
                         </div>
                     </div>
                     <?php endif; ?>
@@ -158,14 +158,14 @@ class CPR_Form_Handler {
                     <!-- Star Rating Field -->
                     <p class="cpr-form-field">
                         <label>
-                            <?php esc_html_e( 'Star Rating', 'reviewnest-product-reviews' ); ?>
+                            <?php esc_html_e( 'Star Rating', 'revwoo-product-reviews' ); ?>
                             <span class="required">*</span>
                         </label>
                         <?php if ( $min_rating > 1 ): ?>
                             <span class="cpr-min-rating-note">
                                 <?php printf(
                                     /* translators: %d: minimum number of stars required for a review */
-                                    esc_html__( '(Minimum %d stars required)', 'reviewnest-product-reviews' ),
+                                    esc_html__( '(Minimum %d stars required)', 'revwoo-product-reviews' ),
                                     intval( $min_rating )
                                 ); ?>
                             </span>
@@ -184,30 +184,30 @@ class CPR_Form_Handler {
                     <!-- Name Field -->
                     <p class="cpr-form-field">
                         <label for="cpr_name">
-                            <?php esc_html_e( 'Name', 'reviewnest-product-reviews' ); ?>
+                            <?php esc_html_e( 'Name', 'revwoo-product-reviews' ); ?>
                             <span class="required">*</span>
                         </label>
                         <input type="text"
                             name="cpr_name"
                             id="cpr_name"
-                            placeholder="<?php esc_attr_e( 'Enter your name', 'reviewnest-product-reviews' ); ?>"
+                            placeholder="<?php esc_attr_e( 'Enter your name', 'revwoo-product-reviews' ); ?>"
                             required>
                     </p>
 
                     <!-- Email Field -->
                     <p class="cpr-form-field">
                         <label for="cpr_email">
-                            <?php esc_html_e( 'Email Address', 'reviewnest-product-reviews' ); ?>
+                            <?php esc_html_e( 'Email Address', 'revwoo-product-reviews' ); ?>
                             <?php if ( $email_required == '1' ): ?>
                                 <span class="required">*</span>
                             <?php else: ?>
-                                <span class="optional"><?php esc_html_e( '(Optional)', 'reviewnest-product-reviews' ); ?></span>
+                                <span class="optional"><?php esc_html_e( '(Optional)', 'revwoo-product-reviews' ); ?></span>
                             <?php endif; ?>
                         </label>
                         <input type="email"
                             name="cpr_email"
                             id="cpr_email"
-                            placeholder="<?php esc_attr_e( 'Enter your email', 'reviewnest-product-reviews' ); ?>"
+                            placeholder="<?php esc_attr_e( 'Enter your email', 'revwoo-product-reviews' ); ?>"
                             <?php echo $email_required == '1' ? 'required' : ''; ?>>
                     </p>
 
@@ -215,11 +215,11 @@ class CPR_Form_Handler {
                     <?php if ( $enable_age_range == '1' ): ?>
                     <p class="cpr-form-field">
                         <label class="cpr-age-range-label">
-                            <?php esc_html_e( 'Age Range', 'reviewnest-product-reviews' ); ?>
+                            <?php esc_html_e( 'Age Range', 'revwoo-product-reviews' ); ?>
                             <span class="required">*</span>
                         </label>
                         <div class="cpr-age-range">
-                            <button type="button" class="age-btn" data-value="under-18"><?php esc_html_e( 'Under 18', 'reviewnest-product-reviews' ); ?></button>
+                            <button type="button" class="age-btn" data-value="under-18"><?php esc_html_e( 'Under 18', 'revwoo-product-reviews' ); ?></button>
                             <button type="button" class="age-btn" data-value="18-24">18 - 24</button>
                             <button type="button" class="age-btn" data-value="25-34">25 - 34</button>
                             <button type="button" class="age-btn" data-value="35-44">35 - 44</button>
@@ -233,12 +233,12 @@ class CPR_Form_Handler {
 
                     <!-- Terms Notice -->
                     <p class="cpr-terms">
-                        <label><?php esc_html_e( "By continuing you agree to JOURIE'S Terms and Conditions", 'reviewnest-product-reviews' ); ?></label>
+                        <label><?php esc_html_e( "By continuing you agree to JOURIE'S Terms and Conditions", 'revwoo-product-reviews' ); ?></label>
                     </p>
 
                     <!-- Submit Button -->
                     <p class="submit-wrapper">
-                        <input type="submit" name="cpr_submit_review" value="<?php esc_attr_e( 'Submit Review', 'reviewnest-product-reviews' ); ?>" class="cpr-submit-btn">
+                        <input type="submit" name="cpr_submit_review" value="<?php esc_attr_e( 'Submit Review', 'revwoo-product-reviews' ); ?>" class="cpr-submit-btn">
                     </p>
                 </form>
             </div>
@@ -256,12 +256,12 @@ class CPR_Form_Handler {
 
         // Verify nonce
         if ( !isset( $_POST['cpr_review_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['cpr_review_nonce'] ) ), 'cpr_submit_review' ) ) {
-            wp_die( esc_html__( 'Security check failed', 'reviewnest-product-reviews' ) );
+            wp_die( esc_html__( 'Security check failed', 'revwoo-product-reviews' ) );
         }
 
         $product_id = isset( $_POST['cpr_product_id'] ) ? intval( $_POST['cpr_product_id'] ) : 0;
         if ( !$product_id ) {
-            wp_die( esc_html__( 'Invalid product', 'reviewnest-product-reviews' ) );
+            wp_die( esc_html__( 'Invalid product', 'revwoo-product-reviews' ) );
         }
 
         // Get form data
@@ -283,15 +283,15 @@ class CPR_Form_Handler {
 
         // Validate required fields based on settings
         if ( $title_required == '1' && empty( $title ) ) {
-            wp_die( esc_html__( 'Review title is required.', 'reviewnest-product-reviews' ) );
+            wp_die( esc_html__( 'Review title is required.', 'revwoo-product-reviews' ) );
         }
 
         if ( $email_required == '1' && empty( $email ) ) {
-            wp_die( esc_html__( 'Email address is required.', 'reviewnest-product-reviews' ) );
+            wp_die( esc_html__( 'Email address is required.', 'revwoo-product-reviews' ) );
         }
 
         if ( empty( $content ) ) {
-            wp_die( esc_html__( 'Review description is required.', 'reviewnest-product-reviews' ) );
+            wp_die( esc_html__( 'Review description is required.', 'revwoo-product-reviews' ) );
         }
 
         // Validate minimum rating
@@ -299,7 +299,7 @@ class CPR_Form_Handler {
             wp_die( 
                 sprintf( 
                     /* translators: %d: minimum rating number */
-                    esc_html__( 'Minimum rating of %d stars is required.', 'reviewnest-product-reviews' ), 
+                    esc_html__( 'Minimum rating of %d stars is required.', 'revwoo-product-reviews' ), 
                     intval( $min_rating ) 
                 ) 
             );
@@ -312,7 +312,7 @@ class CPR_Form_Handler {
 
             foreach ( $bad_words_array as $bad_word ) {
                 if ( !empty( $bad_word ) && strpos( $review_text, $bad_word ) !== false ) {
-                    wp_die( esc_html__( 'Your review contains inappropriate content and cannot be submitted.', 'reviewnest-product-reviews' ) );
+                    wp_die( esc_html__( 'Your review contains inappropriate content and cannot be submitted.', 'revwoo-product-reviews' ) );
                 }
             }
         }
@@ -334,7 +334,7 @@ class CPR_Form_Handler {
         $review_id = wp_insert_post( $post );
 
         if ( !$review_id ) {
-            wp_die( esc_html__( 'Failed to submit review. Please try again.', 'reviewnest-product-reviews' ) );
+            wp_die( esc_html__( 'Failed to submit review. Please try again.', 'revwoo-product-reviews' ) );
         }
 
         // Save meta data
@@ -357,7 +357,7 @@ class CPR_Form_Handler {
 
             $file_info = wp_check_filetype( basename( $_FILES['cpr_file']['name'] ), $allowed_mimes );
             if ( ! in_array( $file_info['ext'], array_keys( $allowed_mimes ) ) ) {
-                wp_die( esc_html__( 'Invalid file type. Only JPG, PNG, and PDF files are allowed.', 'reviewnest-product-reviews' ) );
+                wp_die( esc_html__( 'Invalid file type. Only JPG, PNG, and PDF files are allowed.', 'revwoo-product-reviews' ) );
             }
 
             $uploaded = wp_handle_upload( $_FILES['cpr_file'], array(
@@ -403,50 +403,50 @@ class CPR_Form_Handler {
         $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
         /* translators: %s: product name */
-        $subject = sprintf( __( 'New Review Submitted: %s', 'reviewnest-product-reviews' ), $product->get_name() );
+        $subject = sprintf( __( 'New Review Submitted: %s', 'revwoo-product-reviews' ), $product->get_name() );
 
         /* translators: %s: product name */
         $message = sprintf(
-            __( "A new review has been submitted for: %s\n\n", 'reviewnest-product-reviews' ),
+            __( "A new review has been submitted for: %s\n\n", 'revwoo-product-reviews' ),
             $product->get_name()
         );
 
 
         /* translators: %s: reviewer name */
-        $message .= sprintf( __( "Reviewer: %s\n", 'reviewnest-product-reviews' ), $reviewer_name );
+        $message .= sprintf( __( "Reviewer: %s\n", 'revwoo-product-reviews' ), $reviewer_name );
 
 
         if ( !empty( $reviewer_email ) ) {
             /* translators: %s: reviewer email address */
-            $message .= sprintf( __( "Email: %s\n", 'reviewnest-product-reviews' ), $reviewer_email );
+            $message .= sprintf( __( "Email: %s\n", 'revwoo-product-reviews' ), $reviewer_email );
         }
 
         $message .= sprintf( 
             /* translators: %s: star rating (1-5) */
-            esc_html__( "Rating: %s stars\n", 'reviewnest-product-reviews' ), 
+            esc_html__( "Rating: %s stars\n", 'revwoo-product-reviews' ), 
             intval( $rating ) 
         );
 
         $message .= sprintf( 
             /* translators: %s: review title */
-            esc_html__( "Review Title: %s\n", 'reviewnest-product-reviews' ), 
+            esc_html__( "Review Title: %s\n", 'revwoo-product-reviews' ), 
             sanitize_text_field( $review_title ) 
         );
 
         $message .= sprintf( 
             /* translators: %s: review content */
-            esc_html__( "Review: %s\n\n", 'reviewnest-product-reviews' ), 
+            esc_html__( "Review: %s\n\n", 'revwoo-product-reviews' ), 
             sanitize_textarea_field( $review_content ) 
         );
 
         if ( $auto_approve == '1' ) {
-            $message .= esc_html__( "Status: Published (Auto-approved)\n\n", 'reviewnest-product-reviews' );
+            $message .= esc_html__( "Status: Published (Auto-approved)\n\n", 'revwoo-product-reviews' );
         } else {
-            $message .= esc_html__( "Status: Pending Approval\n\n", 'reviewnest-product-reviews' );
+            $message .= esc_html__( "Status: Pending Approval\n\n", 'revwoo-product-reviews' );
         }
         $message .= sprintf(
             /* translators: %s: URL to review management page */
-            __( "View and manage this review:\n%s", 'reviewnest-product-reviews' ),
+            __( "View and manage this review:\n%s", 'revwoo-product-reviews' ),
             esc_url( admin_url( 'admin.php?page=cpr-reviews' ) )
         );
 
@@ -465,7 +465,7 @@ class CPR_Form_Handler {
        
         ?>
         <div id="cpr-all-reviews-wrapper" class="cpr-reviews-section">
-                <h3><?php esc_html_e( 'Customer Reviews', 'reviewnest-product-reviews' ); ?></h3>
+                <h3><?php esc_html_e( 'Customer Reviews', 'revwoo-product-reviews' ); ?></h3>
             
                 <!-- Hidden input for product ID -->
                 <input type="hidden" id="cpr_product_id" value="<?php echo esc_attr( $product_id ); ?>">
@@ -523,7 +523,7 @@ class CPR_Form_Handler {
                             $this->render_single_review( get_the_ID() );
                         endwhile;
                     else :
-                        echo '<div class="cpr-no-reviews"><p>' . esc_html__( 'No reviews yet. Be the first to review this product!', 'reviewnest-product-reviews' ) . '</p></div>';
+                        echo '<div class="cpr-no-reviews"><p>' . esc_html__( 'No reviews yet. Be the first to review this product!', 'revwoo-product-reviews' ) . '</p></div>';
                     endif;
                     
                     wp_reset_postdata();
@@ -534,7 +534,7 @@ class CPR_Form_Handler {
                 <?php if ( $total_reviews > $initial_reviews ) : ?>
                 <div class="cpr-load-more-container">
                     <button id="cpr-load-more-btn" class="cpr-load-more-btn">
-                        <?php esc_html_e( 'More Reviews', 'reviewnest-product-reviews' ); ?>
+                        <?php esc_html_e( 'More Reviews', 'revwoo-product-reviews' ); ?>
                     </button>
                     <div class="cpr-loading-spinner" style="display: none;">
                         <div class="spinner"></div>
@@ -630,7 +630,7 @@ class CPR_Form_Handler {
         
         // Previous button
         if ( $current_page > 1 ) {
-            echo '<a class="prev page-numbers" href="#" data-page="' . esc_attr( $current_page - 1 ) . '">&laquo; ' . esc_html__( 'Previous', 'reviewnest-product-reviews' ) . '</a>';
+            echo '<a class="prev page-numbers" href="#" data-page="' . esc_attr( $current_page - 1 ) . '">&laquo; ' . esc_html__( 'Previous', 'revwoo-product-reviews' ) . '</a>';
         }
         
         // Page numbers
@@ -644,7 +644,7 @@ class CPR_Form_Handler {
         
         // Next button
         if ( $current_page < $total_pages ) {
-            echo '<a class="next page-numbers" href="#" data-page="' . esc_attr( $current_page + 1 ) . '">' . esc_html__( 'Next', 'reviewnest-product-reviews' ) . ' &raquo;</a>';
+            echo '<a class="next page-numbers" href="#" data-page="' . esc_attr( $current_page + 1 ) . '">' . esc_html__( 'Next', 'revwoo-product-reviews' ) . ' &raquo;</a>';
         }
         
         echo '</div>';
@@ -731,7 +731,7 @@ class CPR_Form_Handler {
 
                 <?php if ( $show_verified_badge == '1' && $verified == '1' ): ?>
                 <div class="cpt-verify-buyer">
-                    <span><?php esc_html_e( 'Verified Buyer', 'reviewnest-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Verified Buyer', 'revwoo-product-reviews' ); ?></span>
                     <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
 
                 </div>
@@ -739,7 +739,7 @@ class CPR_Form_Handler {
 
                 <?php if ( $enable_age_range == '1' && !empty( $reviewer_age ) ): ?>
                 <div class="cpt-age-range">
-                    <span><?php esc_html_e( 'Age Range:', 'reviewnest-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Age Range:', 'revwoo-product-reviews' ); ?></span>
                     <span><?php echo esc_html( $reviewer_age ); ?></span>
                 </div>
                 <?php endif; ?>

@@ -1,4 +1,4 @@
-=== ReviewNest – Product Reviews for WooCommerce ===
+=== RevWoo – Product Reviews for WooCommerce ===
 Contributors: xohanniloy017
 Tags: woocommerce, reviews, product reviews, rating, testimonials
 Requires at least: 5.8
@@ -8,11 +8,11 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A powerful ReviewNest system for WooCommerce with advanced filtering, admin approval, and complete style customization.
+A powerful RevWoo system for WooCommerce with advanced filtering, admin approval, and complete style customization.
 
 == Description ==
 
-**ReviewNest** is a comprehensive review management system designed specifically for WooCommerce stores. It provides a feature-rich alternative to the default WooCommerce review system with advanced filtering, moderation, and customization options.
+**RevWoo** is a comprehensive review management system designed specifically for WooCommerce stores. It provides a feature-rich alternative to the default WooCommerce review system with advanced filtering, moderation, and customization options.
 
 = Key Features =
 
@@ -132,7 +132,7 @@ Get professional support and regular updates to ensure your review system runs s
 
 1. Log in to your WordPress admin panel
 2. Navigate to Plugins > Add New
-3. Search for "ReviewNest"
+3. Search for "RevWoo"
 4. Click "Install Now" and then "Activate"
 
 = Manual Installation =
@@ -154,7 +154,7 @@ Get professional support and regular updates to ensure your review system runs s
 
 = Does this plugin work with any WooCommerce theme? =
 
-Yes! ReviewNest is designed to work with any properly coded WooCommerce theme.
+Yes! RevWoo is designed to work with any properly coded WooCommerce theme.
 
 = Can I customize the review form fields? =
 
@@ -249,14 +249,14 @@ By default, reviews are displayed on WooCommerce product pages. If you need cust
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release of ReviewNest. Install to add a powerful review system to your WooCommerce store.
+Initial release of RevWoo. Install to add a powerful review system to your WooCommerce store.
 
 == Additional Information ==
 
 = Support =
 
 For support, feature requests, or bug reports, please visit:
-* GitHub: https://github.com/shahadatmiadev/reviewnest-product-reviews
+* GitHub: https://github.com/shahadatmiadev/revwoo-product-reviews-for-woocommerce
 * Support Forum: WordPress.org support forum
 
 = Contributing =
@@ -270,7 +270,7 @@ We welcome contributions! If you'd like to contribute to the plugin development,
 
 = Privacy Policy =
 
-ReviewNest does not collect or store any data outside your WordPress installation. All review data is stored in your WordPress database. The plugin collects only the information that customers voluntarily submit through the review form.
+RevWoo does not collect or store any data outside your WordPress installation. All review data is stored in your WordPress database. The plugin collects only the information that customers voluntarily submit through the review form.
 
 = Rate Us =
 
