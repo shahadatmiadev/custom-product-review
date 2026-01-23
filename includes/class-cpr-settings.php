@@ -134,7 +134,7 @@ class CPR_Settings {
             add_settings_error(
                 'cpr_messages',
                 'cpr_message',
-                esc_html__( 'Settings saved successfully', 'revwoo-product-reviews' ),
+                esc_html__( 'Settings saved successfully', 'amrrev-product-reviews-for-woocommerce' ),
                 'updated'
             );
         }
@@ -148,16 +148,16 @@ class CPR_Settings {
             
             <h2 class="nav-tab-wrapper">
                 <a href="?page=cpr-settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>">
-                    <?php esc_html_e( 'General', 'revwoo-product-reviews' ); ?>
+                    <?php esc_html_e( 'General', 'amrrev-product-reviews-for-woocommerce' ); ?>
                 </a>
                 <a href="?page=cpr-settings&tab=form" class="nav-tab <?php echo $active_tab == 'form' ? 'nav-tab-active' : ''; ?>">
-                    <?php esc_html_e( 'Form Settings', 'revwoo-product-reviews' ); ?>
+                    <?php esc_html_e( 'Form Settings', 'amrrev-product-reviews-for-woocommerce' ); ?>
                 </a>
                 <a href="?page=cpr-settings&tab=display" class="nav-tab <?php echo $active_tab == 'display' ? 'nav-tab-active' : ''; ?>">
-                    <?php esc_html_e( 'Display Settings', 'revwoo-product-reviews' ); ?>
+                    <?php esc_html_e( 'Display Settings', 'amrrev-product-reviews-for-woocommerce' ); ?>
                 </a>
                 <a href="?page=cpr-settings&tab=advanced" class="nav-tab <?php echo $active_tab == 'advanced' ? 'nav-tab-active' : ''; ?>">
-                    <?php esc_html_e( 'Advanced', 'revwoo-product-reviews' ); ?>
+                    <?php esc_html_e( 'Advanced', 'amrrev-product-reviews-for-woocommerce' ); ?>
                 </a>
             </h2>
 
@@ -196,20 +196,20 @@ class CPR_Settings {
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Auto Approve Reviews', 'revwoo-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Auto Approve Reviews', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_auto_approve" value="1" <?php checked( $auto_approve, '1' ); ?>>
-                        <?php esc_html_e( 'Automatically approve reviews (No manual approval needed)', 'revwoo-product-reviews' ); ?>
+                        <?php esc_html_e( 'Automatically approve reviews (No manual approval needed)', 'amrrev-product-reviews-for-woocommerce' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'If disabled, reviews will be in pending status and require admin approval.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'If disabled, reviews will be in pending status and require admin approval.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_min_rating"><?php esc_html_e( 'Minimum Star Rating', 'revwoo-product-reviews' ); ?></label>
+                    <label for="cpr_min_rating"><?php esc_html_e( 'Minimum Star Rating', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <select name="cpr_min_rating" id="cpr_min_rating">
@@ -219,30 +219,30 @@ class CPR_Settings {
                         <option value="4" <?php selected( $min_rating, '4' ); ?>>4 Stars</option>
                         <option value="5" <?php selected( $min_rating, '5' ); ?>>5 Stars</option>
                     </select>
-                    <p class="description"><?php esc_html_e( 'Reviews below this rating will not be accepted.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Reviews below this rating will not be accepted.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_form_position"><?php esc_html_e( 'Review Form Position', 'revwoo-product-reviews' ); ?></label>
+                    <label for="cpr_form_position"><?php esc_html_e( 'Review Form Position', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <select name="cpr_form_position" id="cpr_form_position">
-                        <option value="before" <?php selected( $form_position, 'before' ); ?>><?php esc_html_e( 'Before Product Summary', 'revwoo-product-reviews' ); ?></option>
-                        <option value="after" <?php selected( $form_position, 'after' ); ?>><?php esc_html_e( 'After Product Summary', 'revwoo-product-reviews' ); ?></option>
+                        <option value="before" <?php selected( $form_position, 'before' ); ?>><?php esc_html_e( 'Before Product Summary', 'amrrev-product-reviews-for-woocommerce' ); ?></option>
+                        <option value="after" <?php selected( $form_position, 'after' ); ?>><?php esc_html_e( 'After Product Summary', 'amrrev-product-reviews-for-woocommerce' ); ?></option>
                     </select>
-                    <p class="description"><?php esc_html_e( 'Where to display the review form on product page.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Where to display the review form on product page.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_reviews_per_page"><?php esc_html_e( 'Reviews Per Page', 'revwoo-product-reviews' ); ?></label>
+                    <label for="cpr_reviews_per_page"><?php esc_html_e( 'Reviews Per Page', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <input type="number" name="cpr_reviews_per_page" id="cpr_reviews_per_page" value="<?php echo esc_attr( $reviews_per_page ); ?>" min="2" max="100" class="small-text">
-                    <p class="description"><?php esc_html_e( 'Number of reviews to display per page (pagination).', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Number of reviews to display per page (pagination).', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
         </table>
@@ -261,53 +261,53 @@ class CPR_Settings {
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'File Upload', 'revwoo-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'File Upload', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_enable_file_upload" value="1" <?php checked( $enable_file, '1' ); ?>>
-                        <?php esc_html_e( 'Enable file upload (JPG, PNG, PDF)', 'revwoo-product-reviews' ); ?>
+                        <?php esc_html_e( 'Enable file upload (JPG, PNG, PDF)', 'amrrev-product-reviews-for-woocommerce' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Allow customers to upload images or documents with their review.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Allow customers to upload images or documents with their review.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Age Range Field', 'revwoo-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Age Range Field', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_enable_age_range" value="1" <?php checked( $enable_age, '1' ); ?>>
-                        <?php esc_html_e( 'Show age range selection field', 'revwoo-product-reviews' ); ?>
+                        <?php esc_html_e( 'Show age range selection field', 'amrrev-product-reviews-for-woocommerce' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Ask customers to select their age range when submitting a review.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Ask customers to select their age range when submitting a review.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Email Field', 'revwoo-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Email Field', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_email_required" value="1" <?php checked( $email_required, '1' ); ?>>
-                        <?php esc_html_e( 'Email address is required', 'revwoo-product-reviews' ); ?>
+                        <?php esc_html_e( 'Email address is required', 'amrrev-product-reviews-for-woocommerce' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Make email field mandatory for review submission.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Make email field mandatory for review submission.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Review Title', 'revwoo-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Review Title', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_title_required" value="1" <?php checked( $title_required, '1' ); ?>>
-                        <?php esc_html_e( 'Review title is required', 'revwoo-product-reviews' ); ?>
+                        <?php esc_html_e( 'Review title is required', 'amrrev-product-reviews-for-woocommerce' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Make review title field mandatory.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Make review title field mandatory.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
         </table>
@@ -327,20 +327,20 @@ class CPR_Settings {
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Verified Buyer Badge', 'revwoo-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Verified Buyer Badge', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_show_verified_badge" value="1" <?php checked( $show_badge, '1' ); ?>>
-                        <?php esc_html_e( 'Show verified buyer badge on reviews', 'revwoo-product-reviews' ); ?>
+                        <?php esc_html_e( 'Show verified buyer badge on reviews', 'amrrev-product-reviews-for-woocommerce' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Display a badge for verified purchasers.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Display a badge for verified purchasers.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_date_format"><?php esc_html_e( 'Date Format', 'revwoo-product-reviews' ); ?></label>
+                    <label for="cpr_date_format"><?php esc_html_e( 'Date Format', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <select name="cpr_date_format" id="cpr_date_format">
@@ -350,40 +350,40 @@ class CPR_Settings {
                         <option value="M j, Y" <?php selected( $date_format, 'M j, Y' ); ?>>Nov 29, 2025</option>
                         <option value="Y-m-d" <?php selected( $date_format, 'Y-m-d' ); ?>>2025-11-29</option>
                     </select>
-                    <p class="description"><?php esc_html_e( 'How to display review submission date.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'How to display review submission date.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Review Filters', 'revwoo-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Review Filters', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_show_filters" value="1" <?php checked( $show_filters, '1' ); ?>>
-                        <?php esc_html_e( 'Show filter options (Rating, Age Range, Verified)', 'revwoo-product-reviews' ); ?>
+                        <?php esc_html_e( 'Show filter options (Rating, Age Range, Verified)', 'amrrev-product-reviews-for-woocommerce' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Allow customers to filter reviews by rating, age range, etc.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Allow customers to filter reviews by rating, age range, etc.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_empty_star_color"><?php esc_html_e( 'Empty Star Color', 'revwoo-product-reviews' ); ?></label>
+                    <label for="cpr_empty_star_color"><?php esc_html_e( 'Empty Star Color', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <input type="color" name="cpr_empty_star_color" id="cpr_empty_star_color" value="<?php echo esc_attr( $empty_star ); ?>">
-                    <p class="description"><?php esc_html_e( 'Color for empty/unfilled stars.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Color for empty/unfilled stars.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_filled_star_color"><?php esc_html_e( 'Filled Star Color', 'revwoo-product-reviews' ); ?></label>
+                    <label for="cpr_filled_star_color"><?php esc_html_e( 'Filled Star Color', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <input type="color" name="cpr_filled_star_color" id="cpr_filled_star_color" value="<?php echo esc_attr( $filled_star ); ?>">
-                    <p class="description"><?php esc_html_e( 'Color for filled/selected stars.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Color for filled/selected stars.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
         </table>
@@ -402,47 +402,47 @@ class CPR_Settings {
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Review Moderation', 'revwoo-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Review Moderation', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_enable_moderation" value="1" <?php checked( $enable_moderation, '1' ); ?>>
-                        <?php esc_html_e( 'Enable bad words filter', 'revwoo-product-reviews' ); ?>
+                        <?php esc_html_e( 'Enable bad words filter', 'amrrev-product-reviews-for-woocommerce' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Automatically reject reviews containing inappropriate words.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Automatically reject reviews containing inappropriate words.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_bad_words"><?php esc_html_e( 'Bad Words List', 'revwoo-product-reviews' ); ?></label>
+                    <label for="cpr_bad_words"><?php esc_html_e( 'Bad Words List', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <textarea name="cpr_bad_words" id="cpr_bad_words" rows="5" class="large-text"><?php echo esc_textarea( $bad_words ); ?></textarea>
-                    <p class="description"><?php esc_html_e( 'Add words separated by commas. Reviews containing these words will be automatically rejected.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Add words separated by commas. Reviews containing these words will be automatically rejected.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label><?php esc_html_e( 'Email Notifications', 'revwoo-product-reviews' ); ?></label>
+                    <label><?php esc_html_e( 'Email Notifications', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <label>
                         <input type="checkbox" name="cpr_enable_email_notification" value="1" <?php checked( $enable_email, '1' ); ?>>
-                        <?php esc_html_e( 'Send email notification when a new review is submitted', 'revwoo-product-reviews' ); ?>
+                        <?php esc_html_e( 'Send email notification when a new review is submitted', 'amrrev-product-reviews-for-woocommerce' ); ?>
                     </label>
-                    <p class="description"><?php esc_html_e( 'Admin will receive an email alert for each new review.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Admin will receive an email alert for each new review.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">
-                    <label for="cpr_admin_email"><?php esc_html_e( 'Admin Email Address', 'revwoo-product-reviews' ); ?></label>
+                    <label for="cpr_admin_email"><?php esc_html_e( 'Admin Email Address', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                 </th>
                 <td>
                     <input type="email" name="cpr_admin_email" id="cpr_admin_email" value="<?php echo esc_attr( $admin_email ); ?>" class="regular-text">
-                    <p class="description"><?php esc_html_e( 'Email address to receive review notifications.', 'revwoo-product-reviews' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Email address to receive review notifications.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
                 </td>
             </tr>
         </table>

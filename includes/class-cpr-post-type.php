@@ -16,17 +16,17 @@ class CPR_Post_Type {
     public function register_review_post_type() {
 
         $labels = array(
-            'name'               => esc_html__( 'Reviews', 'revwoo-product-reviews' ),
-            'singular_name'      => esc_html__( 'Review', 'revwoo-product-reviews' ),
-            'menu_name'          => esc_html__( 'Product Reviews', 'revwoo-product-reviews' ),
-            'add_new'            => esc_html__( 'Add New Review', 'revwoo-product-reviews' ),
-            'add_new_item'       => esc_html__( 'Add New Review', 'revwoo-product-reviews' ),
-            'edit_item'          => esc_html__( 'Edit Review', 'revwoo-product-reviews' ),
-            'new_item'           => esc_html__( 'New Review', 'revwoo-product-reviews' ),
-            'view_item'          => esc_html__( 'View Review', 'revwoo-product-reviews' ),
-            'search_items'       => esc_html__( 'Search Reviews', 'revwoo-product-reviews' ),
-            'not_found'          => esc_html__( 'No Reviews found', 'revwoo-product-reviews' ),
-            'not_found_in_trash' => esc_html__( 'No Reviews found in Trash', 'revwoo-product-reviews' ),
+            'name'               => esc_html__( 'Reviews', 'amrrev-product-reviews-for-woocommerce' ),
+            'singular_name'      => esc_html__( 'Review', 'amrrev-product-reviews-for-woocommerce' ),
+            'menu_name'          => esc_html__( 'Product Reviews', 'amrrev-product-reviews-for-woocommerce' ),
+            'add_new'            => esc_html__( 'Add New Review', 'amrrev-product-reviews-for-woocommerce' ),
+            'add_new_item'       => esc_html__( 'Add New Review', 'amrrev-product-reviews-for-woocommerce' ),
+            'edit_item'          => esc_html__( 'Edit Review', 'amrrev-product-reviews-for-woocommerce' ),
+            'new_item'           => esc_html__( 'New Review', 'amrrev-product-reviews-for-woocommerce' ),
+            'view_item'          => esc_html__( 'View Review', 'amrrev-product-reviews-for-woocommerce' ),
+            'search_items'       => esc_html__( 'Search Reviews', 'amrrev-product-reviews-for-woocommerce' ),
+            'not_found'          => esc_html__( 'No Reviews found', 'amrrev-product-reviews-for-woocommerce' ),
+            'not_found_in_trash' => esc_html__( 'No Reviews found in Trash', 'amrrev-product-reviews-for-woocommerce' ),
         );
 
         $args = array(

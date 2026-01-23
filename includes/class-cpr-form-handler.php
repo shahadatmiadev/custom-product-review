@@ -61,8 +61,8 @@ class CPR_Form_Handler {
         ?>
 
         <div class="cpr-tab">
-            <div class="cpr-tab-desc " data-tab="desc"><?php esc_html_e( 'Description', 'revwoo-product-reviews' ); ?></div>
-            <div class="cpr-tab-rev cpr-tab-active" data-tab="rev"><?php esc_html_e( 'Review', 'revwoo-product-reviews' ); ?></div>
+            <div class="cpr-tab-desc " data-tab="desc"><?php esc_html_e( 'Description', 'amrrev-product-reviews-for-woocommerce' ); ?></div>
+            <div class="cpr-tab-rev cpr-tab-active" data-tab="rev"><?php esc_html_e( 'Review', 'amrrev-product-reviews-for-woocommerce' ); ?></div>
         </div>
 
         <div class="cpr-tab-desc-area" style="display: none">
@@ -71,7 +71,7 @@ class CPR_Form_Handler {
                 if ( ! empty( $product_description ) ) {
                     echo wp_kses_post( $product_description );
                 } else {
-                    echo '<p>' . esc_html__( 'No product description available.', 'revwoo-product-reviews' ) . '</p>';
+                    echo '<p>' . esc_html__( 'No product description available.', 'amrrev-product-reviews-for-woocommerce' ) . '</p>';
                 }
                 ?>
             </div>
@@ -84,16 +84,16 @@ class CPR_Form_Handler {
             ?>
 
             <div id="cpr-review-form-wrapper" class="cpr-review-form-section">
-                <h3><?php esc_html_e( 'Write a Review', 'revwoo-product-reviews' ); ?></h3>
+                <h3><?php esc_html_e( 'Write a Review', 'amrrev-product-reviews-for-woocommerce' ); ?></h3>
 
                 <?php if ( isset( $_GET['review_submitted'] ) && $_GET['review_submitted'] == '1' ): ?>
                     <div class="cpr-success-message">
                         <?php
                         $auto_approve = get_option( 'cpr_auto_approve', '0' );
                         if ( $auto_approve == '1' ) {
-                            esc_html_e( 'Thank you! Your review has been published.', 'revwoo-product-reviews' );
+                            esc_html_e( 'Thank you! Your review has been published.', 'amrrev-product-reviews-for-woocommerce' );
                         } else {
-                            esc_html_e( 'Thank you! Your review has been submitted and is pending approval.', 'revwoo-product-reviews' );
+                            esc_html_e( 'Thank you! Your review has been submitted and is pending approval.', 'amrrev-product-reviews-for-woocommerce' );
                         }
                         ?>
                     </div>
@@ -107,30 +107,30 @@ class CPR_Form_Handler {
                     <!-- Review Title Field -->
                     <p class="cpr-form-field">
                         <label for="cpr_title">
-                            <?php esc_html_e( 'Review Title', 'revwoo-product-reviews' ); ?>
+                            <?php esc_html_e( 'Review Title', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             <?php if ( $title_required == '1' ): ?>
                                 <span class="required">*</span>
                             <?php else: ?>
-                                <span class="optional"><?php esc_html_e( '(Optional)', 'revwoo-product-reviews' ); ?></span>
+                                <span class="optional"><?php esc_html_e( '(Optional)', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
                             <?php endif; ?>
                         </label>
                         <input type="text"
                             name="cpr_title"
                             id="cpr_title"
-                            placeholder="<?php esc_attr_e( 'Enter review title', 'revwoo-product-reviews' ); ?>"
+                            placeholder="<?php esc_attr_e( 'Enter review title', 'amrrev-product-reviews-for-woocommerce' ); ?>"
                             <?php echo $title_required == '1' ? 'required' : ''; ?>>
                     </p>
 
                     <!-- Review Description Field -->
                     <p class="cpr-form-field">
                         <label for="cpr_content">
-                            <?php esc_html_e( 'Review Description', 'revwoo-product-reviews' ); ?>
+                            <?php esc_html_e( 'Review Description', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             <span class="required">*</span>
                         </label>
                         <textarea name="cpr_content"
                                 id="cpr_content"
                                 rows="4"
-                                placeholder="<?php esc_attr_e( 'Share your experience with this product', 'revwoo-product-reviews' ); ?>"
+                                placeholder="<?php esc_attr_e( 'Share your experience with this product', 'amrrev-product-reviews-for-woocommerce' ); ?>"
                                 required></textarea>
                     </p>
 
@@ -143,14 +143,14 @@ class CPR_Form_Handler {
                         <label class="label">
                             <span class="browse-files">
                                 <input type="file" name="cpr_file" class="default-file-input" id="cpr_file_input" accept=".jpg,.jpeg,.png,.pdf">
-                                <?php esc_html_e( 'Drag and drop, or', 'revwoo-product-reviews' ); ?>
-                                <span class="browse-files-text"><?php esc_html_e( 'browse', 'revwoo-product-reviews' ); ?></span>
-                                <span><?php esc_html_e( 'your files', 'revwoo-product-reviews' ); ?></span>
+                                <?php esc_html_e( 'Drag and drop, or', 'amrrev-product-reviews-for-woocommerce' ); ?>
+                                <span class="browse-files-text"><?php esc_html_e( 'browse', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
+                                <span><?php esc_html_e( 'your files', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
                             </span>
                             <img src="" alt="" id="cpr_file_preview" style="display:none; max-width:70px; margin-left: auto; margin-right: auto;">
                         </label>
                         <div class="cpr-file-format-note">
-                            <span><?php esc_html_e( 'Support JPG, PDF, PNG', 'revwoo-product-reviews' ); ?></span>
+                            <span><?php esc_html_e( 'Support JPG, PDF, PNG', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
                         </div>
                     </div>
                     <?php endif; ?>
@@ -158,14 +158,14 @@ class CPR_Form_Handler {
                     <!-- Star Rating Field -->
                     <p class="cpr-form-field">
                         <label>
-                            <?php esc_html_e( 'Star Rating', 'revwoo-product-reviews' ); ?>
+                            <?php esc_html_e( 'Star Rating', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             <span class="required">*</span>
                         </label>
                         <?php if ( $min_rating > 1 ): ?>
                             <span class="cpr-min-rating-note">
                                 <?php printf(
                                     /* translators: %d: minimum number of stars required for a review */
-                                    esc_html__( '(Minimum %d stars required)', 'revwoo-product-reviews' ),
+                                    esc_html__( '(Minimum %d stars required)', 'amrrev-product-reviews-for-woocommerce' ),
                                     intval( $min_rating )
                                 ); ?>
                             </span>
@@ -184,30 +184,30 @@ class CPR_Form_Handler {
                     <!-- Name Field -->
                     <p class="cpr-form-field">
                         <label for="cpr_name">
-                            <?php esc_html_e( 'Name', 'revwoo-product-reviews' ); ?>
+                            <?php esc_html_e( 'Name', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             <span class="required">*</span>
                         </label>
                         <input type="text"
                             name="cpr_name"
                             id="cpr_name"
-                            placeholder="<?php esc_attr_e( 'Enter your name', 'revwoo-product-reviews' ); ?>"
+                            placeholder="<?php esc_attr_e( 'Enter your name', 'amrrev-product-reviews-for-woocommerce' ); ?>"
                             required>
                     </p>
 
                     <!-- Email Field -->
                     <p class="cpr-form-field">
                         <label for="cpr_email">
-                            <?php esc_html_e( 'Email Address', 'revwoo-product-reviews' ); ?>
+                            <?php esc_html_e( 'Email Address', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             <?php if ( $email_required == '1' ): ?>
                                 <span class="required">*</span>
                             <?php else: ?>
-                                <span class="optional"><?php esc_html_e( '(Optional)', 'revwoo-product-reviews' ); ?></span>
+                                <span class="optional"><?php esc_html_e( '(Optional)', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
                             <?php endif; ?>
                         </label>
                         <input type="email"
                             name="cpr_email"
                             id="cpr_email"
-                            placeholder="<?php esc_attr_e( 'Enter your email', 'revwoo-product-reviews' ); ?>"
+                            placeholder="<?php esc_attr_e( 'Enter your email', 'amrrev-product-reviews-for-woocommerce' ); ?>"
                             <?php echo $email_required == '1' ? 'required' : ''; ?>>
                     </p>
 
@@ -215,11 +215,11 @@ class CPR_Form_Handler {
                     <?php if ( $enable_age_range == '1' ): ?>
                     <p class="cpr-form-field">
                         <label class="cpr-age-range-label">
-                            <?php esc_html_e( 'Age Range', 'revwoo-product-reviews' ); ?>
+                            <?php esc_html_e( 'Age Range', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             <span class="required">*</span>
                         </label>
                         <div class="cpr-age-range">
-                            <button type="button" class="age-btn" data-value="under-18"><?php esc_html_e( 'Under 18', 'revwoo-product-reviews' ); ?></button>
+                            <button type="button" class="age-btn" data-value="under-18"><?php esc_html_e( 'Under 18', 'amrrev-product-reviews-for-woocommerce' ); ?></button>
                             <button type="button" class="age-btn" data-value="18-24">18 - 24</button>
                             <button type="button" class="age-btn" data-value="25-34">25 - 34</button>
                             <button type="button" class="age-btn" data-value="35-44">35 - 44</button>
@@ -233,12 +233,12 @@ class CPR_Form_Handler {
 
                     <!-- Terms Notice -->
                     <p class="cpr-terms">
-                        <label><?php esc_html_e( "By continuing you agree to JOURIE'S Terms and Conditions", 'revwoo-product-reviews' ); ?></label>
+                        <label><?php esc_html_e( "By continuing you agree to JOURIE'S Terms and Conditions", 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                     </p>
 
                     <!-- Submit Button -->
                     <p class="submit-wrapper">
-                        <input type="submit" name="cpr_submit_review" value="<?php esc_attr_e( 'Submit Review', 'revwoo-product-reviews' ); ?>" class="cpr-submit-btn">
+                        <input type="submit" name="cpr_submit_review" value="<?php esc_attr_e( 'Submit Review', 'amrrev-product-reviews-for-woocommerce' ); ?>" class="cpr-submit-btn">
                     </p>
                 </form>
             </div>
@@ -256,12 +256,12 @@ class CPR_Form_Handler {
 
         // Verify nonce
         if ( !isset( $_POST['cpr_review_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['cpr_review_nonce'] ) ), 'cpr_submit_review' ) ) {
-            wp_die( esc_html__( 'Security check failed', 'revwoo-product-reviews' ) );
+            wp_die( esc_html__( 'Security check failed', 'amrrev-product-reviews-for-woocommerce' ) );
         }
 
         $product_id = isset( $_POST['cpr_product_id'] ) ? intval( $_POST['cpr_product_id'] ) : 0;
         if ( !$product_id ) {
-            wp_die( esc_html__( 'Invalid product', 'revwoo-product-reviews' ) );
+            wp_die( esc_html__( 'Invalid product', 'amrrev-product-reviews-for-woocommerce' ) );
         }
 
         // Get form data
@@ -283,15 +283,15 @@ class CPR_Form_Handler {
 
         // Validate required fields based on settings
         if ( $title_required == '1' && empty( $title ) ) {
-            wp_die( esc_html__( 'Review title is required.', 'revwoo-product-reviews' ) );
+            wp_die( esc_html__( 'Review title is required.', 'amrrev-product-reviews-for-woocommerce' ) );
         }
 
         if ( $email_required == '1' && empty( $email ) ) {
-            wp_die( esc_html__( 'Email address is required.', 'revwoo-product-reviews' ) );
+            wp_die( esc_html__( 'Email address is required.', 'amrrev-product-reviews-for-woocommerce' ) );
         }
 
         if ( empty( $content ) ) {
-            wp_die( esc_html__( 'Review description is required.', 'revwoo-product-reviews' ) );
+            wp_die( esc_html__( 'Review description is required.', 'amrrev-product-reviews-for-woocommerce' ) );
         }
 
         // Validate minimum rating
@@ -299,7 +299,7 @@ class CPR_Form_Handler {
             wp_die( 
                 sprintf( 
                     /* translators: %d: minimum rating number */
-                    esc_html__( 'Minimum rating of %d stars is required.', 'revwoo-product-reviews' ), 
+                    esc_html__( 'Minimum rating of %d stars is required.', 'amrrev-product-reviews-for-woocommerce' ), 
                     intval( $min_rating ) 
                 ) 
             );
@@ -312,7 +312,7 @@ class CPR_Form_Handler {
 
             foreach ( $bad_words_array as $bad_word ) {
                 if ( !empty( $bad_word ) && strpos( $review_text, $bad_word ) !== false ) {
-                    wp_die( esc_html__( 'Your review contains inappropriate content and cannot be submitted.', 'revwoo-product-reviews' ) );
+                    wp_die( esc_html__( 'Your review contains inappropriate content and cannot be submitted.', 'amrrev-product-reviews-for-woocommerce' ) );
                 }
             }
         }
@@ -334,7 +334,7 @@ class CPR_Form_Handler {
         $review_id = wp_insert_post( $post );
 
         if ( !$review_id ) {
-            wp_die( esc_html__( 'Failed to submit review. Please try again.', 'revwoo-product-reviews' ) );
+            wp_die( esc_html__( 'Failed to submit review. Please try again.', 'amrrev-product-reviews-for-woocommerce' ) );
         }
 
         // Save meta data
@@ -357,7 +357,7 @@ class CPR_Form_Handler {
 
             $file_info = wp_check_filetype( basename( $_FILES['cpr_file']['name'] ), $allowed_mimes );
             if ( ! in_array( $file_info['ext'], array_keys( $allowed_mimes ) ) ) {
-                wp_die( esc_html__( 'Invalid file type. Only JPG, PNG, and PDF files are allowed.', 'revwoo-product-reviews' ) );
+                wp_die( esc_html__( 'Invalid file type. Only JPG, PNG, and PDF files are allowed.', 'amrrev-product-reviews-for-woocommerce' ) );
             }
 
             $uploaded = wp_handle_upload( $_FILES['cpr_file'], array(
@@ -403,50 +403,50 @@ class CPR_Form_Handler {
         $auto_approve = get_option( 'cpr_auto_approve', '0' );
 
         /* translators: %s: product name */
-        $subject = sprintf( __( 'New Review Submitted: %s', 'revwoo-product-reviews' ), $product->get_name() );
+        $subject = sprintf( __( 'New Review Submitted: %s', 'amrrev-product-reviews-for-woocommerce' ), $product->get_name() );
 
         /* translators: %s: product name */
         $message = sprintf(
-            __( "A new review has been submitted for: %s\n\n", 'revwoo-product-reviews' ),
+            __( "A new review has been submitted for: %s\n\n", 'amrrev-product-reviews-for-woocommerce' ),
             $product->get_name()
         );
 
 
         /* translators: %s: reviewer name */
-        $message .= sprintf( __( "Reviewer: %s\n", 'revwoo-product-reviews' ), $reviewer_name );
+        $message .= sprintf( __( "Reviewer: %s\n", 'amrrev-product-reviews-for-woocommerce' ), $reviewer_name );
 
 
         if ( !empty( $reviewer_email ) ) {
             /* translators: %s: reviewer email address */
-            $message .= sprintf( __( "Email: %s\n", 'revwoo-product-reviews' ), $reviewer_email );
+            $message .= sprintf( __( "Email: %s\n", 'amrrev-product-reviews-for-woocommerce' ), $reviewer_email );
         }
 
         $message .= sprintf( 
             /* translators: %s: star rating (1-5) */
-            esc_html__( "Rating: %s stars\n", 'revwoo-product-reviews' ), 
+            esc_html__( "Rating: %s stars\n", 'amrrev-product-reviews-for-woocommerce' ), 
             intval( $rating ) 
         );
 
         $message .= sprintf( 
             /* translators: %s: review title */
-            esc_html__( "Review Title: %s\n", 'revwoo-product-reviews' ), 
+            esc_html__( "Review Title: %s\n", 'amrrev-product-reviews-for-woocommerce' ), 
             sanitize_text_field( $review_title ) 
         );
 
         $message .= sprintf( 
             /* translators: %s: review content */
-            esc_html__( "Review: %s\n\n", 'revwoo-product-reviews' ), 
+            esc_html__( "Review: %s\n\n", 'amrrev-product-reviews-for-woocommerce' ), 
             sanitize_textarea_field( $review_content ) 
         );
 
         if ( $auto_approve == '1' ) {
-            $message .= esc_html__( "Status: Published (Auto-approved)\n\n", 'revwoo-product-reviews' );
+            $message .= esc_html__( "Status: Published (Auto-approved)\n\n", 'amrrev-product-reviews-for-woocommerce' );
         } else {
-            $message .= esc_html__( "Status: Pending Approval\n\n", 'revwoo-product-reviews' );
+            $message .= esc_html__( "Status: Pending Approval\n\n", 'amrrev-product-reviews-for-woocommerce' );
         }
         $message .= sprintf(
             /* translators: %s: URL to review management page */
-            __( "View and manage this review:\n%s", 'revwoo-product-reviews' ),
+            __( "View and manage this review:\n%s", 'amrrev-product-reviews-for-woocommerce' ),
             esc_url( admin_url( 'admin.php?page=cpr-reviews' ) )
         );
 
@@ -465,7 +465,7 @@ class CPR_Form_Handler {
        
         ?>
         <div id="cpr-all-reviews-wrapper" class="cpr-reviews-section">
-                <h3><?php esc_html_e( 'Customer Reviews', 'revwoo-product-reviews' ); ?></h3>
+                <h3><?php esc_html_e( 'Customer Reviews', 'amrrev-product-reviews-for-woocommerce' ); ?></h3>
             
                 <!-- Hidden input for product ID -->
                 <input type="hidden" id="cpr_product_id" value="<?php echo esc_attr( $product_id ); ?>">
@@ -523,7 +523,7 @@ class CPR_Form_Handler {
                             $this->render_single_review( get_the_ID() );
                         endwhile;
                     else :
-                        echo '<div class="cpr-no-reviews"><p>' . esc_html__( 'No reviews yet. Be the first to review this product!', 'revwoo-product-reviews' ) . '</p></div>';
+                        echo '<div class="cpr-no-reviews"><p>' . esc_html__( 'No reviews yet. Be the first to review this product!', 'amrrev-product-reviews-for-woocommerce' ) . '</p></div>';
                     endif;
                     
                     wp_reset_postdata();
@@ -534,7 +534,7 @@ class CPR_Form_Handler {
                 <?php if ( $total_reviews > $initial_reviews ) : ?>
                 <div class="cpr-load-more-container">
                     <button id="cpr-load-more-btn" class="cpr-load-more-btn">
-                        <?php esc_html_e( 'More Reviews', 'revwoo-product-reviews' ); ?>
+                        <?php esc_html_e( 'More Reviews', 'amrrev-product-reviews-for-woocommerce' ); ?>
                     </button>
                     <div class="cpr-loading-spinner" style="display: none;">
                         <div class="spinner"></div>
@@ -630,7 +630,7 @@ class CPR_Form_Handler {
         
         // Previous button
         if ( $current_page > 1 ) {
-            echo '<a class="prev page-numbers" href="#" data-page="' . esc_attr( $current_page - 1 ) . '">&laquo; ' . esc_html__( 'Previous', 'revwoo-product-reviews' ) . '</a>';
+            echo '<a class="prev page-numbers" href="#" data-page="' . esc_attr( $current_page - 1 ) . '">&laquo; ' . esc_html__( 'Previous', 'amrrev-product-reviews-for-woocommerce' ) . '</a>';
         }
         
         // Page numbers
@@ -644,7 +644,7 @@ class CPR_Form_Handler {
         
         // Next button
         if ( $current_page < $total_pages ) {
-            echo '<a class="next page-numbers" href="#" data-page="' . esc_attr( $current_page + 1 ) . '">' . esc_html__( 'Next', 'revwoo-product-reviews' ) . ' &raquo;</a>';
+            echo '<a class="next page-numbers" href="#" data-page="' . esc_attr( $current_page + 1 ) . '">' . esc_html__( 'Next', 'amrrev-product-reviews-for-woocommerce' ) . ' &raquo;</a>';
         }
         
         echo '</div>';
@@ -731,7 +731,7 @@ class CPR_Form_Handler {
 
                 <?php if ( $show_verified_badge == '1' && $verified == '1' ): ?>
                 <div class="cpt-verify-buyer">
-                    <span><?php esc_html_e( 'Verified Buyer', 'revwoo-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Verified Buyer', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
                     <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
 
                 </div>
@@ -739,7 +739,7 @@ class CPR_Form_Handler {
 
                 <?php if ( $enable_age_range == '1' && !empty( $reviewer_age ) ): ?>
                 <div class="cpt-age-range">
-                    <span><?php esc_html_e( 'Age Range:', 'revwoo-product-reviews' ); ?></span>
+                    <span><?php esc_html_e( 'Age Range:', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
                     <span><?php echo esc_html( $reviewer_age ); ?></span>
                 </div>
                 <?php endif; ?>

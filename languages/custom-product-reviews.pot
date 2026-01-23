@@ -2,8 +2,8 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: RevWoo 1.0.0\n"
-"Report-Msgid-Bugs-To: https://github.com/shahadatmiadev/revwoo-product-reviews-for-woocommerce\n"
+"Project-Id-Version: AmrRev 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/shahadatmiadev/amrrev-product-reviews-for-woocommerce\n"
 "POT-Creation-Date: 2025-01-15 10:00:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -14,21 +14,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: WordPress\n"
-"X-Domain: revwoo-product-reviews\n"
+"X-Domain: amrrev-product-reviews-for-woocommerce\n"
 
-#: revwoo-product-reviews.php:50
+#: amrrev-product-reviews-for-woocommerce.php:50
 msgid "Product Reviews"
 msgstr ""
 
-#: revwoo-product-reviews.php:51
+#: amrrev-product-reviews-for-woocommerce.php:51
 msgid "All Reviews"
 msgstr ""
 
-#: revwoo-product-reviews.php:61
+#: amrrev-product-reviews-for-woocommerce.php:61
 msgid "Settings"
 msgstr ""
 
-#: revwoo-product-reviews.php:71
+#: amrrev-product-reviews-for-woocommerce.php:71
 msgid "Customize Styles"
 msgstr ""
 

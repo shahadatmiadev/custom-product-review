@@ -1,19 +1,20 @@
 <?php
 /**
- * Plugin Name: RevWoo – Product Reviews for WooCommerce
- * Description: A RevWoo system for WooCommerce products with advanced filtering and admin approval system
- * Version: 1.0.0
- * Author: Shahadat Mia
- * Author URI: https://github.com/shahadatmiadev
- * License: GPL v2 or later
- * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: revwoo-product-reviews
+ * Plugin Name: AmrRev – Product Reviews for WooCommerce
+ * Plugin URI:  https://github.com/shahadatmiadev/amrrev-product-reviews-for-woocommerce
+ * Description: A powerful AmrRev system for WooCommerce with advanced filtering, admin approval, and complete style customization.
+ * Version:     1.0.0
+ * Author:      Xohan Niloy
+ * Author URI:  https://github.com/shahadatmiadev
+ * Text Domain: amrrev-product-reviews-for-woocommerce
  * Domain Path: /languages
  * Requires at least: 5.8
+ * Tested up to: 6.9
  * Requires PHP: 7.4
- * WC requires at least: 5.0
- * WC tested up to: 8.0
+ * License:     GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
+
 
 if ( !defined( 'ABSPATH' ) ) {
     exit; // Disable direct access
@@ -220,7 +221,7 @@ final class Custom_Product_Reviews {
      * WooCommerce missing notice
      */
     public function woocommerce_missing_notice() {
-        echo '<div class="error"><p><strong>' . esc_html__( 'RevWoo requires WooCommerce to be installed and active.', 'revwoo-product-reviews' ) . '</strong></p></div>';
+        echo '<div class="error"><p><strong>' . esc_html__( 'AmrRev requires WooCommerce to be installed and active.', 'amrrev-product-reviews-for-woocommerce' ) . '</strong></p></div>';
     }
 
     /**
@@ -228,8 +229,8 @@ final class Custom_Product_Reviews {
      */
     public function add_admin_menu() {
         add_menu_page(
-            esc_html__( 'Product Reviews', 'revwoo-product-reviews' ),
-            esc_html__( 'Product Reviews', 'revwoo-product-reviews' ),
+            esc_html__( 'Product Reviews', 'amrrev-product-reviews-for-woocommerce' ),
+            esc_html__( 'Product Reviews', 'amrrev-product-reviews-for-woocommerce' ),
             'manage_options',
             'cpr-reviews',
             array( $this, 'render_manage_reviews_page' ),
@@ -240,8 +241,8 @@ final class Custom_Product_Reviews {
         // Rename first submenu
         add_submenu_page(
             'cpr-reviews',
-            esc_html__( 'All Reviews', 'revwoo-product-reviews' ),
-            esc_html__( 'All Reviews', 'revwoo-product-reviews' ),
+            esc_html__( 'All Reviews', 'amrrev-product-reviews-for-woocommerce' ),
+            esc_html__( 'All Reviews', 'amrrev-product-reviews-for-woocommerce' ),
             'manage_options',
             'cpr-reviews',
             array( $this, 'render_manage_reviews_page' )
@@ -250,8 +251,8 @@ final class Custom_Product_Reviews {
         // Add Settings submenu
         add_submenu_page(
             'cpr-reviews',
-            esc_html__( 'Settings', 'revwoo-product-reviews' ),
-            esc_html__( 'Settings', 'revwoo-product-reviews' ),
+            esc_html__( 'Settings', 'amrrev-product-reviews-for-woocommerce' ),
+            esc_html__( 'Settings', 'amrrev-product-reviews-for-woocommerce' ),
             'manage_options',
             'cpr-settings',
             array( $this, 'render_settings_page' )
@@ -260,8 +261,8 @@ final class Custom_Product_Reviews {
         // Add Customize Styles submenu
         add_submenu_page(
             'cpr-reviews',
-            esc_html__( 'Customize Styles', 'revwoo-product-reviews' ),
-            esc_html__( 'Customize Styles', 'revwoo-product-reviews' ),
+            esc_html__( 'Customize Styles', 'amrrev-product-reviews-for-woocommerce' ),
+            esc_html__( 'Customize Styles', 'amrrev-product-reviews-for-woocommerce' ),
             'manage_options',
             'cpr-styles',
             array( $this, 'render_styles_page' )
