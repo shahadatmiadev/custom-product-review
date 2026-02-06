@@ -4,7 +4,7 @@
 jQuery(document).ready(function ($) {
   'use strict';
 
-  $('.cpr-approve-btn').on('click', function (e) {
+  $('.amrrev-approve-btn').on('click', function (e) {
     e.preventDefault();
     var button = $(this);
     const reviewId = button.data('review-id');
@@ -16,17 +16,17 @@ jQuery(document).ready(function ($) {
     button.html('Approving...');
 
     $.ajax({
-       url: cpr_admin_ajax.ajax_url,
+       url: amrrev_admin_ajax.ajax_url,
        type: 'POST',
        data: {
-           action: 'cpr_approve_review',
+           action: 'amrrev_approve_review',
            review_id: reviewId,
-           nonce: cpr_admin_ajax.nonce
+           nonce: amrrev_admin_ajax.nonce
        },
        success: function(response) {
             if (response.success) {
                 let popup = $(`
-                    <div class="cpr-popup-message">
+                    <div class="amrrev-popup-message">
                         ${response.data.message}
                     </div>
                 `);
@@ -49,7 +49,7 @@ jQuery(document).ready(function ($) {
     
   });
 
-  $('.cpr-reject-btn').on('click', function (e) {
+  $('.amrrev-reject-btn').on('click', function (e) {
     e.preventDefault();
     var button = $(this);
     const reviewId = button.data('review-id');
@@ -61,17 +61,17 @@ jQuery(document).ready(function ($) {
     button.html('Rejecting...');
 
     $.ajax({
-       url: cpr_admin_ajax.ajax_url,
+       url: amrrev_admin_ajax.ajax_url,
        type: 'POST',
        data: {
-           action: 'cpr_reject_review',
+           action: 'amrrev_reject_review',
            review_id: reviewId,
-           nonce: cpr_admin_ajax.nonce
+           nonce: amrrev_admin_ajax.nonce
        },
        success: function(response) {
             if (response.success) {
                 let popup = $(`
-                    <div class="cpr-popup-message">
+                    <div class="amrrev-popup-message">
                         ${response.data.message}
                     </div>
                 `);
@@ -94,7 +94,7 @@ jQuery(document).ready(function ($) {
     
   });
 
-  $('.cpr-delete-btn').on('click', function (e) {
+  $('.amrrev-delete-btn').on('click', function (e) {
     e.preventDefault();
     var button = $(this);
     const reviewId = button.data('review-id');
@@ -106,17 +106,17 @@ jQuery(document).ready(function ($) {
     button.html('Deleting...');
 
     $.ajax({
-       url: cpr_admin_ajax.ajax_url,
+       url: amrrev_admin_ajax.ajax_url,
        type: 'POST',
        data: {
-           action: 'cpr_delete_review',
+           action: 'amrrev_delete_review',
            review_id: reviewId,
-           nonce: cpr_admin_ajax.nonce
+           nonce: amrrev_admin_ajax.nonce
        },
        success: function(response) {
             if (response.success) {
                 let popup = $(`
-                    <div class="cpr-popup-message">
+                    <div class="amrrev-popup-message">
                         ${response.data.message}
                     </div>
                 `);

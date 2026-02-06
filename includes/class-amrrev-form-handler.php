@@ -1,13 +1,13 @@
 <?php
 /**
  * Form Handler Class
- * includes/class-cpr-form-handler.php
+ * includes/class-amrrev-form-handler.php
  */
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class CPR_Form_Handler {
+class AMRREV_Form_Handler {
 
     public function __construct() {
         // Form position এর উপর depend করে hook add করা
@@ -19,7 +19,7 @@ class CPR_Form_Handler {
      * Setup Form Position Based on Settings
      */
     public function setup_form_position() {
-        $form_position = get_option( 'cpr_form_position', 'after' );
+        $form_position = get_option( 'amrrev_form_position', 'after' );
 
         if ( $form_position == 'before' ) {
             add_action( 'woocommerce_before_single_product_summary', array( $this, 'render_review_form' ), 25 );
@@ -38,17 +38,17 @@ class CPR_Form_Handler {
 
         global $product;
 
-        if ( did_action( 'cpr_render_form_once' ) ) {
+        if ( did_action( 'amrrev_render_form_once' ) ) {
             return;
         }
-        do_action( 'cpr_render_form_once' );
+        do_action( 'amrrev_render_form_once' );
 
         // Get all settings
-        $enable_file_upload = get_option( 'cpr_enable_file_upload', '1' );
-        $enable_age_range = get_option( 'cpr_enable_age_range', '1' );
-        $email_required = get_option( 'cpr_email_required', '1' );
-        $title_required = get_option( 'cpr_title_required', '1' );
-        $min_rating = get_option( 'cpr_min_rating', '1' );
+        $enable_file_upload = get_option( 'amrrev_enable_file_upload', '1' );
+        $enable_age_range = get_option( 'amrrev_enable_age_range', '1' );
+        $email_required = get_option( 'amrrev_email_required', '1' );
+        $title_required = get_option( 'amrrev_title_required', '1' );
+        $min_rating = get_option( 'amrrev_min_rating', '1' );
         
         // Get product description - try long description first, then short
         $product_description = $product->get_description();
@@ -60,13 +60,13 @@ class CPR_Form_Handler {
 
         ?>
 
-        <div class="cpr-tab">
-            <div class="cpr-tab-desc " data-tab="desc"><?php esc_html_e( 'Description', 'amrrev-product-reviews-for-woocommerce' ); ?></div>
-            <div class="cpr-tab-rev cpr-tab-active" data-tab="rev"><?php esc_html_e( 'Review', 'amrrev-product-reviews-for-woocommerce' ); ?></div>
+        <div class="amrrev-tab">
+            <div class="amrrev-tab-desc " data-tab="desc"><?php esc_html_e( 'Description', 'amrrev-product-reviews-for-woocommerce' ); ?></div>
+            <div class="amrrev-tab-rev amrrev-tab-active" data-tab="rev"><?php esc_html_e( 'Review', 'amrrev-product-reviews-for-woocommerce' ); ?></div>
         </div>
 
-        <div class="cpr-tab-desc-area" style="display: none">
-            <div class="cpr-product-description">
+        <div class="amrrev-tab-desc-area" style="display: none">
+            <div class="amrrev-product-description">
                 <?php
                 if ( ! empty( $product_description ) ) {
                     echo wp_kses_post( $product_description );
@@ -77,19 +77,19 @@ class CPR_Form_Handler {
             </div>
         </div>
 
-        <div class="cpr-tab-review-area">
+        <div class="amrrev-tab-review-area">
             <?php
             // Show all reviews first
             $this->render_all_reviews( $product );
             ?>
 
-            <div id="cpr-review-form-wrapper" class="cpr-review-form-section">
+            <div id="amrrev-review-form-wrapper" class="amrrev-review-form-section">
                 <h3><?php esc_html_e( 'Write a Review', 'amrrev-product-reviews-for-woocommerce' ); ?></h3>
 
                 <?php if ( isset( $_GET['review_submitted'] ) && $_GET['review_submitted'] == '1' ): ?>
-                    <div class="cpr-success-message">
+                    <div class="amrrev-success-message">
                         <?php
-                        $auto_approve = get_option( 'cpr_auto_approve', '0' );
+                        $auto_approve = get_option( 'amrrev_auto_approve', '0' );
                         if ( $auto_approve == '1' ) {
                             esc_html_e( 'Thank you! Your review has been published.', 'amrrev-product-reviews-for-woocommerce' );
                         } else {
@@ -99,14 +99,14 @@ class CPR_Form_Handler {
                     </div>
                 <?php endif; ?>
 
-                <form method="post" enctype="multipart/form-data" id="cpr-review-form">
-                    <?php wp_nonce_field( 'cpr_submit_review', 'cpr_review_nonce' ); ?>
+                <form method="post" enctype="multipart/form-data" id="amrrev-review-form">
+                    <?php wp_nonce_field( 'amrrev_submit_review', 'amrrev_review_nonce' ); ?>
 
-                    <input type="hidden" name="cpr_product_id" value="<?php echo esc_attr( $product->get_id() ); ?>">
+                    <input type="hidden" name="amrrev_product_id" value="<?php echo esc_attr( $product->get_id() ); ?>">
 
                     <!-- Review Title Field -->
-                    <p class="cpr-form-field">
-                        <label for="cpr_title">
+                    <p class="amrrev-form-field">
+                        <label for="amrrev_title">
                             <?php esc_html_e( 'Review Title', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             <?php if ( $title_required == '1' ): ?>
                                 <span class="required">*</span>
@@ -115,20 +115,20 @@ class CPR_Form_Handler {
                             <?php endif; ?>
                         </label>
                         <input type="text"
-                            name="cpr_title"
-                            id="cpr_title"
+                            name="amrrev_title"
+                            id="amrrev_title"
                             placeholder="<?php esc_attr_e( 'Enter review title', 'amrrev-product-reviews-for-woocommerce' ); ?>"
                             <?php echo $title_required == '1' ? 'required' : ''; ?>>
                     </p>
 
                     <!-- Review Description Field -->
-                    <p class="cpr-form-field">
-                        <label for="cpr_content">
+                    <p class="amrrev-form-field">
+                        <label for="amrrev_content">
                             <?php esc_html_e( 'Review Description', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             <span class="required">*</span>
                         </label>
-                        <textarea name="cpr_content"
-                                id="cpr_content"
+                        <textarea name="amrrev_content"
+                                id="amrrev_content"
                                 rows="4"
                                 placeholder="<?php esc_attr_e( 'Share your experience with this product', 'amrrev-product-reviews-for-woocommerce' ); ?>"
                                 required></textarea>
@@ -136,33 +136,33 @@ class CPR_Form_Handler {
 
                     <!-- File Upload Field (Conditional) -->
                     <?php if ( $enable_file_upload == '1' ): ?>
-                    <div class="cpr-form-field drag-file-area">
+                    <div class="amrrev-form-field drag-file-area">
                         <div class="drag-file-icon">
-                            <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/download.svg' ); ?>" alt="">
+                            <img src="<?php echo esc_url( AMRREV_ASSETS_URL . 'images/download.svg' ); ?>" alt="">
                         </div>
                         <label class="label">
                             <span class="browse-files">
-                                <input type="file" name="cpr_file" class="default-file-input" id="cpr_file_input" accept=".jpg,.jpeg,.png,.pdf">
+                                <input type="file" name="amrrev_file" class="default-file-input" id="amrrev_file_input" accept=".jpg,.jpeg,.png,.pdf">
                                 <?php esc_html_e( 'Drag and drop, or', 'amrrev-product-reviews-for-woocommerce' ); ?>
                                 <span class="browse-files-text"><?php esc_html_e( 'browse', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
                                 <span><?php esc_html_e( 'your files', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
                             </span>
-                            <img src="" alt="" id="cpr_file_preview" style="display:none; max-width:70px; margin-left: auto; margin-right: auto;">
+                            <img src="" alt="" id="amrrev_file_preview" style="display:none; max-width:70px; margin-left: auto; margin-right: auto;">
                         </label>
-                        <div class="cpr-file-format-note">
+                        <div class="amrrev-file-format-note">
                             <span><?php esc_html_e( 'Support JPG, PDF, PNG', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
                         </div>
                     </div>
                     <?php endif; ?>
 
                     <!-- Star Rating Field -->
-                    <p class="cpr-form-field">
+                    <p class="amrrev-form-field">
                         <label>
                             <?php esc_html_e( 'Star Rating', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             <span class="required">*</span>
                         </label>
                         <?php if ( $min_rating > 1 ): ?>
-                            <span class="cpr-min-rating-note">
+                            <span class="amrrev-min-rating-note">
                                 <?php printf(
                                     /* translators: %d: minimum number of stars required for a review */
                                     esc_html__( '(Minimum %d stars required)', 'amrrev-product-reviews-for-woocommerce' ),
@@ -171,32 +171,32 @@ class CPR_Form_Handler {
                             </span>
 
                         <?php endif; ?>
-                        <div class="cpr-star-rating" data-min-rating="<?php echo esc_attr( $min_rating ); ?>">
+                        <div class="amrrev-star-rating" data-min-rating="<?php echo esc_attr( $min_rating ); ?>">
                             <span data-value="1">&#9733;</span>
                             <span data-value="2">&#9733;</span>
                             <span data-value="3">&#9733;</span>
                             <span data-value="4">&#9733;</span>
                             <span data-value="5">&#9733;</span>
                         </div>
-                        <input type="hidden" name="cpr_rating" id="cpr_rating" required>
+                        <input type="hidden" name="amrrev_rating" id="amrrev_rating" required>
                     </p>
 
                     <!-- Name Field -->
-                    <p class="cpr-form-field">
-                        <label for="cpr_name">
+                    <p class="amrrev-form-field">
+                        <label for="amrrev_name">
                             <?php esc_html_e( 'Name', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             <span class="required">*</span>
                         </label>
                         <input type="text"
-                            name="cpr_name"
-                            id="cpr_name"
+                            name="amrrev_name"
+                            id="amrrev_name"
                             placeholder="<?php esc_attr_e( 'Enter your name', 'amrrev-product-reviews-for-woocommerce' ); ?>"
                             required>
                     </p>
 
                     <!-- Email Field -->
-                    <p class="cpr-form-field">
-                        <label for="cpr_email">
+                    <p class="amrrev-form-field">
+                        <label for="amrrev_email">
                             <?php esc_html_e( 'Email Address', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             <?php if ( $email_required == '1' ): ?>
                                 <span class="required">*</span>
@@ -205,20 +205,20 @@ class CPR_Form_Handler {
                             <?php endif; ?>
                         </label>
                         <input type="email"
-                            name="cpr_email"
-                            id="cpr_email"
+                            name="amrrev_email"
+                            id="amrrev_email"
                             placeholder="<?php esc_attr_e( 'Enter your email', 'amrrev-product-reviews-for-woocommerce' ); ?>"
                             <?php echo $email_required == '1' ? 'required' : ''; ?>>
                     </p>
 
                     <!-- Age Range Field (Conditional) -->
                     <?php if ( $enable_age_range == '1' ): ?>
-                    <p class="cpr-form-field">
-                        <label class="cpr-age-range-label">
+                    <p class="amrrev-form-field">
+                        <label class="amrrev-age-range-label">
                             <?php esc_html_e( 'Age Range', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             <span class="required">*</span>
                         </label>
-                        <div class="cpr-age-range">
+                        <div class="amrrev-age-range">
                             <button type="button" class="age-btn" data-value="under-18"><?php esc_html_e( 'Under 18', 'amrrev-product-reviews-for-woocommerce' ); ?></button>
                             <button type="button" class="age-btn" data-value="18-24">18 - 24</button>
                             <button type="button" class="age-btn" data-value="25-34">25 - 34</button>
@@ -227,18 +227,18 @@ class CPR_Form_Handler {
                             <button type="button" class="age-btn" data-value="55-64">55 - 64</button>
                             <button type="button" class="age-btn" data-value="65+">65+</button>
                         </div>
-                        <input type="hidden" name="cpr_age_range" id="cpr_age_range" required>
+                        <input type="hidden" name="amrrev_age_range" id="amrrev_age_range" required>
                     </p>
                     <?php endif; ?>
 
                     <!-- Terms Notice -->
-                    <p class="cpr-terms">
+                    <p class="amrrev-terms">
                         <label><?php esc_html_e( "By continuing you agree to JOURIE'S Terms and Conditions", 'amrrev-product-reviews-for-woocommerce' ); ?></label>
                     </p>
 
                     <!-- Submit Button -->
                     <p class="submit-wrapper">
-                        <input type="submit" name="cpr_submit_review" value="<?php esc_attr_e( 'Submit Review', 'amrrev-product-reviews-for-woocommerce' ); ?>" class="cpr-submit-btn">
+                        <input type="submit" name="amrrev_submit_review" value="<?php esc_attr_e( 'Submit Review', 'amrrev-product-reviews-for-woocommerce' ); ?>" class="amrrev-submit-btn">
                     </p>
                 </form>
             </div>
@@ -250,36 +250,36 @@ class CPR_Form_Handler {
      * Handle Form Submission with All Settings Check
      */
     public function handle_form_submission() {
-        if ( !isset( $_POST['cpr_submit_review'] ) ) {
+        if ( !isset( $_POST['amrrev_submit_review'] ) ) {
             return;
         }
 
         // Verify nonce
-        if ( !isset( $_POST['cpr_review_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['cpr_review_nonce'] ) ), 'cpr_submit_review' ) ) {
+        if ( !isset( $_POST['amrrev_review_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['amrrev_review_nonce'] ) ), 'amrrev_submit_review' ) ) {
             wp_die( esc_html__( 'Security check failed', 'amrrev-product-reviews-for-woocommerce' ) );
         }
 
-        $product_id = isset( $_POST['cpr_product_id'] ) ? intval( $_POST['cpr_product_id'] ) : 0;
+        $product_id = isset( $_POST['amrrev_product_id'] ) ? intval( $_POST['amrrev_product_id'] ) : 0;
         if ( !$product_id ) {
             wp_die( esc_html__( 'Invalid product', 'amrrev-product-reviews-for-woocommerce' ) );
         }
 
         // Get form data
-        $title = isset( $_POST['cpr_title'] ) ? sanitize_text_field( wp_unslash( $_POST['cpr_title'] ) ) : '';
-        $content = isset( $_POST['cpr_content'] ) ? sanitize_textarea_field( wp_unslash( $_POST['cpr_content'] ) ) : '';
-        $rating = isset( $_POST['cpr_rating'] ) ? intval( $_POST['cpr_rating'] ) : 0;
-        $name = isset( $_POST['cpr_name'] ) ? sanitize_text_field( wp_unslash( $_POST['cpr_name'] ) ) : '';
-        $email = isset( $_POST['cpr_email'] ) ? sanitize_email( wp_unslash( $_POST['cpr_email'] ) ) : '';
-        $age_range = isset( $_POST['cpr_age_range'] ) ? sanitize_text_field( wp_unslash( $_POST['cpr_age_range'] ) ) : '';
+        $title = isset( $_POST['amrrev_title'] ) ? sanitize_text_field( wp_unslash( $_POST['amrrev_title'] ) ) : '';
+        $content = isset( $_POST['amrrev_content'] ) ? sanitize_textarea_field( wp_unslash( $_POST['amrrev_content'] ) ) : '';
+        $rating = isset( $_POST['amrrev_rating'] ) ? intval( $_POST['amrrev_rating'] ) : 0;
+        $name = isset( $_POST['amrrev_name'] ) ? sanitize_text_field( wp_unslash( $_POST['amrrev_name'] ) ) : '';
+        $email = isset( $_POST['amrrev_email'] ) ? sanitize_email( wp_unslash( $_POST['amrrev_email'] ) ) : '';
+        $age_range = isset( $_POST['amrrev_age_range'] ) ? sanitize_text_field( wp_unslash( $_POST['amrrev_age_range'] ) ) : '';
 
         // Get all settings
-        $auto_approve = get_option( 'cpr_auto_approve', '0' );
-        $min_rating = get_option( 'cpr_min_rating', '1' );
-        $enable_moderation = get_option( 'cpr_enable_moderation', '0' );
-        $bad_words = get_option( 'cpr_bad_words', '' );
-        $enable_email = get_option( 'cpr_enable_email_notification', '1' );
-        $title_required = get_option( 'cpr_title_required', '1' );
-        $email_required = get_option( 'cpr_email_required', '1' );
+        $auto_approve = get_option( 'amrrev_auto_approve', '0' );
+        $min_rating = get_option( 'amrrev_min_rating', '1' );
+        $enable_moderation = get_option( 'amrrev_enable_moderation', '0' );
+        $bad_words = get_option( 'amrrev_bad_words', '' );
+        $enable_email = get_option( 'amrrev_enable_email_notification', '1' );
+        $title_required = get_option( 'amrrev_title_required', '1' );
+        $email_required = get_option( 'amrrev_email_required', '1' );
 
         // Validate required fields based on settings
         if ( $title_required == '1' && empty( $title ) ) {
@@ -325,7 +325,7 @@ class CPR_Form_Handler {
 
         // Insert review post
         $post = array(
-            'post_type'    => 'cpr_review',
+            'post_type'    => 'amrrev_review',
             'post_title'   => $post_title,
             'post_content' => $content,
             'post_status'  => $post_status,
@@ -338,15 +338,15 @@ class CPR_Form_Handler {
         }
 
         // Save meta data
-        update_post_meta( $review_id, '_cpr_rating', $rating );
-        update_post_meta( $review_id, '_cpr_product_id', $product_id );
-        update_post_meta( $review_id, '_cpr_name', $name );
-        update_post_meta( $review_id, '_cpr_email', $email );
-        update_post_meta( $review_id, '_cpr_age_range', $age_range );
-        update_post_meta( $review_id, '_cpr_verified_buyer', '1' );
+        update_post_meta( $review_id, '_amrrev_rating', $rating );
+        update_post_meta( $review_id, '_amrrev_product_id', $product_id );
+        update_post_meta( $review_id, '_amrrev_name', $name );
+        update_post_meta( $review_id, '_amrrev_email', $email );
+        update_post_meta( $review_id, '_amrrev_age_range', $age_range );
+        update_post_meta( $review_id, '_amrrev_verified_buyer', '1' );
 
         // Handle file upload if enabled
-        if ( get_option( 'cpr_enable_file_upload', '1' ) == '1' && !empty( $_FILES['cpr_file']['name'] ) ) {
+        if ( get_option( 'amrrev_enable_file_upload', '1' ) == '1' && !empty( $_FILES['amrrev_file']['name'] ) ) {
             require_once ABSPATH . 'wp-admin/includes/file.php';
 
             $allowed_mimes = array(
@@ -355,18 +355,18 @@ class CPR_Form_Handler {
                 'pdf'      => 'application/pdf',
             );
 
-            $file_info = wp_check_filetype( basename( $_FILES['cpr_file']['name'] ), $allowed_mimes );
+            $file_info = wp_check_filetype( basename( $_FILES['amrrev_file']['name'] ), $allowed_mimes );
             if ( ! in_array( $file_info['ext'], array_keys( $allowed_mimes ) ) ) {
                 wp_die( esc_html__( 'Invalid file type. Only JPG, PNG, and PDF files are allowed.', 'amrrev-product-reviews-for-woocommerce' ) );
             }
 
-            $uploaded = wp_handle_upload( $_FILES['cpr_file'], array(
+            $uploaded = wp_handle_upload( $_FILES['amrrev_file'], array(
                 'test_form' => false,
                 'mimes'     => $allowed_mimes,
             ) );
 
             if ( !isset( $uploaded['error'] ) ) {
-                update_post_meta( $review_id, '_cpr_file_url', $uploaded['url'] );
+                update_post_meta( $review_id, '_amrrev_file_url', $uploaded['url'] );
             }
         }
 
@@ -384,7 +384,7 @@ class CPR_Form_Handler {
      * Send Email Notification to Admin
      */
     private function send_review_notification( $review_id, $product_id ) {
-        $admin_email = get_option( 'cpr_admin_email', get_option( 'admin_email' ) );
+        $admin_email = get_option( 'amrrev_admin_email', get_option( 'admin_email' ) );
 
         if ( empty( $admin_email ) ) {
             return;
@@ -397,10 +397,10 @@ class CPR_Form_Handler {
 
         $review_title = get_the_title( $review_id );
         $review_content = get_post_field( 'post_content', $review_id );
-        $reviewer_name = get_post_meta( $review_id, '_cpr_name', true );
-        $reviewer_email = get_post_meta( $review_id, '_cpr_email', true );
-        $rating = get_post_meta( $review_id, '_cpr_rating', true );
-        $auto_approve = get_option( 'cpr_auto_approve', '0' );
+        $reviewer_name = get_post_meta( $review_id, '_amrrev_name', true );
+        $reviewer_email = get_post_meta( $review_id, '_amrrev_email', true );
+        $rating = get_post_meta( $review_id, '_amrrev_rating', true );
+        $auto_approve = get_option( 'amrrev_auto_approve', '0' );
 
         /* translators: %s: product name */
         $subject = sprintf( __( 'New Review Submitted: %s', 'amrrev-product-reviews-for-woocommerce' ), $product->get_name() );
@@ -447,7 +447,7 @@ class CPR_Form_Handler {
         $message .= sprintf(
             /* translators: %s: URL to review management page */
             __( "View and manage this review:\n%s", 'amrrev-product-reviews-for-woocommerce' ),
-            esc_url( admin_url( 'admin.php?page=cpr-reviews' ) )
+            esc_url( admin_url( 'admin.php?page=amrrev-reviews' ) )
         );
 
         wp_mail( $admin_email, $subject, $message );
@@ -458,38 +458,40 @@ class CPR_Form_Handler {
      */
     public function render_all_reviews( $product ) {
         $product_id = $product->get_id();
-        $show_filters = get_option( 'cpr_show_filters', '1' );
-        $initial_reviews = get_option( 'cpr_reviews_per_page', '10' );
+        $show_filters = get_option( 'amrrev_show_filters', '1' );
+        $initial_reviews = get_option( 'amrrev_reviews_per_page', '10' );
         $load_more_count = 3;
+        $auto_approve = get_option( 'amrrev_auto_approve', '0' );
+        $post_status = ( $auto_approve == '1' ) ? 'publish' : 'publish';
          // Get product description
        
         ?>
-        <div id="cpr-all-reviews-wrapper" class="cpr-reviews-section">
+        <div id="amrrev-all-reviews-wrapper" class="amrrev-reviews-section">
                 <h3><?php esc_html_e( 'Customer Reviews', 'amrrev-product-reviews-for-woocommerce' ); ?></h3>
             
                 <!-- Hidden input for product ID -->
-                <input type="hidden" id="cpr_product_id" value="<?php echo esc_attr( $product_id ); ?>">
-                <input type="hidden" id="cpr_initial_reviews" value="<?php echo esc_attr( $initial_reviews ); ?>">
-                <input type="hidden" id="cpr_load_more_count" value="<?php echo esc_attr( $load_more_count ); ?>">
+                <input type="hidden" id="amrrev_product_id" value="<?php echo esc_attr( $product_id ); ?>">
+                <input type="hidden" id="amrrev_initial_reviews" value="<?php echo esc_attr( $initial_reviews ); ?>">
+                <input type="hidden" id="amrrev_load_more_count" value="<?php echo esc_attr( $load_more_count ); ?>">
                 
                 <!-- Filters (Conditional) -->
                 <?php if ( $show_filters == '1' ) : ?>
                 <?php
-                $filter = new CPR_Filter();
+                $filter = new AMRREV_Filter();
                 $filter->render_filter_form();
                 ?>
                 <?php endif; ?>
                 
                 <!-- Reviews Container -->
-                <div id="cpr-reviews-container">
+                <div id="amrrev-reviews-container">
                     <?php
                     // Get total reviews count
                     $total_args = array(
-                        'post_type'      => 'cpr_review',
-                        'post_status'    => 'publish',
+                        'post_type'      => 'amrrev_review',
+                        'post_status'    => $post_status,
                         'meta_query'     => array(
                             array(
-                                'key'     => '_cpr_product_id',
+                                'key'     => '_amrrev_product_id',
                                 'value'   => $product_id,
                                 'compare' => '=',
                             ),
@@ -502,12 +504,12 @@ class CPR_Form_Handler {
                     
                     // Get initial reviews
                     $args = array(
-                        'post_type'      => 'cpr_review',
+                        'post_type'      => 'amrrev_review',
                         'post_status'    => 'publish',
                         'posts_per_page' => $initial_reviews,
                         'meta_query'     => array(
                             array(
-                                'key'     => '_cpr_product_id',
+                                'key'     => '_amrrev_product_id',
                                 'value'   => $product_id,
                                 'compare' => '=',
                             ),
@@ -523,7 +525,7 @@ class CPR_Form_Handler {
                             $this->render_single_review( get_the_ID() );
                         endwhile;
                     else :
-                        echo '<div class="cpr-no-reviews"><p>' . esc_html__( 'No reviews yet. Be the first to review this product!', 'amrrev-product-reviews-for-woocommerce' ) . '</p></div>';
+                        echo '<div class="amrrev-no-reviews"><p>' . esc_html__( 'No reviews yet. Be the first to review this product!', 'amrrev-product-reviews-for-woocommerce' ) . '</p></div>';
                     endif;
                     
                     wp_reset_postdata();
@@ -532,93 +534,23 @@ class CPR_Form_Handler {
                 
                 <!-- Load More Button -->
                 <?php if ( $total_reviews > $initial_reviews ) : ?>
-                <div class="cpr-load-more-container">
-                    <button id="cpr-load-more-btn" class="cpr-load-more-btn">
+                <div class="amrrev-load-more-container">
+                    <button id="amrrev-load-more-btn" class="amrrev-load-more-btn">
                         <?php esc_html_e( 'More Reviews', 'amrrev-product-reviews-for-woocommerce' ); ?>
                     </button>
-                    <div class="cpr-loading-spinner" style="display: none;">
+                    <div class="amrrev-loading-spinner" style="display: none;">
                         <div class="spinner"></div>
                     </div>
                 </div>
                 <?php endif; ?>
                 
                 <!-- Hidden field for total reviews -->
-                <input type="hidden" id="cpr_total_reviews" value="<?php echo esc_attr( $total_reviews ); ?>">
-                <input type="hidden" id="cpr_loaded_reviews" value="<?php echo esc_attr( min( $initial_reviews, $total_reviews ) ); ?>">
+                <input type="hidden" id="amrrev_total_reviews" value="<?php echo esc_attr( $total_reviews ); ?>">
+                <input type="hidden" id="amrrev_loaded_reviews" value="<?php echo esc_attr( min( $initial_reviews, $total_reviews ) ); ?>">
             
             
         </div>
     
-        <script type="text/javascript">
-            jQuery(document).ready(function($) {
-                $('#cpr-load-more-btn').on('click', function(e) {
-                    e.preventDefault();
-                    
-                    var button = $(this);
-                    var spinner = $('.cpr-loading-spinner');
-                    var container = $('#cpr-reviews-container');
-                    var product_id = $('#cpr_product_id').val();
-                    var initial_reviews = parseInt($('#cpr_initial_reviews').val());
-                    var load_more_count = parseInt($('#cpr_load_more_count').val());
-                    var total_reviews = parseInt($('#cpr_total_reviews').val());
-                    var loaded_reviews = parseInt($('#cpr_loaded_reviews').val());
-                    
-                    // Get filter values
-                    var ratings = [];
-                    $('input[name="rating[]"]:checked').each(function() {
-                        ratings.push($(this).val());
-                    });
-                    
-                    var age_range = $('select[name="age_range"]').val();
-                    var verified_only = $('input[name="verified_only"]').is(':checked') ? '1' : '0';
-                    
-                    // Show loading spinner
-                    button.hide();
-                    spinner.show();
-                    
-                    $.ajax({
-                        url: '<?php echo esc_url( admin_url('admin-ajax.php' ) ); ?>',
-                        type: 'POST',
-                        data: {
-                            action: 'cpr_load_more_reviews',
-                            nonce: '<?php echo esc_js( wp_create_nonce( 'cpr_load_more_nonce' ) ); ?>',
-                            product_id: product_id,
-                            offset: loaded_reviews,
-                            count: load_more_count,
-                            rating: ratings,
-                            age_range: age_range,
-                            verified_only: verified_only
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                // Append new reviews
-                                container.append(response.data.reviews);
-                                
-                                // Update loaded reviews count
-                                var new_loaded_count = loaded_reviews + response.data.loaded_count;
-                                $('#cpr_loaded_reviews').val(new_loaded_count);
-                                
-                                // Hide button if all reviews are loaded
-                                if (new_loaded_count >= total_reviews) {
-                                    $('.cpr-load-more-container').hide();
-                                }
-                            } else {
-                                alert('Error loading more reviews. Please try again.');
-                            }
-                            
-                            // Show button and hide spinner
-                            button.show();
-                            spinner.hide();
-                        },
-                        error: function() {
-                            alert('Error loading more reviews. Please try again.');
-                            button.show();
-                            spinner.hide();
-                        }
-                    });
-                });
-            });
-        </script>
         <?php
     }
 
@@ -626,7 +558,7 @@ class CPR_Form_Handler {
      * Render Custom Pagination
      */
     private function render_custom_pagination( $total_pages, $current_page, $product_id ) {
-        echo '<div class="cpr-pagination">';
+        echo '<div class="amrrev-pagination">';
         
         // Previous button
         if ( $current_page > 1 ) {
@@ -648,81 +580,25 @@ class CPR_Form_Handler {
         }
         
         echo '</div>';
-        
-        // Add JavaScript for AJAX pagination
-        ?>
-        <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            $('.cpr-pagination a.page-numbers').on('click', function(e) {
-                e.preventDefault();
-                
-                var page = $(this).data('page');
-                var product_id = $('#cpr_product_id').val();
-                
-                // Get filter values
-                var ratings = [];
-                $('input[name="rating[]"]:checked').each(function() {
-                    ratings.push($(this).val());
-                });
-                
-                var age_range = $('select[name="age_range"]').val();
-                var verified_only = $('input[name="verified_only"]').is(':checked') ? '1' : '0';
-                
-                $.ajax({
-                    url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
-                    type: 'POST',
-                    data: {
-                        action: 'cpr_paginate_reviews',
-                        nonce: '<?php echo esc_js( wp_create_nonce( 'cpr_pagination_nonce' ) ); ?>',
-                        product_id: product_id,
-                        page: page,
-                        rating: ratings,
-                        age_range: age_range,
-                        verified_only: verified_only
-                    },
-                    beforeSend: function() {
-                        $('#cpr-reviews-container').html('<div class="cpr-loading">Loading...</div>');
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            $('#cpr-reviews-container').html(response.data.reviews);
-                            $('.cpr-pagination').html(response.data.pagination);
-                            
-                            // Update URL without page reload
-                            var url = new URL(window.location);
-                            url.searchParams.set('cpr_page', page);
-                            window.history.pushState({}, '', url);
-                        } else {
-                            $('#cpr-reviews-container').html('<div class="cpr-error">Error loading reviews</div>');
-                        }
-                    },
-                    error: function() {
-                        $('#cpr-reviews-container').html('<div class="cpr-error">Error loading reviews. Please try again.</div>');
-                    }
-                });
-            });
-        });
-        </script>
-        <?php
     }
 
     /**
      * Render Single Review with Display Settings
      */
     private function render_single_review( $review_id ) {
-        $product_id = get_post_meta( $review_id, '_cpr_product_id', true );
-        $file_url = get_post_meta( $review_id, '_cpr_file_url', true );
-        $rating = get_post_meta( $review_id, '_cpr_rating', true );
-        $reviewer_name = get_post_meta( $review_id, '_cpr_name', true );
-        $reviewer_age = get_post_meta( $review_id, '_cpr_age_range', true );
-        $verified = get_post_meta( $review_id, '_cpr_verified_buyer', true );
+        $product_id = get_post_meta( $review_id, '_amrrev_product_id', true );
+        $file_url = get_post_meta( $review_id, '_amrrev_file_url', true );
+        $rating = get_post_meta( $review_id, '_amrrev_rating', true );
+        $reviewer_name = get_post_meta( $review_id, '_amrrev_name', true );
+        $reviewer_age = get_post_meta( $review_id, '_amrrev_age_range', true );
+        $verified = get_post_meta( $review_id, '_amrrev_verified_buyer', true );
 
         // Get display settings
-        $show_verified_badge = get_option( 'cpr_show_verified_badge', '1' );
-        $date_format = get_option( 'cpr_date_format', 'j/n/y' );
-        $enable_age_range = get_option( 'cpr_enable_age_range', '1' );
-        $filled_star_color = get_option( 'cpr_filled_star_color', '#ffc107' );
-        $empty_star_color = get_option( 'cpr_empty_star_color', '#dddddd' );
+        $show_verified_badge = get_option( 'amrrev_show_verified_badge', '1' );
+        $date_format = get_option( 'amrrev_date_format', 'j/n/y' );
+        $enable_age_range = get_option( 'amrrev_enable_age_range', '1' );
+        $filled_star_color = get_option( 'amrrev_filled_star_color', '#ffc107' );
+        $empty_star_color = get_option( 'amrrev_empty_star_color', '#dddddd' );
 
         ?>
         <div class="cpt-review-full-box">
@@ -732,7 +608,7 @@ class CPR_Form_Handler {
                 <?php if ( $show_verified_badge == '1' && $verified == '1' ): ?>
                 <div class="cpt-verify-buyer">
                     <span><?php esc_html_e( 'Verified Buyer', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
-                    <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
+                    <img src="<?php echo esc_url( AMRREV_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
 
                 </div>
                 <?php endif; ?>
@@ -786,4 +662,4 @@ class CPR_Form_Handler {
 }
 
 // Initialize Form Handler
-new CPR_Form_Handler();
+new AMRREV_Form_Handler();

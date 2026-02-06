@@ -1,13 +1,13 @@
 <?php
 /**
  * Post Type Class
- * includes/class-cpr-post-type.php
+ * includes/class-amrrev-post-type.php
  */
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class CPR_Post_Type {
+class AMRREV_Post_Type {
 
     public function __construct() {
         add_action('init', array($this, 'register_review_post_type'));
@@ -33,7 +33,7 @@ class CPR_Post_Type {
             'labels'             => $labels,
             'public'             => false,
             'show_ui'            => true,
-            'show_in_menu'       => 'cpr-reviews', // ⭐ MAIN MENU এর অধীনে দেখাবে
+            'show_in_menu'       => 'amrrev-reviews', // ⭐ MAIN MENU এর অধীনে দেখাবে
             'menu_icon'          => 'dashicons-star-half',
             'supports'           => array( 'title', 'editor', 'author' ),
             'capability_type'    => 'post',
@@ -41,6 +41,6 @@ class CPR_Post_Type {
             'show_in_rest'       => false,
         );
 
-        register_post_type( 'cpr_review', $args );
+        register_post_type( 'amrrev_review', $args );
     }
 }

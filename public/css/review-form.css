@@ -6,7 +6,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-.cpr-review-form-wrapper {
+.amrrev-review-form-wrapper {
   background: #fffff4;
   margin: 0 auto;
 }
@@ -15,7 +15,7 @@ form {
     margin: 0;
   }
 
-  .cpr-file-format-note,
+  .amrrev-file-format-note,
   label {
     color: #661415;
     font-size: 16px;
@@ -47,7 +47,7 @@ form {
     color: #661415;
   }
 
-  .cpr-age-range {
+  .amrrev-age-range {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -73,10 +73,10 @@ form {
       border-radius: 8px;
     }
   }
-  .cpr-terms {
+  .amrrev-terms {
     text-align: center;
   }
-  .cpr-age-range-label {
+  .amrrev-age-range-label {
     font-size: 21px;
     font-weight: 500;
   }
@@ -100,26 +100,26 @@ form {
       margin: 0 auto;
     }
   }
-  .cpr-star-rating {
+  .amrrev-star-rating {
     margin-bottom: 20px;
   }
-  .cpr-star-rating span {
+  .amrrev-star-rating span {
     font-size: 25px;
     cursor: pointer;
     color: #ccc;
   }
-  .cpr-star-rating span.selected,
-  .cpr-star-rating span:hover {
+  .amrrev-star-rating span.selected,
+  .amrrev-star-rating span:hover {
     color: #ffcc00;
   }
 
 
-  .cpr-star-rating {
+  .amrrev-star-rating {
     line-height: 0;
   }
 
 /* Success Message */
-.cpr-success-message {
+.amrrev-success-message {
   background: #d4edda;
   border: 1px solid #c3e6cb;
   color: #155724;
@@ -142,30 +142,30 @@ form {
 }
 
 /* Form Field Styling */
-.cpr-form-field {
+.amrrev-form-field {
   margin-bottom: 20px;
 }
 
-.cpr-form-field label {
+.amrrev-form-field label {
   display: block;
   font-weight: 500;
   margin-bottom: 8px !important;
 }
 
-.cpr-form-field .required {
+.amrrev-form-field .required {
   color: #e74c3c;
   font-weight: bold;
 }
 
-.cpr-form-field .optional {
+.amrrev-form-field .optional {
   color: #7f8c8d;
   font-size: 12px;
   font-weight: normal;
 }
 
-.cpr-form-field input[type='text'],
-.cpr-form-field input[type='email'],
-.cpr-form-field textarea {
+.amrrev-form-field input[type='text'],
+.amrrev-form-field input[type='email'],
+.amrrev-form-field textarea {
   width: 100%;
   padding: 12px 15px;
   border: 1px solid #ddd;
@@ -174,36 +174,36 @@ form {
   transition: border-color 0.3s;
 }
 
-.cpr-form-field input[type='text']:focus,
-.cpr-form-field input[type='email']:focus,
-.cpr-form-field textarea:focus {
+.amrrev-form-field input[type='text']:focus,
+.amrrev-form-field input[type='email']:focus,
+.amrrev-form-field textarea:focus {
   border-color: #661415;
   outline: none;
   box-shadow: 0 0 0 3px rgba(102, 20, 21, 0.1);
 }
 
 /* Age Range Buttons */
-.cpr-age-range {
+.amrrev-age-range {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
 
-.cpr-age-range .age-btn:hover {
+.amrrev-age-range .age-btn:hover {
   border-color: #661415;
   background: #fbf9ec;
   color: #661415;
 }
 
-.cpr-age-range .age-btn.selected {
+.amrrev-age-range .age-btn.selected {
   border-color: #661415;
   background: #661415;
   color: #fff;
 }
 
 /* Submit Button */
-.cpr-submit-btn {
+.amrrev-submit-btn {
   background: #661415;
   color: #fff;
   padding: 14px 40px;
@@ -215,14 +215,14 @@ form {
   transition: all 0.3s;
 }
 
-.cpr-submit-btn:hover {
+.amrrev-submit-btn:hover {
   background: #4a0f10;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(102, 20, 21, 0.3);
 }
 
 /* Min Rating Note */
-.cpr-min-rating-note {
+.amrrev-min-rating-note {
   display: inline-block;
   background: #fff3cd;
   color: #856404;

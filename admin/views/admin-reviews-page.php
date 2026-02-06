@@ -10,7 +10,7 @@ if ( !defined( 'ABSPATH' ) ) {
 $status = isset( $_GET['review_status'] ) ? sanitize_text_field( wp_unslash( $_GET['review_status'] ) ) : 'pending';
 
 $arg = array(
-    'post_type'      => 'cpr_review',
+    'post_type'      => 'amrrev_review',
     'post_status'    => $status,
     'posts_per_page' => 50,
     'orderby'        => 'date',
@@ -19,9 +19,9 @@ $arg = array(
 
 $reviews = new WP_Query( $arg );
 
-$pending_count = wp_count_posts('cpr_review')->pending;
-$approved_count = wp_count_posts('cpr_review')->publish;
-$rejected_count = wp_count_posts('cpr_review')->draft;
+$pending_count = wp_count_posts('amrrev_review')->pending;
+$approved_count = wp_count_posts('amrrev_review')->publish;
+$rejected_count = wp_count_posts('amrrev_review')->draft;
 
 ?>
 
@@ -31,21 +31,21 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
     <!-- Status Tabs -->
     <ul class="subsubsub">
         <li>
-            <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'cpr-reviews', 'review_status' => 'pending' ) ) ); ?>" 
+            <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'amrrev-reviews', 'review_status' => 'pending' ) ) ); ?>" 
             class="<?php echo $status === 'pending' ? 'current' : ''; ?>">
                 <?php esc_html_e( 'Pending', 'amrrev-product-reviews-for-woocommerce' ); ?> 
                 <span class="count">(<?php echo esc_html( $pending_count ); ?>)</span>
             </a> |
         </li>
         <li>
-            <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'cpr-reviews', 'review_status' => 'publish' ) ) ); ?>" 
+            <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'amrrev-reviews', 'review_status' => 'publish' ) ) ); ?>" 
             class="<?php echo $status === 'publish' ? 'current' : ''; ?>">
                 <?php esc_html_e( 'Approved', 'amrrev-product-reviews-for-woocommerce' ); ?> 
                 <span class="count">(<?php echo esc_html( $approved_count ); ?>)</span>
             </a> |
         </li>
         <li>
-            <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'cpr-reviews', 'review_status' => 'draft' ) ) ); ?>" 
+            <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'amrrev-reviews', 'review_status' => 'draft' ) ) ); ?>" 
             class="<?php echo $status === 'draft' ? 'current' : ''; ?>">
                 <?php esc_html_e( 'Rejected', 'amrrev-product-reviews-for-woocommerce' ); ?> 
                 <span class="count">(<?php echo esc_html( $rejected_count ); ?>)</span>
@@ -53,7 +53,7 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
         </li>
     </ul>
 
-    <div class="cpr-reviews-table-wrapper">
+    <div class="amrrev-reviews-table-wrapper">
         <?php if ( $reviews->have_posts() ): ?>
         <table class="wp-list-table widefat fixed striped table-view-list posts">
             <thead>
@@ -72,12 +72,12 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
                 <?php $i = 1; while($reviews->have_posts()): $reviews->the_post();
 
                     $review_id = get_the_ID();
-                    $product_id = get_post_meta($review_id, '_cpr_product_id', true);  
-                    $file_url = get_post_meta($review_id, '_cpr_file_url', true); 
-                    $rating = get_post_meta($review_id, '_cpr_rating', true);  
-                    $reviewer_name = get_post_meta($review_id, '_cpr_name', true);      
-                    $reviewer_email = get_post_meta($review_id, '_cpr_email', true);      
-                    $reviewer_age = get_post_meta($review_id, '_cpr_age_range', true);      
+                    $product_id = get_post_meta($review_id, '_amrrev_product_id', true);  
+                    $file_url = get_post_meta($review_id, '_amrrev_file_url', true); 
+                    $rating = get_post_meta($review_id, '_amrrev_rating', true);  
+                    $reviewer_name = get_post_meta($review_id, '_amrrev_name', true);      
+                    $reviewer_email = get_post_meta($review_id, '_amrrev_email', true);      
+                    $reviewer_age = get_post_meta($review_id, '_amrrev_age_range', true);      
                 ?>
                 <tr>
                     <td width="5%"><?php echo esc_html( $i++ ); ?></td>
@@ -92,7 +92,7 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
                         <p><?php echo esc_html(wp_trim_words(get_the_content(), 5)); ?></p>
                         <p>
                             <?php if ($file_url) : ?>
-                                <a href="<?php echo esc_url($file_url); ?>" target="_blank" class="cpr-attachment-link">
+                                <a href="<?php echo esc_url($file_url); ?>" target="_blank" class="amrrev-attachment-link">
                                     📎 View Attachment
                                 </a>
                             <?php endif; ?>
@@ -113,39 +113,39 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
                     <td width="10%"><?php echo get_the_date('M j, Y'); ?></td>
                     <td width="15%">
                         <?php if ( $status === 'pending' ) : ?>
-                            <button class="button button-small cpr-approve-btn" 
+                            <button class="button button-small amrrev-approve-btn" 
                                     data-review-id="<?php echo esc_attr( $review_id ); ?>">
-                                <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/approve.svg' ); ?>" 
+                                <img src="<?php echo esc_url( AMRREV_ASSETS_URL . 'images/approve.svg' ); ?>" 
                                     alt="<?php esc_attr_e( 'Approve', 'amrrev-product-reviews-for-woocommerce' ); ?>"> 
                                 <?php esc_html_e( 'Approve', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             </button><br>
-                            <button class="button button-small cpr-reject-btn" 
+                            <button class="button button-small amrrev-reject-btn" 
                                     data-review-id="<?php echo esc_attr( $review_id ); ?>" 
                                     style="margin-top: 5px;">
-                                <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/reject.svg' ); ?>" 
+                                <img src="<?php echo esc_url( AMRREV_ASSETS_URL . 'images/reject.svg' ); ?>" 
                                     alt="<?php esc_attr_e( 'Reject', 'amrrev-product-reviews-for-woocommerce' ); ?>"> 
                                 <?php esc_html_e( 'Reject', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             </button>
                         <?php elseif ( $status === 'publish' ) : ?>
-                            <button class="button button-small cpr-reject-btn" 
+                            <button class="button button-small amrrev-reject-btn" 
                                     data-review-id="<?php echo esc_attr( $review_id ); ?>">
-                                <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/reject.svg' ); ?>" 
+                                <img src="<?php echo esc_url( AMRREV_ASSETS_URL . 'images/reject.svg' ); ?>" 
                                     alt="<?php esc_attr_e( 'Reject', 'amrrev-product-reviews-for-woocommerce' ); ?>"> 
                                 <?php esc_html_e( 'Reject', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             </button>
                         <?php elseif ( $status === 'draft' ) : ?>
-                            <button class="button button-small cpr-approve-btn" 
+                            <button class="button button-small amrrev-approve-btn" 
                                     data-review-id="<?php echo esc_attr( $review_id ); ?>">
-                                <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/approve.svg' ); ?>" 
+                                <img src="<?php echo esc_url( AMRREV_ASSETS_URL . 'images/approve.svg' ); ?>" 
                                     alt="<?php esc_attr_e( 'Approve', 'amrrev-product-reviews-for-woocommerce' ); ?>"> 
                                 <?php esc_html_e( 'Approve', 'amrrev-product-reviews-for-woocommerce' ); ?>
                             </button>
                         <?php endif; ?>
                         <br>
-                        <button class="button button-link-delete button-small cpr-delete-btn" 
+                        <button class="button button-link-delete button-small amrrev-delete-btn" 
                                 data-review-id="<?php echo esc_attr( $review_id ); ?>" 
                                 style="margin-top: 5px; color: #a00;">
-                            <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/delete.svg' ); ?>" 
+                            <img src="<?php echo esc_url( AMRREV_ASSETS_URL . 'images/delete.svg' ); ?>" 
                                 alt="<?php esc_attr_e( 'Delete', 'amrrev-product-reviews-for-woocommerce' ); ?>"> 
                             <?php esc_html_e( 'Delete', 'amrrev-product-reviews-for-woocommerce' ); ?>
                         </button>
@@ -156,7 +156,7 @@ $rejected_count = wp_count_posts('cpr_review')->draft;
         </table>
         <?php
         else: ?>
-          <div class="cpr-no-reviews">
+          <div class="amrrev-no-reviews">
                 <p style="padding: 40px; text-align: center; color: #666;">
                     <?php esc_html_e( 'No reviews found with this status.', 'amrrev-product-reviews-for-woocommerce' ); ?>
                 </p>

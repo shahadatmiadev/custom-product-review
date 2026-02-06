@@ -2,13 +2,13 @@ jQuery(document).ready(function($) {
     'use strict';
     
     // Tab functionality
-    $('.cpr-style-settings-tabs .nav-tab').on('click', function(e) {
+    $('.amrrev-style-settings-tabs .nav-tab').on('click', function(e) {
         e.preventDefault();
         
         var tabId = $(this).attr('href');
         
         // Hide all tabs
-        $('.cpr-style-tab-content').hide();
+        $('.amrrev-style-tab-content').hide();
         
         // Remove active class from all tabs
         $('.nav-tab').removeClass('nav-tab-active');

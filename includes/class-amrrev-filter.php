@@ -1,27 +1,27 @@
 <?php
 /**
- * includes/class-cpr-filter.php
+ * includes/class-amrrev-filter.php
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class CPR_Filter {
+class AMRREV_Filter {
 
     public function __construct() {
-        add_action( 'wp_ajax_cpr_filter_reviews', array( $this, 'filter_reviews' ) );
-        add_action( 'wp_ajax_nopriv_cpr_filter_reviews', array( $this, 'filter_reviews' ) );
+        add_action( 'wp_ajax_amrrev_filter_reviews', array( $this, 'filter_reviews' ) );
+        add_action( 'wp_ajax_nopriv_amrrev_filter_reviews', array( $this, 'filter_reviews' ) );
     }
 
     public function render_filter_form() {
         ?>
-        <div class="cpr-review-filters">
+        <div class="amrrev-review-filters">
             <h4><?php esc_html_e( 'Filter Reviews', 'amrrev-product-reviews-for-woocommerce' ); ?></h4>
             
-            <div class="cpr-filter-group">
+            <div class="amrrev-filter-group">
                 <label><?php esc_html_e( 'Rating', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
-                <div class="cpr-rating-filter">
+                <div class="amrrev-rating-filter">
                     <?php for ( $i = 5; $i >= 1; $i-- ) : ?>
                         <label>
                             <input type="checkbox" name="rating[]" value="<?php echo esc_attr( $i ); ?>">
@@ -31,9 +31,9 @@ class CPR_Filter {
                 </div>
             </div>
             
-            <div class="cpr-filter-group">
+            <div class="amrrev-filter-group">
                 <label><?php esc_html_e( 'Age Range', 'amrrev-product-reviews-for-woocommerce' ); ?></label>
-                <div class="cpr-age-filter">
+                <div class="amrrev-age-filter">
                     <select name="age_range">
                         <option value=""><?php esc_html_e( 'All Ages', 'amrrev-product-reviews-for-woocommerce' ); ?></option>
                         <option value="under-18"><?php esc_html_e( 'Under 18', 'amrrev-product-reviews-for-woocommerce' ); ?></option>
@@ -47,7 +47,7 @@ class CPR_Filter {
                 </div>
             </div>
             
-            <div class="cpr-filter-group cpr-verified-filter">
+            <div class="amrrev-filter-group amrrev-verified-filter">
                 <label>
                     <input type="checkbox" name="verified_only" value="1">
                     <?php esc_html_e( 'Verified Buyers Only', 'amrrev-product-reviews-for-woocommerce' ); ?>
@@ -58,7 +58,7 @@ class CPR_Filter {
     }
 
     public function filter_reviews() {
-        check_ajax_referer( 'cpr_filter_nonce', 'nonce' );
+        check_ajax_referer( 'amrrev_filter_nonce', 'nonce' );
         
         $product_id = isset( $_POST['product_id'] ) ? intval( $_POST['product_id'] ) : 0;
         $ratings = isset( $_POST['rating'] ) && is_array( $_POST['rating'] ) ? array_map( 'intval', $_POST['rating'] ) : array();
@@ -73,7 +73,7 @@ class CPR_Filter {
         $meta_query = array(
             'relation' => 'AND',
             array(
-                'key'     => '_cpr_product_id',
+                'key'     => '_amrrev_product_id',
                 'value'   => $product_id,
                 'compare' => '=',
             ),
@@ -81,7 +81,7 @@ class CPR_Filter {
         
         if ( ! empty( $ratings ) ) {
             $meta_query[] = array(
-                'key'     => '_cpr_rating',
+                'key'     => '_amrrev_rating',
                 'value'   => $ratings,
                 'compare' => 'IN',
                 'type'    => 'NUMERIC',
@@ -90,7 +90,7 @@ class CPR_Filter {
         
         if ( ! empty( $age_range ) ) {
             $meta_query[] = array(
-                'key'     => '_cpr_age_range',
+                'key'     => '_amrrev_age_range',
                 'value'   => $age_range,
                 'compare' => '=',
             );
@@ -98,15 +98,17 @@ class CPR_Filter {
         
         if ( $verified_only ) {
             $meta_query[] = array(
-                'key'     => '_cpr_verified_buyer',
+                'key'     => '_amrrev_verified_buyer',
                 'value'   => '1',
                 'compare' => '=',
             );
         }
-        
+        $auto_approve = get_option( 'amrrev_auto_approve', '0' );
+        $post_status = ( $auto_approve == '1' ) ? 'publish' : 'publish';
+
         $args = array(
-            'post_type'      => 'cpr_review',
-            'post_status'    => 'publish',
+            'post_type'      => 'amrrev_review',
+            'post_status'    => $post_status,
             'posts_per_page' => -1,
             'meta_query'     => $meta_query,
             'orderby'        => 'date',
@@ -122,7 +124,7 @@ class CPR_Filter {
                 $this->render_single_review( get_the_ID() );
             }
         } else {
-            echo '<div class="cpr-no-reviews"><p>' . esc_html__( 'No reviews found with these filters.', 'amrrev-product-reviews-for-woocommerce' ) . '</p></div>';
+            echo '<div class="amrrev-no-reviews"><p>' . esc_html__( 'No reviews found with these filters.', 'amrrev-product-reviews-for-woocommerce' ) . '</p></div>';
         }
         wp_reset_postdata();
         
@@ -132,19 +134,19 @@ class CPR_Filter {
     }
     
     private function render_single_review( $review_id ) {
-        $product_id = get_post_meta( $review_id, '_cpr_product_id', true );
-        $file_url = get_post_meta( $review_id, '_cpr_file_url', true );
-        $rating = get_post_meta( $review_id, '_cpr_rating', true );
-        $reviewer_name = get_post_meta( $review_id, '_cpr_name', true );
-        $reviewer_age = get_post_meta( $review_id, '_cpr_age_range', true );
-        $verified = get_post_meta( $review_id, '_cpr_verified_buyer', true );
+        $product_id = get_post_meta( $review_id, '_amrrev_product_id', true );
+        $file_url = get_post_meta( $review_id, '_amrrev_file_url', true );
+        $rating = get_post_meta( $review_id, '_amrrev_rating', true );
+        $reviewer_name = get_post_meta( $review_id, '_amrrev_name', true );
+        $reviewer_age = get_post_meta( $review_id, '_amrrev_age_range', true );
+        $verified = get_post_meta( $review_id, '_amrrev_verified_buyer', true );
         
         // Get display settings
-        $show_verified_badge = get_option( 'cpr_show_verified_badge', '1' );
-        $date_format = get_option( 'cpr_date_format', 'j/n/y' );
-        $enable_age_range = get_option( 'cpr_enable_age_range', '1' );
-        $filled_star_color = get_option( 'cpr_filled_star_color', '#ffc107' );
-        $empty_star_color = get_option( 'cpr_empty_star_color', '#dddddd' );
+        $show_verified_badge = get_option( 'amrrev_show_verified_badge', '1' );
+        $date_format = get_option( 'amrrev_date_format', 'j/n/y' );
+        $enable_age_range = get_option( 'amrrev_enable_age_range', '1' );
+        $filled_star_color = get_option( 'amrrev_filled_star_color', '#ffc107' );
+        $empty_star_color = get_option( 'amrrev_empty_star_color', '#dddddd' );
         
         ?>
         <div class="cpt-review-full-box">
@@ -154,7 +156,7 @@ class CPR_Filter {
                 <?php if ( $show_verified_badge == '1' && $verified == '1' ) : ?>
                 <div class="cpt-verify-buyer">
                     <span><?php esc_html_e( 'Verified Buyer', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
-                    <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
+                    <img src="<?php echo esc_url( AMRREV_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
                 </div>
                 <?php endif; ?>
                 
@@ -208,4 +210,4 @@ class CPR_Filter {
     }
 }
 
-new CPR_Filter();
+new AMRREV_Filter();

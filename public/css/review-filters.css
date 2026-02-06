@@ -6,21 +6,21 @@
   padding: 0;
   box-sizing: border-box;
 }
-.cpr-review-filters {
+.amrrev-review-filters {
   background: #fbf9ec;
   border: 1px solid #f0e6d3;
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 30px;
 }
-.cpr-review-filters h4 {
+.amrrev-review-filters h4 {
   margin-bottom: 20px;
 }
-.cpr-filter-group {
+.amrrev-filter-group {
   margin-bottom: 15px;
 }
 
-.cpr-filter-group label {
+.amrrev-filter-group label {
   display: block;
   font-weight: 500;
   margin-bottom: 8px !important;
@@ -28,41 +28,41 @@
   font-size: 15px;
 }
 
-.cpr-rating-filter {
+.amrrev-rating-filter {
   display: flex;
   gap: 15px;
 }
 
-.cpr-rating-filter label {
+.amrrev-rating-filter label {
   display: flex;
   align-items: center;
   gap: 5px;
   font-weight: normal;
 }
 
-.cpr-rating-filter input[type='checkbox'] {
+.amrrev-rating-filter input[type='checkbox'] {
   width: auto;
   outline: none;
   cursor: pointer;
 }
-.cpr-filter-group.cpr-verified-filter label {
+.amrrev-filter-group.amrrev-verified-filter label {
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
   justify-content: start;
   gap: 5px;
 }
-.cpr-filter-group.cpr-verified-filter label input {
+.amrrev-filter-group.amrrev-verified-filter label input {
   width: auto;
 }
-.cpr-loading,
-.cpr-error {
+.amrrev-loading,
+.amrrev-error {
   text-align: center;
   padding: 20px;
   color: #661415;
 }
 
-.cpr-age-filter select {
+.amrrev-age-filter select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -81,34 +81,34 @@
   background-position: right 12px center;
 }
 
-.cpr-age-filter select:focus {
+.amrrev-age-filter select:focus {
   outline: none;
   border-color: none;
   box-shadow: none;
 }
 
-.cpr-tab {
+.amrrev-tab {
   display: flex;
   border-bottom: 1px solid #ddd;
   margin-bottom: 20px;
 }
 
-.cpr-tab > div {
+.amrrev-tab > div {
   padding: 10px 20px;
   cursor: pointer;
   font-weight: 600;
   position: relative;
 }
 
-.cpr-tab > div:hover {
+.amrrev-tab > div:hover {
   background-color: #f9f9f9;
 }
 
-.cpr-tab-active {
+.amrrev-tab-active {
   color: #661415;
 }
 
-.cpr-tab-active::after {
+.amrrev-tab-active::after {
   content: '';
   position: absolute;
   bottom: -1px;
@@ -118,12 +118,12 @@
   background-color: #661415;
 }
 
-.cpr-product-description {
+.amrrev-product-description {
   padding: 15px 0;
   line-height: 1.6;
 }
 
-.cpr-loading-spinner .spinner {
+.amrrev-loading-spinner .spinner {
   border: 2px solid #f3f3f3;
   border-top: 2px solid #661415;
   border-radius: 50%;

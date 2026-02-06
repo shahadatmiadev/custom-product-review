@@ -6,7 +6,7 @@ jQuery(document).ready(function($) {
     
     // Function to apply filters
     function applyFilters() {
-        var product_id = $('#cpr_product_id').val();
+        var product_id = $('#amrrev_product_id').val();
         var ratings = [];
         var age_range = $('select[name="age_range"]').val();
         var verified_only = $('input[name="verified_only"]').is(':checked') ? '1' : '0';
@@ -17,30 +17,30 @@ jQuery(document).ready(function($) {
         });
                 
         $.ajax({
-            url: cpr_ajax.ajax_url,
+            url: amrrev_ajax.ajax_url,
             type: 'POST',
             data: {
-                action: 'cpr_filter_reviews',
-                nonce: cpr_ajax.nonce,
+                action: 'amrrev_filter_reviews',
+                nonce: amrrev_ajax.nonce,
                 product_id: product_id,
                 rating: ratings,
                 age_range: age_range,
                 verified_only: verified_only
             },
             beforeSend: function() {
-                $('#cpr-reviews-container').html('<div class="cpr-loading">Loading...</div>');
+                $('#amrrev-reviews-container').html('<div class="amrrev-loading">Loading...</div>');
             },
             success: function(response) {
                 if (response.success) {
-                    $('#cpr-reviews-container').html(response.data);
-                    $('.cpr-load-more-container').hide();
+                    $('#amrrev-reviews-container').html(response.data);
+                    $('.amrrev-load-more-container').hide();
                 } else {
-                    $('#cpr-reviews-container').html('<div class="cpr-error">Error loading reviews</div>');
+                    $('#amrrev-reviews-container').html('<div class="amrrev-error">Error loading reviews</div>');
                 }
             },
             error: function(xhr, status, error) {
                 console.error('AJAX Error:', error);
-                $('#cpr-reviews-container').html('<div class="cpr-error">Error loading reviews. Please try again.</div>');
+                $('#amrrev-reviews-container').html('<div class="amrrev-error">Error loading reviews. Please try again.</div>');
             }
         });
     }
@@ -59,20 +59,20 @@ jQuery(document).ready(function($) {
     });
 
      // Tab switching functionality
-    $('.cpr-tab > div').on('click', function() {
+    $('.amrrev-tab > div').on('click', function() {
         var tab = $(this).data('tab');
         
         // Update active tab
-        $('.cpr-tab > div').removeClass('cpr-tab-active');
-        $(this).addClass('cpr-tab-active');
+        $('.amrrev-tab > div').removeClass('amrrev-tab-active');
+        $(this).addClass('amrrev-tab-active');
         
         // Show/hide content
         if (tab === 'desc') {
-            $('.cpr-tab-desc-area').show();
-            $('.cpr-tab-review-area').hide();
+            $('.amrrev-tab-desc-area').show();
+            $('.amrrev-tab-review-area').hide();
         } else {
-            $('.cpr-tab-desc-area').hide();
-            $('.cpr-tab-review-area').show();
+            $('.amrrev-tab-desc-area').hide();
+            $('.amrrev-tab-review-area').show();
         }
     });
 });

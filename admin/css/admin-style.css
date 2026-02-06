@@ -6,7 +6,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-#cpr_review_details .inside img {
+#amrrev_review_details .inside img {
   width: 100px;
   height: 100px;
   border-radius: 10px;
@@ -15,7 +15,7 @@
 
 
 /* Action Buttons */
-.cpr-reviews-table-wrapper .button-small {
+.amrrev-reviews-table-wrapper .button-small {
     height: 28px;
     line-height: 26px;
     padding: 0 10px;
@@ -23,31 +23,31 @@
     min-width: 80px;
     text-align: center;
 }
-.cpr-delete-btn img,
-.cpr-reject-btn img,
-.cpr-approve-btn img {
+.amrrev-delete-btn img,
+.amrrev-reject-btn img,
+.amrrev-approve-btn img {
   width: 10px;
 }
-.cpr-approve-btn {
+.amrrev-approve-btn {
     background-color: #2ecc71 !important;
     color: #fff !important;
     border-color: #27ae60 !important;
 }
 
-.cpr-reject-btn {
+.amrrev-reject-btn {
     background-color: #e67e22 !important;
     color: #fff !important;
     border-color: #d35400 !important;
 }
 
-.cpr-delete-btn {
+.amrrev-delete-btn {
     background-color: #e74c3c !important;
     color: #fff !important;
     border-color: #c0392b !important;
 }
 
 
-.cpr-popup-message {
+.amrrev-popup-message {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -69,14 +69,14 @@
 
 
 /* Reset Button Styles */
-.cpr-reset-styles-form .submit {
+.amrrev-reset-styles-form .submit {
     padding: 0;
     background: none;
     border: none;
     box-shadow: none;
 }
 
-.cpr-reset-styles-form .submit input[type="submit"] {
+.amrrev-reset-styles-form .submit input[type="submit"] {
     background-color: #dc3232;
     color: #fff;
     border-color: #dc3232;
@@ -84,8 +84,8 @@
     box-shadow: none;
 }
 
-.cpr-reset-styles-form .submit input[type="submit"]:hover,
-.cpr-reset-styles-form .submit input[type="submit"]:focus {
+.amrrev-reset-styles-form .submit input[type="submit"]:hover,
+.amrrev-reset-styles-form .submit input[type="submit"]:focus {
     background-color: #c62222;
     border-color: #c62222;
     color: #fff;

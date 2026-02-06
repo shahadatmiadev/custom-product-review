@@ -73,16 +73,16 @@
 
 
 /* Review Sections */
-.cpr-review-form-section,
-.cpr-reviews-section {
+.amrrev-review-form-section,
+.amrrev-reviews-section {
     background: #fffff4;
     padding: 30px;
     border-radius: 12px;
     margin-bottom: 30px;
 }
 
-.cpr-reviews-section h3,
-.cpr-review-form-section h3 {
+.amrrev-reviews-section h3,
+.amrrev-review-form-section h3 {
     margin-bottom: 25px;
     font-size: 24px;
     color: #661415;
@@ -107,12 +107,12 @@
 }
 
 /* Pagination */
-.cpr-pagination {
+.amrrev-pagination {
     margin-top: 30px;
     text-align: center;
 }
 
-.cpr-pagination .page-numbers {
+.amrrev-pagination .page-numbers {
     display: inline-block;
     padding: 0px 11px;
     font-size: 16px;
@@ -125,15 +125,15 @@
     transition: all 0.3s;
 }
 
-.cpr-pagination .page-numbers:hover,
-.cpr-pagination .page-numbers.current {
+.amrrev-pagination .page-numbers:hover,
+.amrrev-pagination .page-numbers.current {
     background: #661415;
     color: #fff;
     border-color: #661415;
 }
 
 /* No Reviews Message */
-.cpr-no-reviews {
+.amrrev-no-reviews {
     text-align: center;
     padding: 40px 20px;
     background: #f8f9fa;
@@ -141,12 +141,12 @@
     color: #6c757d;
 }
 
- .cpr-load-more-container {
+ .amrrev-load-more-container {
       text-align: center;
       margin-top: 20px;
   }
   
-  .cpr-load-more-btn {
+  .amrrev-load-more-btn {
     background-color: #fbf9ec;
     color: #661415;
     padding: 10px 20px;
@@ -157,12 +157,12 @@
     border: 1px solid #661415;
 }
   
-  .cpr-load-more-btn:hover {
+  .amrrev-load-more-btn:hover {
       background-color: #661415;
       color: #fff;
   }
   
-  .cpr-loading-spinner {
+  .amrrev-loading-spinner {
       display: inline-block;
       width: 20px;
       height: 20px;

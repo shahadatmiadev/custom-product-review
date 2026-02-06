@@ -1,78 +1,77 @@
 <?php
 /**
  * Ajax Class
- * includes/class-cpr-ajax.php
+ * includes/class-amrrev-ajax.php
  */
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class CPR_Ajax {
+class AMRREV_Ajax {
     public function __construct() {
-        add_action( 'wp_ajax_cpr_approve_review', array( $this, 'approve_review' ) );
-        add_action( 'wp_ajax_cpr_reject_review', array( $this, 'reject_review' ) );
-        add_action( 'wp_ajax_cpr_delete_review', array( $this, 'delete_review' ) );
+        add_action( 'wp_ajax_amrrev_approve_review', array( $this, 'approve_review' ) );
+        add_action( 'wp_ajax_amrrev_reject_review', array( $this, 'reject_review' ) );
+        add_action( 'wp_ajax_amrrev_delete_review', array( $this, 'delete_review' ) );
 
-        add_action( 'wp_ajax_cpr_load_more_reviews', array( $this, 'load_more_reviews' ) );
-        add_action( 'wp_ajax_nopriv_cpr_load_more_reviews', array( $this, 'load_more_reviews' ) );
+        add_action( 'wp_ajax_amrrev_load_more_reviews', array( $this, 'load_more_reviews' ) );
+        add_action( 'wp_ajax_nopriv_amrrev_load_more_reviews', array( $this, 'load_more_reviews' ) );
     }
 
     public function approve_review() {
-        check_ajax_referer( 'cpr_admin_ajax', 'nonce' );
-       
-        $review_id = isset($_POST['review_id']) ? intval($_POST['review_id']) : 0;
+        check_ajax_referer( 'amrrev_admin_ajax', 'nonce' );
+
+        $review_id = isset( $_POST['review_id'] ) ? intval( $_POST['review_id'] ) : 0;
 
         if ( !$review_id ) {
             wp_send_json_error( array( 'message' => 'Invalid review ID.' ) );
         }
-        
+
         $update = array(
-            'ID' => $review_id,
+            'ID'          => $review_id,
             'post_status' => 'publish',
         );
         wp_update_post( $update );
 
-        if($update && !is_wp_error($update)) {
+        if ( $update && !is_wp_error( $update ) ) {
             wp_send_json_success( array( 'message' => 'Review approved successfully.' ) );
-        }else {
+        } else {
             wp_send_json_error( array( 'message' => 'Failed to approve review.' ) );
         }
     }
 
     public function reject_review() {
-        check_ajax_referer( 'cpr_admin_ajax', 'nonce' );
-       
-        $review_id = isset($_POST['review_id']) ? intval($_POST['review_id']) : 0;
+        check_ajax_referer( 'amrrev_admin_ajax', 'nonce' );
+
+        $review_id = isset( $_POST['review_id'] ) ? intval( $_POST['review_id'] ) : 0;
 
         if ( !$review_id ) {
             wp_send_json_error( array( 'message' => 'Invalid review ID.' ) );
         }
-        
+
         $update = array(
-            'ID' => $review_id,
+            'ID'          => $review_id,
             'post_status' => 'draft',
         );
         wp_update_post( $update );
 
-        if($update && !is_wp_error($update)) {
+        if ( $update && !is_wp_error( $update ) ) {
             wp_send_json_success( array( 'message' => 'Review rejected successfully.' ) );
-        }else {
+        } else {
             wp_send_json_error( array( 'message' => 'Failed to reject review.' ) );
         }
     }
 
     public function delete_review() {
-        check_ajax_referer( 'cpr_admin_ajax', 'nonce' );
-       
-        $review_id = isset($_POST['review_id']) ? intval($_POST['review_id']) : 0;
+        check_ajax_referer( 'amrrev_admin_ajax', 'nonce' );
+
+        $review_id = isset( $_POST['review_id'] ) ? intval( $_POST['review_id'] ) : 0;
 
         if ( !$review_id ) {
             wp_send_json_error( array( 'message' => 'Invalid review ID.' ) );
         }
-        
-        
-       $deleted = wp_delete_post( $review_id, true );
+
+        $deleted = wp_delete_post( $review_id, true );
 
         if ( $deleted ) {
             wp_send_json_success( array( 'message' => 'Review deleted permanently!' ) );
@@ -85,90 +84,93 @@ class CPR_Ajax {
      * Load More Reviews
      */
     public function load_more_reviews() {
-        check_ajax_referer( 'cpr_load_more_nonce', 'nonce' );
-        
+        check_ajax_referer( 'amrrev_load_more_nonce', 'nonce' );
+
         $product_id = isset( $_POST['product_id'] ) ? intval( $_POST['product_id'] ) : 0;
         $offset = isset( $_POST['offset'] ) ? intval( $_POST['offset'] ) : 0;
         $count = isset( $_POST['count'] ) ? intval( $_POST['count'] ) : 3;
         $ratings = isset( $_POST['rating'] ) && is_array( $_POST['rating'] ) ? array_map( 'intval', $_POST['rating'] ) : array();
         $age_range = isset( $_POST['age_range'] ) ? sanitize_text_field( wp_unslash( $_POST['age_range'] ) ) : '';
         $verified_only = isset( $_POST['verified_only'] ) && $_POST['verified_only'] == '1' ? true : false;
-        
+
         if ( !$product_id ) {
             wp_send_json_error( array( 'message' => 'Product ID missing' ) );
         }
-        
+
         // Build meta query with caching consideration
         $meta_query = array(
             'relation' => 'AND',
             array(
-                'key'     => '_cpr_product_id',
+                'key'     => '_amrrev_product_id',
                 'value'   => $product_id,
                 'compare' => '=',
                 'type'    => 'NUMERIC',
             ),
         );
-        
-        if ( ! empty( $ratings ) ) {
+
+        if ( !empty( $ratings ) ) {
             $meta_query[] = array(
-                'key'     => '_cpr_rating',
+                'key'     => '_amrrev_rating',
                 'value'   => $ratings,
                 'compare' => 'IN',
                 'type'    => 'NUMERIC',
             );
         }
-        
-        if ( ! empty( $age_range ) ) {
+
+        if ( !empty( $age_range ) ) {
             $meta_query[] = array(
-                'key'     => '_cpr_age_range',
+                'key'     => '_amrrev_age_range',
                 'value'   => $age_range,
                 'compare' => '=',
                 'type'    => 'CHAR',
             );
         }
-        
+
         if ( $verified_only ) {
             $meta_query[] = array(
-                'key'     => '_cpr_verified_buyer',
+                'key'     => '_amrrev_verified_buyer',
                 'value'   => '1',
                 'compare' => '=',
                 'type'    => 'CHAR',
             );
         }
-        
+
         // Create cache key
-        $cache_key = 'cpr_reviews_' . md5( serialize( array(
+        $cache_key = 'amrrev_reviews_' . md5( serialize( array(
             'product_id' => $product_id,
-            'offset' => $offset,
-            'count' => $count,
-            'ratings' => $ratings,
-            'age_range' => $age_range,
-            'verified' => $verified_only
+            'offset'     => $offset,
+            'count'      => $count,
+            'ratings'    => $ratings,
+            'age_range'  => $age_range,
+            'verified'   => $verified_only,
         ) ) );
-        
+
         // Try to get cached results
         $cached_results = get_transient( $cache_key );
-        
+
         if ( false !== $cached_results ) {
             wp_send_json_success( $cached_results );
             return;
         }
-        
+
+        $auto_approve = get_option( 'amrrev_auto_approve', '0' );
+        $post_status = ( $auto_approve == '1' ) ? 'publish' : 'publish';
+
         $args = array(
-            'post_type'      => 'cpr_review',
-            'post_status'    => 'publish',
-            'posts_per_page' => $count,
-            'offset'         => $offset,
-            'meta_query'     => $meta_query,
-            'orderby'        => 'date',
-            'order'          => 'DESC',
-            'no_found_rows'  => true, // Performance optimization
+            'post_type'              => 'amrrev_review',
+            'post_status'            => $post_status,
+            'posts_per_page'         => $count,
+            'offset'                 => $offset,
+            'meta_query'             => $meta_query,
+            'orderby'                => 'date',
+            'order'                  => 'DESC',
+            'no_found_rows'          => true, // Performance optimization
             'update_post_meta_cache' => true,
             'update_post_term_cache' => false,
         );
-        
+
         $review_query = new WP_Query( $args );
-        
+
         ob_start();
         if ( $review_query->have_posts() ) {
             while ( $review_query->have_posts() ) {
@@ -178,69 +180,69 @@ class CPR_Ajax {
         }
         wp_reset_postdata();
         $reviews_html = ob_get_clean();
-        
+
         $response_data = array(
-            'reviews' => $reviews_html,
-            'loaded_count' => $review_query->post_count
+            'reviews'      => $reviews_html,
+            'loaded_count' => $review_query->post_count,
         );
-        
+
         // Cache for 1 hour
         set_transient( $cache_key, $response_data, HOUR_IN_SECONDS );
-        
+
         wp_send_json_success( $response_data );
     }
-    
+
     /**
      * Render Single Review for AJAX
      */
     private function render_single_review( $review_id ) {
-        $product_id = get_post_meta( $review_id, '_cpr_product_id', true );
-        $file_url = get_post_meta( $review_id, '_cpr_file_url', true );
-        $rating = get_post_meta( $review_id, '_cpr_rating', true );
-        $reviewer_name = get_post_meta( $review_id, '_cpr_name', true );
-        $reviewer_age = get_post_meta( $review_id, '_cpr_age_range', true );
-        $verified = get_post_meta( $review_id, '_cpr_verified_buyer', true );
-        
+        $product_id = get_post_meta( $review_id, '_amrrev_product_id', true );
+        $file_url = get_post_meta( $review_id, '_amrrev_file_url', true );
+        $rating = get_post_meta( $review_id, '_amrrev_rating', true );
+        $reviewer_name = get_post_meta( $review_id, '_amrrev_name', true );
+        $reviewer_age = get_post_meta( $review_id, '_amrrev_age_range', true );
+        $verified = get_post_meta( $review_id, '_amrrev_verified_buyer', true );
+
         // Get display settings
-        $show_verified_badge = get_option( 'cpr_show_verified_badge', '1' );
-        $date_format = get_option( 'cpr_date_format', 'j/n/y' );
-        $enable_age_range = get_option( 'cpr_enable_age_range', '1' );
-        $filled_star_color = get_option( 'cpr_filled_star_color', '#ffc107' );
-        $empty_star_color = get_option( 'cpr_empty_star_color', '#dddddd' );
-        
+        $show_verified_badge = get_option( 'amrrev_show_verified_badge', '1' );
+        $date_format = get_option( 'amrrev_date_format', 'j/n/y' );
+        $enable_age_range = get_option( 'amrrev_enable_age_range', '1' );
+        $filled_star_color = get_option( 'amrrev_filled_star_color', '#ffc107' );
+        $empty_star_color = get_option( 'amrrev_empty_star_color', '#dddddd' );
+
         ?>
         <div class="cpt-review-full-box">
             <div class="cpt-review-box-one">
                 <div class="cpt-name"><?php echo esc_html( $reviewer_name ); ?></div>
-                
-                <?php if ( $show_verified_badge == '1' && $verified == '1' ) : ?>
+
+                <?php if ( $show_verified_badge == '1' && $verified == '1' ): ?>
                 <div class="cpt-verify-buyer">
                     <span><?php esc_html_e( 'Verified Buyer', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
-                    <img src="<?php echo esc_url( CPR_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
+                    <img src="<?php echo esc_url( AMRREV_ASSETS_URL . 'images/verify-buyer.svg' ); ?>" alt="verify-buyer">
                 </div>
                 <?php endif; ?>
-                
-                <?php if ( $enable_age_range == '1' && !empty( $reviewer_age ) ) : ?>
+
+                <?php if ( $enable_age_range == '1' && !empty( $reviewer_age ) ): ?>
                 <div class="cpt-age-range">
                     <span><?php esc_html_e( 'Age Range:', 'amrrev-product-reviews-for-woocommerce' ); ?></span>
                     <span><?php echo esc_html( $reviewer_age ); ?></span>
                 </div>
                 <?php endif; ?>
             </div>
-            
+
             <div class="cpt-review-box-two">
                 <div class="cpt-review-date">
                     <div class="cpt-review-count">
-                        <?php 
-                        // Display stars with custom colors
-                        for ( $i = 1; $i <= 5; $i++ ) {
-                            if ( $i <= intval( $rating ) ) {
-                                echo '<span style="color: ' . esc_attr( $filled_star_color ) . ';">★</span>';
-                            } else {
-                                echo '<span style="color: ' . esc_attr( $empty_star_color ) . ';">☆</span>';
-                            }
-                        }
-                        ?>
+                        <?php
+// Display stars with custom colors
+        for ( $i = 1; $i <= 5; $i++ ) {
+            if ( $i <= intval( $rating ) ) {
+                echo '<span style="color: ' . esc_attr( $filled_star_color ) . ';">★</span>';
+            } else {
+                echo '<span style="color: ' . esc_attr( $empty_star_color ) . ';">☆</span>';
+            }
+        }
+        ?>
                     </div>
                     <div class="cpt-date"><?php echo get_the_date( $date_format ); ?></div>
                 </div>
@@ -249,13 +251,13 @@ class CPR_Ajax {
                         <div class="cpt-review-title">
                         <strong><?php echo esc_html( get_the_title() ); ?></strong>
                         </div>
-                        
+
                         <div class="cpt-review-content">
                             <span><?php echo esc_html( get_the_content() ); ?></span>
                         </div>
                     </div>
 
-                    <?php if ( !empty( $file_url ) ) : ?>
+                    <?php if ( !empty( $file_url ) ): ?>
                     <div class="cpt-review-image">
                         <img src="<?php echo esc_url( $file_url ); ?>" alt="Review attachment" style="max-width: 50px; height: auto;">
                     </div>
@@ -264,5 +266,5 @@ class CPR_Ajax {
             </div>
         </div>
         <?php
-    }
+}
 }

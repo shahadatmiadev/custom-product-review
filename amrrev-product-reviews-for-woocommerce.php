@@ -11,10 +11,10 @@
  * Requires at least: 5.8
  * Tested up to: 6.9
  * Requires PHP: 7.4
+ * Requires Plugins: woocommerce
  * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
-
 
 if ( !defined( 'ABSPATH' ) ) {
     exit; // Disable direct access
@@ -23,7 +23,7 @@ if ( !defined( 'ABSPATH' ) ) {
 /**
  * Main Plugin Class
  */
-final class Custom_Product_Reviews {
+final class AmrRev_Product_Reviews {
 
     /**
      * Plugin version
@@ -58,18 +58,18 @@ final class Custom_Product_Reviews {
      */
     private function define_constants() {
 
-        define( 'CPR_VERSION', self::VERSION );
-        define( 'CPR_PLUGIN_FILE', __FILE__ );
-        define( 'CPR_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-        define( 'CPR_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-        define( 'CPR_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+        define( 'AMRREV_VERSION', self::VERSION );
+        define( 'AMRREV_PLUGIN_FILE', __FILE__ );
+        define( 'AMRREV_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+        define( 'AMRREV_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+        define( 'AMRREV_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
-        define( 'CPR_INCLUDES_DIR', CPR_PLUGIN_DIR . 'includes/' );
-        define( 'CPR_ADMIN_DIR', CPR_PLUGIN_DIR . 'admin/' );
-        define( 'CPR_ADMIN_URL', CPR_PLUGIN_URL . 'admin/' );
-        define( 'CPR_PUBLIC_DIR', CPR_PLUGIN_DIR . 'public/' );
-        define( 'CPR_PUBLIC_URL', CPR_PLUGIN_URL . 'public/' );
-        define( 'CPR_ASSETS_URL', CPR_PLUGIN_URL . 'assets/' );
+        define( 'AMRREV_INCLUDES_DIR', AMRREV_PLUGIN_DIR . 'includes/' );
+        define( 'AMRREV_ADMIN_DIR', AMRREV_PLUGIN_DIR . 'admin/' );
+        define( 'AMRREV_ADMIN_URL', AMRREV_PLUGIN_URL . 'admin/' );
+        define( 'AMRREV_PUBLIC_DIR', AMRREV_PLUGIN_DIR . 'public/' );
+        define( 'AMRREV_PUBLIC_URL', AMRREV_PLUGIN_URL . 'public/' );
+        define( 'AMRREV_ASSETS_URL', AMRREV_PLUGIN_URL . 'assets/' );
     }
 
     /**
@@ -90,23 +90,23 @@ final class Custom_Product_Reviews {
      */
     public function plugin_activation() {
         // Set default options
-        add_option( 'cpr_auto_approve', '0' );
-        add_option( 'cpr_min_rating', '1' );
-        add_option( 'cpr_form_position', 'after' );
-        add_option( 'cpr_reviews_per_page', '10' );
-        add_option( 'cpr_enable_file_upload', '1' );
-        add_option( 'cpr_enable_age_range', '1' );
-        add_option( 'cpr_email_required', '1' );
-        add_option( 'cpr_title_required', '1' );
-        add_option( 'cpr_show_verified_badge', '1' );
-        add_option( 'cpr_date_format', 'j/n/y' );
-        add_option( 'cpr_show_filters', '1' );
-        add_option( 'cpr_empty_star_color', '#dddddd' );
-        add_option( 'cpr_filled_star_color', '#ffc107' );
-        add_option( 'cpr_enable_moderation', '0' );
-        add_option( 'cpr_bad_words', '' );
-        add_option( 'cpr_enable_email_notification', '1' );
-        add_option( 'cpr_admin_email', get_option( 'admin_email' ) );
+        add_option( 'amrrev_auto_approve', '0' );
+        add_option( 'amrrev_min_rating', '1' );
+        add_option( 'amrrev_form_position', 'after' );
+        add_option( 'amrrev_reviews_per_page', '10' );
+        add_option( 'amrrev_enable_file_upload', '1' );
+        add_option( 'amrrev_enable_age_range', '1' );
+        add_option( 'amrrev_email_required', '1' );
+        add_option( 'amrrev_title_required', '1' );
+        add_option( 'amrrev_show_verified_badge', '1' );
+        add_option( 'amrrev_date_format', 'j/n/y' );
+        add_option( 'amrrev_show_filters', '1' );
+        add_option( 'amrrev_empty_star_color', '#dddddd' );
+        add_option( 'amrrev_filled_star_color', '#ffc107' );
+        add_option( 'amrrev_enable_moderation', '0' );
+        add_option( 'amrrev_bad_words', '' );
+        add_option( 'amrrev_enable_email_notification', '1' );
+        add_option( 'amrrev_admin_email', get_option( 'admin_email' ) );
     }
 
     /**
@@ -123,12 +123,12 @@ final class Custom_Product_Reviews {
         $this->includes();
 
         // Initialize main loader class
-        new CPR_Ajax();
-        new CPR_Filter();
-        new CPR_Form_Handler();
-        new CPR_Meta_Boxes();
-        new CPR_Post_Type();
-        new CPR_Settings();
+        new AMRREV_Ajax();
+        new AMRREV_Filter();
+        new AMRREV_Form_Handler();
+        new AMRREV_Meta_Boxes();
+        new AMRREV_Post_Type();
+        new AMRREV_Settings();
     }
 
     /**
@@ -136,43 +136,62 @@ final class Custom_Product_Reviews {
      */
     private function includes() {
 
-        require_once CPR_INCLUDES_DIR . 'class-cpr-post-type.php';
-        require_once CPR_INCLUDES_DIR . 'class-cpr-meta-boxes.php';
-        require_once CPR_INCLUDES_DIR . 'class-cpr-form-handler.php';
-        require_once CPR_INCLUDES_DIR . 'class-cpr-filter.php';
-        require_once CPR_INCLUDES_DIR . 'class-cpr-ajax.php';
-        require_once CPR_INCLUDES_DIR . 'class-cpr-settings.php';
-        require_once CPR_INCLUDES_DIR . 'class-cpr-style-settings.php';
+        require_once AMRREV_INCLUDES_DIR . 'class-amrrev-post-type.php';
+        require_once AMRREV_INCLUDES_DIR . 'class-amrrev-meta-boxes.php';
+        require_once AMRREV_INCLUDES_DIR . 'class-amrrev-form-handler.php';
+        require_once AMRREV_INCLUDES_DIR . 'class-amrrev-filter.php';
+        require_once AMRREV_INCLUDES_DIR . 'class-amrrev-ajax.php';
+        require_once AMRREV_INCLUDES_DIR . 'class-amrrev-settings.php';
+        require_once AMRREV_INCLUDES_DIR . 'class-amrrev-style-settings.php';
     }
 
     /**
      * Enqueue assets
      */
     public function enqueue_assets() {
-        wp_enqueue_style( 'cpr-public-review-form', CPR_PUBLIC_URL . 'css/review-form.css', array(), CPR_VERSION );
-        wp_enqueue_style( 'cpr-public-review-display', CPR_PUBLIC_URL . 'css/review-display.css', array(), CPR_VERSION );
-        wp_enqueue_style( 'cpr-public-additional-styles', CPR_PUBLIC_URL . 'css/additional-styles.css', array(), CPR_VERSION );
-        wp_enqueue_script( 'cpr-public-review-rating', CPR_PUBLIC_URL . 'js/review-rating.js', array( 'jquery' ), CPR_VERSION, true );
-        wp_enqueue_style( 'cpr-public-review-filter', CPR_PUBLIC_URL . 'css/review-filters.css', array(), CPR_VERSION );
-        wp_enqueue_script( 'cpr-public-review-filter', CPR_PUBLIC_URL . 'js/review-filter.js', array( 'jquery' ), CPR_VERSION, true );
 
-        // Add custom styles
-        wp_add_inline_style( 'cpr-public-review-display', CPR_Style_Settings::get_custom_css() );
+        wp_enqueue_style( 'amrrev-public-review-form', AMRREV_PUBLIC_URL . 'css/review-form.css', array(), AMRREV_VERSION );
+        wp_enqueue_style( 'amrrev-public-review-display', AMRREV_PUBLIC_URL . 'css/review-display.css', array(), AMRREV_VERSION );
+        wp_enqueue_style( 'amrrev-public-review-filter', AMRREV_PUBLIC_URL . 'css/review-filters.css', array(), AMRREV_VERSION );
 
-        // AJAX variables
-        wp_localize_script( 'cpr-public-review-filter', 'cpr_ajax', array(
+        wp_enqueue_script( 'amrrev-public-review-rating', AMRREV_PUBLIC_URL . 'js/review-rating.js', array( 'jquery' ), AMRREV_VERSION, true );
+        wp_enqueue_script( 'amrrev-public-review-filter', AMRREV_PUBLIC_URL . 'js/review-filter.js', array( 'jquery' ), AMRREV_VERSION, true );
+
+        wp_enqueue_script( 'amrrev-load-more', AMRREV_PUBLIC_URL . 'js/load-more.js', array( 'jquery' ), AMRREV_VERSION, true );
+        wp_enqueue_script( 'amrrev-pagination', AMRREV_PUBLIC_URL . 'js/pagination.js', array( 'jquery' ), AMRREV_VERSION, true );
+
+        // Custom CSS
+        wp_add_inline_style( 'amrrev-public-review-display', AMRREV_Style_Settings::get_custom_css() );
+
+        /**
+         * 🔥 AJAX Data for FILTER
+         */
+        wp_localize_script( 'amrrev-public-review-filter', 'amrrev_filter_ajax', array(
             'ajax_url' => admin_url( 'admin-ajax.php' ),
-            'nonce'    => wp_create_nonce( 'cpr_filter_nonce' ),
+            'nonce'    => wp_create_nonce( 'amrrev_filter_nonce' ),
         ) );
 
-        // Pass settings to frontend
-        wp_localize_script( 'cpr-public-review-rating', 'cpr_settings', array(
-            'empty_star_color'  => get_option( 'cpr_empty_star_color', '#dddddd' ),
-            'filled_star_color' => get_option( 'cpr_filled_star_color', '#ffc107' ),
-            'min_rating'        => get_option( 'cpr_min_rating', '1' ),
+        /**
+         * 🔥 AJAX Data for LOAD MORE + PAGINATION
+         */
+        $ajax_data = array(
+            'ajax_url'         => admin_url( 'admin-ajax.php' ),
+            'load_more_nonce'  => wp_create_nonce( 'amrrev_load_more_nonce' ),
+            'pagination_nonce' => wp_create_nonce( 'amrrev_pagination_nonce' ),
+        );
+
+        wp_localize_script( 'amrrev-load-more', 'amrrev_ajax', $ajax_data );
+        wp_localize_script( 'amrrev-pagination', 'amrrev_ajax', $ajax_data );
+
+        /**
+         * Star rating settings
+         */
+        wp_localize_script( 'amrrev-public-review-rating', 'amrrev_settings', array(
+            'empty_star_color'  => get_option( 'amrrev_empty_star_color', '#dddddd' ),
+            'filled_star_color' => get_option( 'amrrev_filled_star_color', '#ffc107' ),
+            'min_rating'        => get_option( 'amrrev_min_rating', '1' ),
         ) );
 
-        // Add dynamic CSS for star colors
         $this->add_dynamic_star_css();
     }
 
@@ -180,14 +199,14 @@ final class Custom_Product_Reviews {
      * Add Dynamic Star Color CSS
      */
     private function add_dynamic_star_css() {
-        $empty_star = get_option( 'cpr_empty_star_color', '#dddddd' );
-        $filled_star = get_option( 'cpr_filled_star_color', '#ffc107' );
+        $empty_star = get_option( 'amrrev_empty_star_color', '#dddddd' );
+        $filled_star = get_option( 'amrrev_filled_star_color', '#ffc107' );
 
         $custom_css = "
-            .cpr-star-rating span {
+            .amrrev-star-rating span {
                 color: {$empty_star} !important;
             }
-            .cpr-star-rating span.selected {
+            .amrrev-star-rating span.selected {
                 color: {$filled_star} !important;
             }
             .cpt-review-count {
@@ -195,25 +214,25 @@ final class Custom_Product_Reviews {
             }
         ";
 
-        wp_add_inline_style( 'cpr-public-review-display', $custom_css );
+        wp_add_inline_style( 'amrrev-public-review-display', $custom_css );
     }
 
     /**
      * Enqueue admin assets
      */
     public function enqueue_admin_assets( $hook ) {
-        if ( $hook == 'toplevel_page_cpr-reviews' || $hook == 'product-reviews_page_cpr-styles' ) {
-            wp_enqueue_style( 'cpr-admin-style', CPR_ADMIN_URL . 'css/admin-style.css', array(), CPR_VERSION );
-            wp_enqueue_script( 'cpr-admin-reviews', CPR_ADMIN_URL . 'js/admin-reviews.js', array( 'jquery' ), CPR_VERSION, true );
-            wp_localize_script( 'cpr-admin-reviews', 'cpr_admin_ajax', array(
+        if ( $hook == 'toplevel_page_amrrev-reviews' || $hook == 'product-reviews_page_amrrev-styles' ) {
+            wp_enqueue_style( 'amrrev-admin-style', AMRREV_ADMIN_URL . 'css/admin-style.css', array(), AMRREV_VERSION );
+            wp_enqueue_script( 'amrrev-admin-reviews', AMRREV_ADMIN_URL . 'js/admin-reviews.js', array( 'jquery' ), AMRREV_VERSION, true );
+            wp_localize_script( 'amrrev-admin-reviews', 'amrrev_admin_ajax', array(
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
-                'nonce'    => wp_create_nonce( 'cpr_admin_ajax' ),
+                'nonce'    => wp_create_nonce( 'amrrev_admin_ajax' ),
             ) );
         }
 
         // Enqueue style settings script
-        if ( $hook == 'product-reviews_page_cpr-styles' ) {
-            wp_enqueue_script( 'cpr-admin-style-settings', CPR_ADMIN_URL . 'js/admin-style-settings.js', array( 'jquery' ), CPR_VERSION, true );
+        if ( $hook == 'product-reviews_page_amrrev-styles' ) {
+            wp_enqueue_script( 'amrrev-admin-style-settings', AMRREV_ADMIN_URL . 'js/admin-style-settings.js', array( 'jquery' ), AMRREV_VERSION, true );
         }
     }
 
@@ -232,7 +251,7 @@ final class Custom_Product_Reviews {
             esc_html__( 'Product Reviews', 'amrrev-product-reviews-for-woocommerce' ),
             esc_html__( 'Product Reviews', 'amrrev-product-reviews-for-woocommerce' ),
             'manage_options',
-            'cpr-reviews',
+            'amrrev-reviews',
             array( $this, 'render_manage_reviews_page' ),
             'dashicons-star-half',
             56
@@ -240,31 +259,31 @@ final class Custom_Product_Reviews {
 
         // Rename first submenu
         add_submenu_page(
-            'cpr-reviews',
+            'amrrev-reviews',
             esc_html__( 'All Reviews', 'amrrev-product-reviews-for-woocommerce' ),
             esc_html__( 'All Reviews', 'amrrev-product-reviews-for-woocommerce' ),
             'manage_options',
-            'cpr-reviews',
+            'amrrev-reviews',
             array( $this, 'render_manage_reviews_page' )
         );
 
         // Add Settings submenu
         add_submenu_page(
-            'cpr-reviews',
+            'amrrev-reviews',
             esc_html__( 'Settings', 'amrrev-product-reviews-for-woocommerce' ),
             esc_html__( 'Settings', 'amrrev-product-reviews-for-woocommerce' ),
             'manage_options',
-            'cpr-settings',
+            'amrrev-settings',
             array( $this, 'render_settings_page' )
         );
 
         // Add Customize Styles submenu
         add_submenu_page(
-            'cpr-reviews',
+            'amrrev-reviews',
             esc_html__( 'Customize Styles', 'amrrev-product-reviews-for-woocommerce' ),
             esc_html__( 'Customize Styles', 'amrrev-product-reviews-for-woocommerce' ),
             'manage_options',
-            'cpr-styles',
+            'amrrev-styles',
             array( $this, 'render_styles_page' )
         );
 
@@ -274,14 +293,14 @@ final class Custom_Product_Reviews {
      * Render Admin Page
      */
     public function render_manage_reviews_page() {
-        require_once CPR_ADMIN_DIR . 'views/admin-reviews-page.php';
+        require_once AMRREV_ADMIN_DIR . 'views/admin-reviews-page.php';
     }
 
     /**
      * Render Settings Page
      */
     public function render_settings_page() {
-        $settings = new CPR_Settings();
+        $settings = new AMRREV_Settings();
         $settings->render_settings_page();
     }
 
@@ -289,7 +308,7 @@ final class Custom_Product_Reviews {
      * Render Styles Page
      */
     public function render_styles_page() {
-        require_once CPR_ADMIN_DIR . 'views/admin-styles-page.php';
+        require_once AMRREV_ADMIN_DIR . 'views/admin-styles-page.php';
     }
 
 }
@@ -297,9 +316,9 @@ final class Custom_Product_Reviews {
 /**
  * Helper function
  */
-function CPR() {
-    return Custom_Product_Reviews::instance();
+function AmrRev() {
+    return AmrRev_Product_Reviews::instance();
 }
 
 // Start plugin
-CPR();
+AmrRev();

@@ -5,9 +5,9 @@ jQuery(document).ready(function($) {
     'use strict';
     
     // Star Rating Functionality
-    $('.cpr-star-rating span').on('click', function() {
+    $('.amrrev-star-rating span').on('click', function() {
         var rating = $(this).data('value');
-        var minRating = $('.cpr-star-rating').data('min-rating') || 1;
+        var minRating = $('.amrrev-star-rating').data('min-rating') || 1;
         
         // Check minimum rating requirement
         if (rating < minRating) {
@@ -15,42 +15,42 @@ jQuery(document).ready(function($) {
             return;
         }
         
-        $('#cpr_rating').val(rating);
+        $('#amrrev_rating').val(rating);
         
         // Remove selected class from all stars
-        $('.cpr-star-rating span').removeClass('selected');
+        $('.amrrev-star-rating span').removeClass('selected');
         
         // Add selected class to clicked star and all previous stars
         $(this).addClass('selected').prevAll().addClass('selected');
     });
     
     // Star hover effect
-    $('.cpr-star-rating span').hover(
+    $('.amrrev-star-rating span').hover(
         function() {
             var rating = $(this).data('value');
             $(this).addClass('hover').prevAll().addClass('hover');
         },
         function() {
-            $('.cpr-star-rating span').removeClass('hover');
+            $('.amrrev-star-rating span').removeClass('hover');
         }
     );
     
     // Age Range Button Functionality
-    $('.cpr-age-range .age-btn').on('click', function() {
+    $('.amrrev-age-range .age-btn').on('click', function() {
         var ageValue = $(this).data('value');
         
         // Remove selected class from all buttons
-        $('.cpr-age-range .age-btn').removeClass('selected');
+        $('.amrrev-age-range .age-btn').removeClass('selected');
         
         // Add selected class to clicked button
         $(this).addClass('selected');
         
         // Set hidden input value
-        $('#cpr_age_range').val(ageValue);
+        $('#amrrev_age_range').val(ageValue);
     });
     
     // File Upload Preview
-    $('#cpr_file_input').on('change', function(e) {
+    $('#amrrev_file_input').on('change', function(e) {
         var file = e.target.files[0];
         
         if (file) {
@@ -58,7 +58,7 @@ jQuery(document).ready(function($) {
             
             reader.onload = function(e) {
                 if (file.type.match('image.*')) {
-                    $('#cpr_file_preview').attr('src', e.target.result).show();
+                    $('#amrrev_file_preview').attr('src', e.target.result).show();
                 }
             };
             
@@ -67,9 +67,9 @@ jQuery(document).ready(function($) {
     });
     
     // Form Validation
-    $('#cpr-review-form').on('submit', function(e) {
-        var rating = $('#cpr_rating').val();
-        var minRating = $('.cpr-star-rating').data('min-rating') || 1;
+    $('#amrrev-review-form').on('submit', function(e) {
+        var rating = $('#amrrev_rating').val();
+        var minRating = $('.amrrev-star-rating').data('min-rating') || 1;
         
         // Check if rating is selected
         if (!rating) {
@@ -86,7 +86,7 @@ jQuery(document).ready(function($) {
         }
         
         // Check age range if field exists
-        if ($('#cpr_age_range').length && !$('#cpr_age_range').val()) {
+        if ($('#amrrev_age_range').length && !$('#amrrev_age_range').val()) {
             e.preventDefault();
             alert('Please select your age range!');
             return false;
@@ -96,13 +96,13 @@ jQuery(document).ready(function($) {
     });
     
     // Apply star colors from settings
-    if (typeof cpr_settings !== 'undefined') {
-        var emptyColor = cpr_settings.empty_star_color || '#dddddd';
-        var filledColor = cpr_settings.filled_star_color || '#ffc107';
+    if (typeof amrrev_settings !== 'undefined') {
+        var emptyColor = amrrev_settings.empty_star_color || '#dddddd';
+        var filledColor = amrrev_settings.filled_star_color || '#ffc107';
         
         // Apply to rating form stars
-        $('.cpr-star-rating span').css('color', emptyColor);
-        $('.cpr-star-rating span.selected').css('color', filledColor);
+        $('.amrrev-star-rating span').css('color', emptyColor);
+        $('.amrrev-star-rating span.selected').css('color', filledColor);
         
         // Apply to display stars
         $('.cpt-review-count').each(function() {
