@@ -58,7 +58,7 @@ jQuery(document).ready(function($) {
         applyFilters();
     });
 
-     // Tab switching functionality
+    // Tab switching functionality
     $('.amrrev-tab > div').on('click', function() {
         var tab = $(this).data('tab');
         
@@ -67,11 +67,15 @@ jQuery(document).ready(function($) {
         $(this).addClass('amrrev-tab-active');
         
         // Show/hide content
+        $('.amrrev-tab-desc-area').hide();
+        $('.amrrev-tab-review-area').hide();
+        $('.amrrev-tab-addinfo-area').hide();
+
         if (tab === 'desc') {
             $('.amrrev-tab-desc-area').show();
-            $('.amrrev-tab-review-area').hide();
+        } else if (tab === 'addinfo') {
+            $('.amrrev-tab-addinfo-area').show();
         } else {
-            $('.amrrev-tab-desc-area').hide();
             $('.amrrev-tab-review-area').show();
         }
     });

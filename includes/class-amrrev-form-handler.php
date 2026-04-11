@@ -63,6 +63,9 @@ class AMRREV_Form_Handler {
         <div class="amrrev-tab">
             <div class="amrrev-tab-desc " data-tab="desc"><?php esc_html_e( 'Description', 'amrrev-product-reviews-for-woocommerce' ); ?></div>
             <div class="amrrev-tab-rev amrrev-tab-active" data-tab="rev"><?php esc_html_e( 'Review', 'amrrev-product-reviews-for-woocommerce' ); ?></div>
+            <?php if ( $product->is_type( 'variable' ) ) : ?>
+            <div class="amrrev-tab-addinfo" data-tab="addinfo"><?php esc_html_e( 'Additional Info', 'amrrev-product-reviews-for-woocommerce' ); ?></div>
+            <?php endif; ?>
         </div>
 
         <div class="amrrev-tab-desc-area" style="display: none">
@@ -76,6 +79,42 @@ class AMRREV_Form_Handler {
                 ?>
             </div>
         </div>
+
+        <?php if ( $product->is_type( 'variable' ) ) : ?>
+        <div class="amrrev-tab-addinfo-area" style="display: none">
+            <div class="amrrev-additional-info">
+                <?php
+                $attributes = $product->get_variation_attributes();
+                if ( ! empty( $attributes ) ) :
+                ?>
+                <table class="amrrev-addinfo-table">
+                    <tbody>
+                        <?php foreach ( $attributes as $attribute_name => $options ) :
+                            $taxonomy = str_replace( 'attribute_', '', $attribute_name );
+                            $label = wc_attribute_label( $taxonomy );
+                            $option_labels = array();
+                            foreach ( $options as $option ) {
+                                if ( taxonomy_exists( $taxonomy ) ) {
+                                    $term = get_term_by( 'slug', $option, $taxonomy );
+                                    $option_labels[] = $term ? esc_html( $term->name ) : esc_html( $option );
+                                } else {
+                                    $option_labels[] = esc_html( $option );
+                                }
+                            }
+                        ?>
+                        <tr>
+                            <th><?php echo esc_html( $label ); ?></th>
+                            <td><?php echo implode( ', ', $option_labels ); ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php else : ?>
+                <p><?php esc_html_e( 'No additional information available.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php endif; ?>
 
         <div class="amrrev-tab-review-area">
             <?php

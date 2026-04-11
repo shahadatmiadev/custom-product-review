@@ -242,25 +242,6 @@ class AMRREV_Style_Settings {
             'sanitize_callback' => 'sanitize_hex_color',
             'default'           => '#333333',
         ) );
-
-        register_setting( 'amrrev_style_settings', 'amrrev_custom_css', array(
-            'type'              => 'string',
-            'sanitize_callback' => array( $this, 'sanitize_css' ),
-            'default'           => '',
-        ) );
-    }
-
-    /**
-     * Sanitize CSS - Remove script tags and dangerous content
-     */
-    public function sanitize_css( $css ) {
-        // Remove any script tags or dangerous content
-        $css = wp_strip_all_tags( $css );
-
-        // Remove potential XSS vectors
-        $css = str_replace( array( '<script', '</script', 'javascript:', 'expression(' ), '', $css );
-
-        return $css;
     }
 
     /**
@@ -291,7 +272,6 @@ class AMRREV_Style_Settings {
                         <a href="#form-styles" class="nav-tab nav-tab-active"><?php esc_html_e( 'Form Styles', 'amrrev-product-reviews-for-woocommerce' ); ?></a>
                         <a href="#review-styles" class="nav-tab"><?php esc_html_e( 'Review Styles', 'amrrev-product-reviews-for-woocommerce' ); ?></a>
                         <a href="#filter-styles" class="nav-tab"><?php esc_html_e( 'Filter Styles', 'amrrev-product-reviews-for-woocommerce' ); ?></a>
-                        <a href="#custom-css" class="nav-tab"><?php esc_html_e( 'Custom CSS', 'amrrev-product-reviews-for-woocommerce' ); ?></a>
                     </h2>
 
                     <div id="form-styles" class="amrrev-style-tab-content">
@@ -304,10 +284,6 @@ class AMRREV_Style_Settings {
 
                     <div id="filter-styles" class="amrrev-style-tab-content" style="display:none;">
                         <?php $this->render_filter_styles(); ?>
-                    </div>
-
-                    <div id="custom-css" class="amrrev-style-tab-content" style="display:none;">
-                        <?php $this->render_custom_css(); ?>
                     </div>
                 </div>
 
@@ -607,120 +583,151 @@ class AMRREV_Style_Settings {
 }
 
     /**
-     * Render Custom CSS Section
-     */
-    private function render_custom_css() {
-        $custom_css = get_option( 'amrrev_custom_css', '' );
-        ?>
-        <table class="form-table">
-            <tr>
-                <th scope="row"><?php esc_html_e( 'Custom CSS', 'amrrev-product-reviews-for-woocommerce' ); ?></th>
-                <td>
-                    <textarea name="amrrev_custom_css" rows="20" class="large-text"><?php echo esc_textarea( $custom_css ); ?></textarea>
-                    <p class="description"><?php esc_html_e( 'Add your custom CSS code here. It will be applied to all review forms and displays.', 'amrrev-product-reviews-for-woocommerce' ); ?></p>
-                </td>
-            </tr>
-        </table>
-        <?php
-}
+     * SS dimension values sanitize helper method।
+     * valid CSS units (px, em, rem, %, vh, vw) allow
+    */
+    private static function sanitize_css_dimension( $value, $default = '' ) {
+        $value = sanitize_text_field( $value );
+        if ( preg_match( '/^\d+(\.\d+)?(px|em|rem|%|vh|vw)$/', $value ) ) {
+            return $value;
+        }
+        return $default;
+    }
 
     /**
      * Generate Custom CSS
      */
     public static function get_custom_css() {
+
         // FORM
-        $form_bg = sanitize_hex_color( get_option( 'amrrev_form_bg_color' ) );
-        $form_border = sanitize_hex_color( get_option( 'amrrev_form_border_color' ) );
-        $form_border_width = absint( get_option( 'amrrev_form_border_width' ) );
-        $form_radius = sanitize_text_field( get_option( 'amrrev_form_border_radius' ) );
-        $form_padding = sanitize_text_field( get_option( 'amrrev_form_padding' ) );
-        $title_color = sanitize_hex_color( get_option( 'amrrev_form_title_color' ) );
-        $label_color = sanitize_hex_color( get_option( 'amrrev_form_label_color' ) );
-        $input_bg = sanitize_hex_color( get_option( 'amrrev_form_input_bg_color' ) );
-        $input_border = sanitize_hex_color( get_option( 'amrrev_form_input_border_color' ) );
-        $input_text = sanitize_hex_color( get_option( 'amrrev_form_input_text_color' ) );
-        $button_bg = sanitize_hex_color( get_option( 'amrrev_form_button_bg_color' ) );
-        $button_text = sanitize_hex_color( get_option( 'amrrev_form_button_text_color' ) );
-        $button_hover_bg = sanitize_hex_color( get_option( 'amrrev_form_button_hover_bg_color' ) );
+        $form_bg           = sanitize_hex_color( get_option( 'amrrev_form_bg_color' ) );
+        $form_border       = sanitize_hex_color( get_option( 'amrrev_form_border_color' ) );
+        $form_border_width = get_option( 'amrrev_form_border_width' );
+        $form_border_width = is_numeric( $form_border_width ) ? absint( $form_border_width ) : '';
+        $form_radius       = self::sanitize_css_dimension( get_option( 'amrrev_form_border_radius' ) );
+        $form_padding      = self::sanitize_css_dimension( get_option( 'amrrev_form_padding' ) );
+        $title_color       = sanitize_hex_color( get_option( 'amrrev_form_title_color' ) );
+        $label_color       = sanitize_hex_color( get_option( 'amrrev_form_label_color' ) );
+        $input_bg          = sanitize_hex_color( get_option( 'amrrev_form_input_bg_color' ) );
+        $input_border      = sanitize_hex_color( get_option( 'amrrev_form_input_border_color' ) );
+        $input_text        = sanitize_hex_color( get_option( 'amrrev_form_input_text_color' ) );
+        $button_bg         = sanitize_hex_color( get_option( 'amrrev_form_button_bg_color' ) );
+        $button_text       = sanitize_hex_color( get_option( 'amrrev_form_button_text_color' ) );
+        $button_hover_bg   = sanitize_hex_color( get_option( 'amrrev_form_button_hover_bg_color' ) );
         $button_hover_text = sanitize_hex_color( get_option( 'amrrev_form_button_hover_text_color' ) );
 
         // REVIEW BOX
-        $review_bg = sanitize_hex_color( get_option( 'amrrev_review_box_bg_color' ) );
-        $review_border = sanitize_hex_color( get_option( 'amrrev_review_box_border_color' ) );
-        $review_border_width = absint( get_option( 'amrrev_review_box_border_width' ) );
-        $review_radius = sanitize_text_field( get_option( 'amrrev_review_box_border_radius', '8px' ) );
-        $review_padding = sanitize_text_field( get_option( 'amrrev_review_box_padding', '15px' ) );
-        $name_color = sanitize_hex_color( get_option( 'amrrev_review_name_color' ) );
-        $date_color = sanitize_hex_color( get_option( 'amrrev_review_date_color' ) );
-        $content_color = sanitize_hex_color( get_option( 'amrrev_review_content_color' ) );
-        $star_size = sanitize_text_field( get_option( 'amrrev_star_size', '16px' ) );
+        $review_bg           = sanitize_hex_color( get_option( 'amrrev_review_box_bg_color' ) );
+        $review_border       = sanitize_hex_color( get_option( 'amrrev_review_box_border_color' ) );
+        $review_border_width = get_option( 'amrrev_review_box_border_width' );
+        $review_border_width = is_numeric( $review_border_width ) ? absint( $review_border_width ) : '';
+        $review_radius       = self::sanitize_css_dimension( get_option( 'amrrev_review_box_border_radius' ) );
+        $review_padding      = self::sanitize_css_dimension( get_option( 'amrrev_review_box_padding' ) );
+        $name_color          = sanitize_hex_color( get_option( 'amrrev_review_name_color' ) );
+        $date_color          = sanitize_hex_color( get_option( 'amrrev_review_date_color' ) );
+        $content_color       = sanitize_hex_color( get_option( 'amrrev_review_content_color' ) );
+        $star_size           = self::sanitize_css_dimension( get_option( 'amrrev_star_size' ) );
 
         // FILTER
-        $filter_bg = sanitize_hex_color( get_option( 'amrrev_filter_bg_color' ) );
-        $filter_border = sanitize_hex_color( get_option( 'amrrev_filter_border_color', '#f0e6d3' ) );
-        $filter_border_width = absint( get_option( 'amrrev_filter_border_width', 1 ) );
-        $filter_radius = sanitize_text_field( get_option( 'amrrev_filter_border_radius' ) );
-        $filter_padding = sanitize_text_field( get_option( 'amrrev_filter_padding' ) );
-        $filter_title_color = sanitize_hex_color( get_option( 'amrrev_filter_title_color' ) );
-        $filter_label_color = sanitize_hex_color( get_option( 'amrrev_filter_label_color' ) );
+        $filter_bg             = sanitize_hex_color( get_option( 'amrrev_filter_bg_color' ) );
+        $filter_border         = sanitize_hex_color( get_option( 'amrrev_filter_border_color' ) );
+        $filter_border_width   = get_option( 'amrrev_filter_border_width' );
+        $filter_border_width   = is_numeric( $filter_border_width ) ? absint( $filter_border_width ) : '';
+        $filter_radius         = self::sanitize_css_dimension( get_option( 'amrrev_filter_border_radius' ) );
+        $filter_padding        = self::sanitize_css_dimension( get_option( 'amrrev_filter_padding' ) );
+        $filter_title_color    = sanitize_hex_color( get_option( 'amrrev_filter_title_color' ) );
+        $filter_label_color    = sanitize_hex_color( get_option( 'amrrev_filter_label_color' ) );
         $filter_checkbox_color = sanitize_hex_color( get_option( 'amrrev_filter_checkbox_color' ) );
-        $filter_select_bg = sanitize_hex_color( get_option( 'amrrev_filter_select_bg_color' ) );
-        $filter_select_border = sanitize_hex_color( get_option( 'amrrev_filter_select_border_color' ) );
-        $filter_select_text = sanitize_hex_color( get_option( 'amrrev_filter_select_text_color' ) );
+        $filter_select_bg      = sanitize_hex_color( get_option( 'amrrev_filter_select_bg_color' ) );
+        $filter_select_border  = sanitize_hex_color( get_option( 'amrrev_filter_select_border_color' ) );
+        $filter_select_text    = sanitize_hex_color( get_option( 'amrrev_filter_select_text_color' ) );
 
-        // Custom CSS (safe but still CSS)
-        $custom_css = wp_strip_all_tags( get_option( 'amrrev_custom_css', '' ) );
+        // value থাকলে property output, না থাকলে skip — CSS file override হবে না
+        $css = '';
 
-        $css = "
-    .amrrev-review-form-section {
-        background-color: {$form_bg};
-        border: {$form_border_width}px solid {$form_border};
-        border-radius: {$review_radius};
-        padding: {$form_padding};
-    }
-    .amrrev-review-form-section h3 { color: {$title_color}; }
-    .amrrev-form-field label { color: {$label_color}; }
-    .amrrev-form-field input[type=\"text\"],
-    .amrrev-form-field input[type=\"email\"],
-    .amrrev-form-field textarea {
-        background-color: {$input_bg};
-        border-color: {$input_border};
-        color: {$input_text};
-    }
-    .amrrev-submit-btn { background-color: {$button_bg}; color: {$button_text}; }
-    .amrrev-submit-btn:hover { background-color: {$button_hover_bg}; color: {$button_hover_text}; }
+        // FORM SECTION
+        $form_props = '';
+        if ( $form_bg )     $form_props .= 'background-color: ' . $form_bg . '; ';
+        if ( $form_border && $form_border_width !== '' ) $form_props .= 'border: ' . $form_border_width . 'px solid ' . $form_border . '; ';
+        if ( $form_radius ) $form_props .= 'border-radius: ' . $form_radius . '; ';
+        if ( $form_padding ) $form_props .= 'padding: ' . $form_padding . '; ';
+        if ( $form_props )  $css .= '.amrrev-review-form-section { ' . $form_props . "}
+";
 
-    .cpt-review-full-box {
-        background-color: {$review_bg};
-        border: {$review_border_width}px solid {$review_border};
-        border-radius: {$review_radius};
-        padding: {$review_padding};
-    }
-    .cpt-name { color: {$name_color}; }
-    .cpt-date { color: {$date_color}; }
-    .cpt-review-content { color: {$content_color}; }
-    .cpt-review-count span { font-size: {$star_size}; }
+        if ( $title_color ) $css .= '.amrrev-review-form-section h3 { color: ' . $title_color . "; }
+";
+        if ( $label_color ) $css .= '.amrrev-form-field label { color: ' . $label_color . "; }
+";
 
-    .amrrev-review-filters {
-        background-color: {$filter_bg};
-        border: {$filter_border_width}px solid {$filter_border};
-        border-radius: {$filter_radius};
-        padding: {$filter_padding};
-    }
-    .amrrev-review-filters h4 { color: {$filter_title_color}; }
-    .amrrev-filter-group label { color: {$filter_label_color}; }
-    .amrrev-rating-filter input[type=\"checkbox\"]:checked,
-    .amrrev-filter-group input[type=\"checkbox\"]:checked {
-        accent-color: {$filter_checkbox_color};
-    }
-    .amrrev-age-filter select {
-        background-color: {$filter_select_bg};
-        border-color: {$filter_select_border};
-        color: {$filter_select_text};
-    }
+        $input_props = '';
+        if ( $input_bg )     $input_props .= 'background-color: ' . $input_bg . '; ';
+        if ( $input_border ) $input_props .= 'border-color: ' . $input_border . '; ';
+        if ( $input_text )   $input_props .= 'color: ' . $input_text . '; ';
+        if ( $input_props ) {
+            $css .= '.amrrev-form-field input[type="text"], ';
+            $css .= '.amrrev-form-field input[type="email"], ';
+            $css .= '.amrrev-form-field textarea { ' . $input_props . "}
+";
+        }
 
-    {$custom_css}
-    ";
+        if ( $button_bg || $button_text ) {
+            $btn = '';
+            if ( $button_bg )   $btn .= 'background-color: ' . $button_bg . '; ';
+            if ( $button_text ) $btn .= 'color: ' . $button_text . '; ';
+            $css .= '.amrrev-submit-btn { ' . $btn . "}
+";
+        }
+        if ( $button_hover_bg || $button_hover_text ) {
+            $btn_h = '';
+            if ( $button_hover_bg )   $btn_h .= 'background-color: ' . $button_hover_bg . '; ';
+            if ( $button_hover_text ) $btn_h .= 'color: ' . $button_hover_text . '; ';
+            $css .= '.amrrev-submit-btn:hover { ' . $btn_h . "}
+";
+        }
+
+        // REVIEW BOX SECTION
+        $box_props = '';
+        if ( $review_bg )     $box_props .= 'background-color: ' . $review_bg . '; ';
+        if ( $review_border && $review_border_width !== '' ) $box_props .= 'border: ' . $review_border_width . 'px solid ' . $review_border . '; ';
+        if ( $review_radius ) $box_props .= 'border-radius: ' . $review_radius . '; ';
+        if ( $review_padding ) $box_props .= 'padding: ' . $review_padding . '; ';
+        if ( $box_props )     $css .= '.cpt-review-full-box { ' . $box_props . "}
+";
+
+        if ( $name_color )    $css .= '.cpt-name { color: ' . $name_color . "; }
+";
+        if ( $date_color )    $css .= '.cpt-date { color: ' . $date_color . "; }
+";
+        if ( $content_color ) $css .= '.cpt-review-content { color: ' . $content_color . "; }
+";
+        if ( $star_size )     $css .= '.cpt-review-count span { font-size: ' . $star_size . "; }
+";
+
+        // FILTER SECTION
+        $filter_props = '';
+        if ( $filter_bg )     $filter_props .= 'background-color: ' . $filter_bg . '; ';
+        if ( $filter_border && $filter_border_width !== '' ) $filter_props .= 'border: ' . $filter_border_width . 'px solid ' . $filter_border . '; ';
+        if ( $filter_radius ) $filter_props .= 'border-radius: ' . $filter_radius . '; ';
+        if ( $filter_padding ) $filter_props .= 'padding: ' . $filter_padding . '; ';
+        if ( $filter_props )  $css .= '.amrrev-review-filters { ' . $filter_props . "}
+";
+
+        if ( $filter_title_color ) $css .= '.amrrev-review-filters h4 { color: ' . $filter_title_color . "; }
+";
+        if ( $filter_label_color ) $css .= '.amrrev-filter-group label { color: ' . $filter_label_color . "; }
+";
+        if ( $filter_checkbox_color ) {
+            $css .= '.amrrev-rating-filter input[type="checkbox"]:checked, ';
+            $css .= '.amrrev-filter-group input[type="checkbox"]:checked { accent-color: ' . $filter_checkbox_color . "; }
+";
+        }
+
+        $select_props = '';
+        if ( $filter_select_bg )     $select_props .= 'background-color: ' . $filter_select_bg . '; ';
+        if ( $filter_select_border ) $select_props .= 'border-color: ' . $filter_select_border . '; ';
+        if ( $filter_select_text )   $select_props .= 'color: ' . $filter_select_text . '; ';
+        if ( $select_props ) $css .= '.amrrev-age-filter select { ' . $select_props . "}
+";
 
         return $css;
     }

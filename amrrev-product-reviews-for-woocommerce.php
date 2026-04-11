@@ -197,24 +197,32 @@ final class AmrRev_Product_Reviews {
 
     /**
      * Add Dynamic Star Color CSS
-     */
+    */
     private function add_dynamic_star_css() {
-        $empty_star = get_option( 'amrrev_empty_star_color', '#dddddd' );
-        $filled_star = get_option( 'amrrev_filled_star_color', '#ffc107' );
+        $empty_star  = sanitize_hex_color( get_option( 'amrrev_empty_star_color', '#dddddd' ) );
+        $filled_star = sanitize_hex_color( get_option( 'amrrev_filled_star_color', '#ffc107' ) );
 
-        $custom_css = "
+        // Fallback to safe defaults if sanitize_hex_color returns empty
+        if ( empty( $empty_star ) ) {
+            $empty_star = '#dddddd';
+        }
+        if ( empty( $filled_star ) ) {
+            $filled_star = '#ffc107';
+        }
+
+        $dynamic_css = '
             .amrrev-star-rating span {
-                color: {$empty_star} !important;
+                color: ' . $empty_star . ' !important;
             }
             .amrrev-star-rating span.selected {
-                color: {$filled_star} !important;
+                color: ' . $filled_star . ' !important;
             }
             .cpt-review-count {
-                color: {$filled_star} !important;
+                color: ' . $filled_star . ' !important;
             }
-        ";
+        ';
 
-        wp_add_inline_style( 'amrrev-public-review-display', $custom_css );
+        wp_add_inline_style( 'amrrev-public-review-display', $dynamic_css );
     }
 
     /**

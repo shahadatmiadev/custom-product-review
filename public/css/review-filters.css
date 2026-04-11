@@ -142,3 +142,37 @@
     transform: rotate(360deg);
   }
 }
+
+/* Additional Info Tab */
+.amrrev-tab-addinfo {
+    cursor: pointer;
+}
+
+.amrrev-addinfo-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.amrrev-addinfo-table th,
+.amrrev-addinfo-table td {
+    padding: 10px 14px;
+    border: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 14px;
+}
+
+.amrrev-addinfo-table th {
+    background-color: #f9f9f9;
+    font-weight: 600;
+    width: 30%;
+    color: #333;
+}
+
+.amrrev-addinfo-table td {
+    color: #555;
+}
+
+.amrrev-addinfo-table tr:nth-child(even) td {
+    background-color: #fafafa;
+}
